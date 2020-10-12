@@ -156,20 +156,24 @@ def PesquisarSTAT():
 
 def AtuaListPRO():
     squery = "SELECT Nome FROM PROPRIETARIOS"
-    ListaPRO = list(VCU_QUERY.DQL(squery))
+    ListaPRO = (VCU_QUERY.DQL(squery))
     return (ListaPRO)
 
 def DeletarPRO():
     try:
-        MsgResult = messagebox.askyesno(title="VCU - Atenção!!!",
-                                        message="Deseja mesmo exluir o Profissional selecionado?")
-        if MsgResult == True:
-            ItemSelect = tv1.selection()[0]
-            Valores = tv1.item(ItemSelect, "values")
-            ValorSelect = Valores[0]
-            dquery = "DELETE FROM PROPRIETARIOS WHERE Nome ='" + ValorSelect + "'"
-            tv1.delete(ItemSelect)
-            VCU_QUERY.DML(dquery)
+        cquery = "SELECT Proprietario FROM VEICULOS"
+        PropricomVE = VCU_QUERY.DQL(cquery)
+        ItemSelect = tv1.selection()[0]
+        Valores = tv1.item(ItemSelect, "values")
+        ValorSelect = Valores[0]
+        if ValorSelect not in str(PropricomVE):
+            MsgResult = messagebox.askyesno(title="VCU - Atenção!!!", message="Deseja mesmo exluir o Profissional selecionado?")
+            if MsgResult == True:
+                dquery = "DELETE FROM PROPRIETARIOS WHERE Nome ='" + ValorSelect + "'"
+                tv1.delete(ItemSelect)
+                VCU_QUERY.DML(dquery)
+        else:
+            messagebox.showwarning(title="VCU - Atenção!!!", message="Não é possivel excluir um proprietário que tenha veículos disponíveis!")
     except:
         messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
 
@@ -182,7 +186,9 @@ def AtualizarPRO():
             UpTelefone = AtTelefone.get()
             UpHabilita = AtHabilita.get()
             Upquery = "UPDATE PROPRIETARIOS SET Nome='" + UpNome + "', CPF='" + UpCPF + "', Endereço='" + UpEndereco + "', Telefone='" + UpTelefone + "', Habilitação='" + UpHabilita + "' WHERE CPF = '" + UpCPF + "'"
+            QUERYup = "UPDATE VEICULOS SET Proprietario='"+AtNome.get()+"' WHERE Proprietario='"+NomePRO+"'"
             VCU_QUERY.DML(Upquery)
+            VCU_QUERY.DML(QUERYup)
             messagebox.showinfo(title="VCU - Vendas de Carros Usados", message="Dados Atualizados com sucesso!")
         else:
             messagebox.showwarning(title="VCU - Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
@@ -247,18 +253,13 @@ def AtualizarPRO():
     except:
         messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
 
-def VenderVE():
-    pass
-
 def DeletarVE():
     try:
-        MsgResult = messagebox.askyesno(title="VCU - Atenção!!!",
-                                        message="Deseja mesmo exluir o Veículo selecionado?")
+        ItemSelect = tv.selection()[0]
+        Valores = tv.item(ItemSelect, "values")
+        ValorSelect = Valores[8]
+        MsgResult = messagebox.askyesno(title="VCU - Atenção!!!", message="Deseja mesmo exluir o Veículo selecionado?")
         if MsgResult == True:
-            ItemSelect = tv.selection()[0]
-            Valores = tv.item(ItemSelect, "values")
-            ValorSelect = Valores[8]
-            print(ValorSelect)
             dquery = "DELETE FROM VEICULOS WHERE Placa ='" + ValorSelect + "'"
             tv.delete(ItemSelect)
             VCU_QUERY.DML(dquery)
@@ -413,9 +414,6 @@ def AtualizarVE():
         AppATTve.mainloop()
     except:
         messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
-
-def UpdateVE():
-    pass
 
 def semComando():
     pass
@@ -790,7 +788,7 @@ btnExcVE.configure(font="arial 12 bold", background="#f00", foreground="#fff")
 btnExcVE.place(x=50, y=20, width=220, height=40)
 
 # botao Vender na ABA Consultar VEICULOS
-btnVendVE = Button(FrameVendaVE, text="Vender Veículo", command=VenderVE)
+btnVendVE = Button(FrameVendaVE, text="Vender Veículo", command=semComando)
 btnVendVE.configure(font="arial 12 bold", background="#0f3", foreground="#000")
 btnVendVE.place(x=50, y=20, width=220, height=40)
 
