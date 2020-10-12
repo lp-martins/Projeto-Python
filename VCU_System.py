@@ -174,51 +174,78 @@ def DeletarPRO():
         messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
 
 def AtualizarPRO():
-    AppATTpro = Tk()
-    AppATTpro.title("VCU - Atualizando dados do Proprietário")
-    AppATTpro.geometry("900x800")
-    AppATTpro.resizable(False, False)
-    AppATTpro.configure(background="#fd0")
-    AppATTpro.focus_force()
-    AppATTpro.grab_set()
+    def UpdatePRO():
+        if (AtNome.get() != "") and (AtCPF.get() != "") and (AtEndereco.get() != "") and (AtTelefone.get() != "") and (AtHabilita.get() != ""):
+            UpNome = AtNome.get()
+            UpCPF = AtCPF.get()
+            UpEndereco = AtEndereco.get()
+            UpTelefone = AtTelefone.get()
+            UpHabilita = AtHabilita.get()
+            Upquery = "UPDATE PROPRIETARIOS SET Nome='" + UpNome + "', CPF='" + UpCPF + "', Endereço='" + UpEndereco + "', Telefone='" + UpTelefone + "', Habilitação='" + UpHabilita + "' WHERE CPF = '" + UpCPF + "'"
+            VCU_QUERY.DML(Upquery)
+            messagebox.showinfo(title="VCU - Vendas de Carros Usados", message="Dados Atualizados com sucesso!")
+        else:
+            messagebox.showwarning(title="VCU - Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
+    try:
+        ItemSelectPRO = tv1.selection()[0]
+        valoresPRO = tv1.item(ItemSelectPRO, "values")
+        NomePRO = valoresPRO[0]
+        CPFpro = valoresPRO[1]
+        EnderecoPRO = valoresPRO[2]
+        TelefonePRO = valoresPRO[3]
+        HabilitaPRO = valoresPRO[4]
 
-    ABAatt = ttk.Notebook(AppATTpro)
-    ABAatt.place(x=10, y=10, width=880, height=780)
+        AppATTpro = Tk()
+        AppATTpro.title("VCU - Atualizando dados do Proprietário")
+        AppATTpro.geometry("900x800")
+        AppATTpro.resizable(False, False)
+        AppATTpro.configure(background="#fd0")
+        AppATTpro.focus_force()
+        AppATTpro.grab_set()
 
-    FrameAttPro = LabelFrame(ABAatt, text="Dados Pessoais do Proprietário", font="Arial 12 italic", borderwidth='1', relief="solid")
-    FrameAttPro.configure(background="#e6e6e6")
-    FrameAttPro.place(x=0, y=0, width=880, height=780)
+        ABAatt = ttk.Notebook(AppATTpro)
+        ABAatt.place(x=10, y=10, width=880, height=780)
 
-    Label(FrameAttPro, text="Nome Completo: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=280, y=148)
-    AtNome = Entry(FrameAttPro)
-    AtNome.configure(font="Arial 14")
-    AtNome.place(x=280, y=170, width=310, height=30)
+        FrameAttPro = LabelFrame(ABAatt, text="Dados Pessoais do Proprietário", font="Arial 12 italic", borderwidth='1', relief="solid")
+        FrameAttPro.configure(background="#e6e6e6")
+        FrameAttPro.place(x=0, y=0, width=880, height=780)
 
-    Label(FrameAttPro, text="CPF: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=280, y=218)
-    AtCPF = Entry(FrameAttPro)
-    AtCPF.configure(font="Arial 14")
-    AtCPF.place(x=280, y=240, width=310, height=30)
+        Label(FrameAttPro, text="Nome Completo: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=280, y=148)
+        AtNome = ttk.Entry(FrameAttPro)
+        AtNome.configure(font="Arial 14")
+        AtNome.place(x=280, y=170, width=310, height=30)
+        AtNome.insert(0, NomePRO)
 
-    Label(FrameAttPro, text="Endereço: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=280, y=288)
-    AtEndereco = Entry(FrameAttPro)
-    AtEndereco.configure(font="Arial 14")
-    AtEndereco.place(x=280, y=310, width=310, height=30)
+        Label(FrameAttPro, text="CPF: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=280, y=218)
+        AtCPF = Entry(FrameAttPro)
+        AtCPF.configure(font="Arial 14")
+        AtCPF.place(x=280, y=240, width=310, height=30)
+        AtCPF.insert(0, CPFpro)
 
-    Label(FrameAttPro, text="Telefone para Contato: ", background="#e6e6e6", foreground="#009", font="Arial 12").place( x=280, y=358)
-    AtTelefone = Entry(FrameAttPro)
-    AtTelefone.configure(font="Arial 14")
-    AtTelefone.place(x=280, y=380, width=310, height=30)
+        Label(FrameAttPro, text="Endereço: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=280, y=288)
+        AtEndereco = Entry(FrameAttPro)
+        AtEndereco.configure(font="Arial 14")
+        AtEndereco.place(x=280, y=310, width=310, height=30)
+        AtEndereco.insert(0, EnderecoPRO)
 
-    Label(FrameAttPro, text="Habilitação: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=280, y=428)
-    AtHabilita = Entry(FrameAttPro)
-    AtHabilita.configure(font="Arial 14")
-    AtHabilita.place(x=280, y=450, width=310, height=30)
+        Label(FrameAttPro, text="Telefone para Contato: ", background="#e6e6e6", foreground="#009", font="Arial 12").place( x=280, y=358)
+        AtTelefone = Entry(FrameAttPro)
+        AtTelefone.configure(font="Arial 14")
+        AtTelefone.place(x=280, y=380, width=310, height=30)
+        AtTelefone.insert(0, TelefonePRO)
 
-    btnSalvarAtt = Button(FrameAttPro, text="Salvar Alterações", background="#fd0", foreground="#000", font="ArialBlk 12 bold", command=semComando)
-    btnSalvarAtt.place(x=350, y=500, width=180, height=30)
+        Label(FrameAttPro, text="Habilitação: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=280, y=428)
+        AtHabilita = Entry(FrameAttPro)
+        AtHabilita.configure(font="Arial 14")
+        AtHabilita.place(x=280, y=450, width=310, height=30)
+        AtHabilita.insert(0, HabilitaPRO)
 
+        btnSalvarAttPRO = Button(FrameAttPro, text="Salvar Alterações", background="#fd0", foreground="#000", font="ArialBlk 12 bold", command=UpdatePRO)
+        btnSalvarAttPRO.place(x=350, y=500, width=180, height=30)
 
-    AppATTpro.mainloop()
+        AppATTpro.mainloop()
+    except:
+        messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
 
 def VenderVE():
     pass
@@ -239,102 +266,156 @@ def DeletarVE():
         messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
 
 def AtualizarVE():
-    AppATTve = Tk()
-    AppATTve.title("VCU - Atualizando dados do Veículo")
-    AppATTve.geometry("900x800")
-    AppATTve.resizable(False, False)
-    AppATTve.configure(background="#fd0")
-    AppATTve.focus_force()
-    AppATTve.grab_set()
+    def UpdateVE():
+        if (atModeloV.get() != "") and (atMarcaV.get() != "") and (atCorV.get() != "") and (atAnoV.get() != "") and (atCombustV.get() != "") and (atProprietarioV.get() != "") and (atPagamentoV.get() != "") and (atRenavV.get() != "") and (atPlacaV.get() != "") and (atFinanceiroV.get() != "") and (atFipeV.get() != "") and (atPrecoProV.get() != "") and (atAcessoriosV.get() != "") and (atStatusV.get() != ""):
+            UpModelo = atModeloV.get()
+            UpMarca = atMarcaV.get()
+            UpCor = atCorV.get()
+            UpAnoLanc = atAnoV.get()
+            UpCombust = atCombustV.get()
+            UpProprieta = atProprietarioV.get()
+            UpFormPag = atPagamentoV.get()
+            UpRenavam = atRenavV.get()
+            UpPlaca = atPlacaV.get()
+            UpSituaFin = atFinanceiroV.get()
+            UpValorFip = atFipeV.get()
+            UpValorPRO = atPrecoProV.get()
+            UpAcessorio = atAcessoriosV.get()
+            UpStatus = atStatusV.get()
 
-    ABAattVE = ttk.Notebook(AppATTve)
-    ABAattVE.place(x=10, y=10, width=880, height=780)
+            Upquery = "UPDATE VEICULOS SET Modelo='"+UpModelo+"', Marca='"+UpMarca+"', Cor='"+UpCor+"', Ano_de_Lançamento='"+UpAnoLanc+"', Combustivel='"+UpCombust+"', Proprietario='"+UpProprieta+"', Formas_de_Pagamento='"+UpFormPag+"', Renavam='"+UpRenavam+"', Placa='"+UpPlaca+"', Situação_Financeira='"+UpSituaFin+"', Valor_FIPE='"+UpValorFip+"', Valor_Proprietario='"+UpValorPRO+"', Acessorios='"+UpAcessorio+"', Status='"+UpStatus+"' WHERE Placa = '" + UpPlaca + "'"
+            VCU_QUERY.DML(Upquery)
+            messagebox.showinfo(title="VCU - Vendas de Carros Usados", message="Dados Atualizados com sucesso!")
+        else:
+            messagebox.showwarning(title="VCU - Campos Vazios!",
+                                   message="Por favor, preencha todos os campos para realizar o cadastro!")
 
-    FrameAttVE = LabelFrame(ABAattVE, text="Dados do Veículo", font="Arial 12 italic", borderwidth='1', relief="solid")
-    FrameAttVE.configure(background="#e6e6e6")
-    FrameAttVE.place(x=0, y=0, width=880, height=780)
+    try:
+        ItemSelectVE = tv.selection()[0]
+        ValoresVE = tv.item(ItemSelectVE, "values")
+        ModeloVE = ValoresVE[0]
+        MarcaVE = ValoresVE[1]
+        CorVE = ValoresVE[2]
+        AnoLancVE = ValoresVE[3]
+        CombustVE = ValoresVE[4]
+        ProprietaVE = ValoresVE[5]
+        FormPagVE = ValoresVE[6]
+        RenavVE = ValoresVE[7]
+        PlaacaVE = ValoresVE[8]
+        SituaFinVE = ValoresVE[9]
+        ValorFipVE = ValoresVE[10]
+        ValorPropVE = ValoresVE[11]
+        AcessoVE = ValoresVE[12]
+        StatussVE = ValoresVE[13]
 
-    Label(FrameAttVE, text="Modelo: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=48)
-    atModeloV = Entry(FrameAttVE)
-    atModeloV.configure(font="Arial 14")
-    atModeloV.place(x=110, y=70, width=310, height=30)
+        AppATTve = Tk()
+        AppATTve.title("VCU - Atualizando dados do Veículo")
+        AppATTve.geometry("900x800")
+        AppATTve.resizable(False, False)
+        AppATTve.configure(background="#fd0")
+        AppATTve.focus_force()
+        AppATTve.grab_set()
 
-    Label(FrameAttVE, text="Renavan: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=48)
-    atRenavV = Entry(FrameAttVE)
-    atRenavV.configure(font="Arial 14")
-    atRenavV.place(x=440, y=70, width=310, height=30)
+        ABAattVE = ttk.Notebook(AppATTve)
+        ABAattVE.place(x=10, y=10, width=880, height=780)
 
-    Label(FrameAttVE, text="Marca: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=118)
-    atMarcaV = Entry(FrameAttVE)
-    atMarcaV.configure(font="Arial 14")
-    atMarcaV.place(x=110, y=140, width=310, height=30)
+        FrameAttVE = LabelFrame(ABAattVE, text="Dados do Veículo", font="Arial 12 italic", borderwidth='1', relief="solid")
+        FrameAttVE.configure(background="#e6e6e6")
+        FrameAttVE.place(x=0, y=0, width=880, height=780)
 
-    Label(FrameAttVE, text="Placa: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=118)
-    atPlacaV = Entry(FrameAttVE)
-    atPlacaV.configure(font="Arial 14")
-    atPlacaV.place(x=440, y=140, width=310, height=30)
+        Label(FrameAttVE, text="Modelo: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=48)
+        atModeloV = Entry(FrameAttVE)
+        atModeloV.configure(font="Arial 14")
+        atModeloV.place(x=110, y=70, width=310, height=30)
+        atModeloV.insert(0, ModeloVE)
 
-    Label(FrameAttVE, text="Cor: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=188)
-    atCorV = Entry(FrameAttVE)
-    atCorV.configure(font="Arial 14")
-    atCorV.place(x=110, y=210, width=310, height=30)
+        Label(FrameAttVE, text="Renavan: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=48)
+        atRenavV = Entry(FrameAttVE)
+        atRenavV.configure(font="Arial 14")
+        atRenavV.place(x=440, y=70, width=310, height=30)
+        atRenavV.insert(0, RenavVE)
 
-    Label(FrameAttVE, text="Situação Financeira: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=188)
-    atFinanceiroV = Entry(FrameAttVE)
-    atFinanceiroV.configure(font="Arial 14")
-    atFinanceiroV.place(x=440, y=210, width=310, height=30)
+        Label(FrameAttVE, text="Marca: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=118)
+        atMarcaV = Entry(FrameAttVE)
+        atMarcaV.configure(font="Arial 14")
+        atMarcaV.place(x=110, y=140, width=310, height=30)
+        atMarcaV.insert(0, MarcaVE)
 
-    Label(FrameAttVE, text="Ano de Lançamento: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=258)
-    atAnoV = Entry(FrameAttVE)
-    atAnoV.configure(font="Arial 14")
-    atAnoV.place(x=110, y=280, width=310, height=30)
+        Label(FrameAttVE, text="Placa: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=118)
+        atPlacaV = Entry(FrameAttVE)
+        atPlacaV.configure(font="Arial 14")
+        atPlacaV.place(x=440, y=140, width=310, height=30)
+        atPlacaV.insert(0, PlaacaVE)
 
-    Label(FrameAttVE, text="Valor na Tabela FIPE: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=258)
-    atFipeV = Entry(FrameAttVE)
-    atFipeV.configure(font="Arial 14")
-    atFipeV.place(x=440, y=280, width=310, height=30)
+        Label(FrameAttVE, text="Cor: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=188)
+        atCorV = Entry(FrameAttVE)
+        atCorV.configure(font="Arial 14")
+        atCorV.place(x=110, y=210, width=310, height=30)
+        atCorV.insert(0, CorVE)
 
-    Label(FrameAttVE, text="Combustível: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=328)
-    atCombustV = ttk.Combobox(FrameAttVE, values="Gasolina Etanol Gasolina/Etanol Diesel Elétrico ")
-    atCombustV.configure(font="Arial 14")
-    atCombustV.place(x=110, y=350, width=310, height=30)
+        Label(FrameAttVE, text="Situação Financeira: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=188)
+        atFinanceiroV = Entry(FrameAttVE)
+        atFinanceiroV.configure(font="Arial 14")
+        atFinanceiroV.place(x=440, y=210, width=310, height=30)
+        atFinanceiroV.insert(0, SituaFinVE)
 
-    btnAtualVE = Button(FrameAttVE, text="Atualizar lista", background="#090", foreground="#fff", font="georgia 8 bold italic", command=AtuaListPRO)
-    btnAtualVE.place(x=317, y=398, height=17)
+        Label(FrameAttVE, text="Ano de Lançamento: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=258)
+        atAnoV = Entry(FrameAttVE)
+        atAnoV.configure(font="Arial 14")
+        atAnoV.place(x=110, y=280, width=310, height=30)
+        atAnoV.insert(0, AnoLancVE)
 
-    Label(FrameAttVE, text="Valor do proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=328)
-    atPrecoProV = Entry(FrameAttVE)
-    atPrecoProV.configure(font="Arial 14")
-    atPrecoProV.place(x=440, y=350, width=310, height=30)
+        Label(FrameAttVE, text="Valor na Tabela FIPE: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=258)
+        atFipeV = Entry(FrameAttVE)
+        atFipeV.configure(font="Arial 14")
+        atFipeV.place(x=440, y=280, width=310, height=30)
+        atFipeV.insert(0, ValorFipVE)
 
-    Label(FrameAttVE, text="Proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=398)
-    atProprietarioV = ttk.Combobox(FrameAttVE, values=AtuaListPRO())
-    atProprietarioV.configure(font="Arial 14")
-    atProprietarioV.place(x=110, y=420, width=310, height=30)
+        Label(FrameAttVE, text="Combustível: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=328)
+        atCombustV = ttk.Combobox(FrameAttVE, values="Gasolina Etanol Gasolina/Etanol Diesel Elétrico ")
+        atCombustV.configure(font="Arial 14")
+        atCombustV.place(x=110, y=350, width=310, height=30)
+        atCombustV.insert(0, CombustVE)
 
-    Label(FrameAttVE, text="Acessórios: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=398)
-    atAcessoriosV = Entry(FrameAttVE)
-    atAcessoriosV.configure(font="Arial 14")
-    atAcessoriosV.place(x=440, y=420, width=310, height=30)
+        Label(FrameAttVE, text="Valor do proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=328)
+        atPrecoProV = Entry(FrameAttVE)
+        atPrecoProV.configure(font="Arial 14")
+        atPrecoProV.place(x=440, y=350, width=310, height=30)
+        atPrecoProV.insert(0, ValorPropVE)
 
-    Label(FrameAttVE, text="Formas de pagamento: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=468)
-    atPagamentoV = Entry(FrameAttVE)
-    atPagamentoV.configure(font="Arial 14")
-    atPagamentoV.place(x=110, y=490, width=310, height=30)
+        Label(FrameAttVE, text="Proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=398)
+        atProprietarioV = ttk.Combobox(FrameAttVE, values=AtuaListPRO())
+        atProprietarioV.configure(font="Arial 14")
+        atProprietarioV.place(x=110, y=420, width=310, height=30)
+        atProprietarioV.insert(0, ProprietaVE)
 
-    Label(FrameAttVE, text="Status: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=468)
-    atStatusV = ttk.Combobox(FrameAttVE, values="Disponível Vendido")
-    atStatusV.configure(font="Arial 14")
-    atStatusV.place(x=440, y=490, width=310, height=30)
+        Label(FrameAttVE, text="Acessórios: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=398)
+        atAcessoriosV = Entry(FrameAttVE)
+        atAcessoriosV.configure(font="Arial 14")
+        atAcessoriosV.place(x=440, y=420, width=310, height=30)
+        atAcessoriosV.insert(0, AcessoVE)
 
-    btnSalvarVE = Button(FrameAttVE, text="Salvar Alterações", background="#fd0", foreground="#000", font="ArialBlk 12 bold", command=semComando)
-    btnSalvarVE.place(x=360, y=550, width=150, height=30)
+        Label(FrameAttVE, text="Formas de pagamento: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=468)
+        atPagamentoV = Entry(FrameAttVE)
+        atPagamentoV.configure(font="Arial 14")
+        atPagamentoV.place(x=110, y=490, width=310, height=30)
+        atPagamentoV.insert(0, FormPagVE)
 
+        Label(FrameAttVE, text="Status: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=468)
+        atStatusV = ttk.Combobox(FrameAttVE, values="Disponível Vendido")
+        atStatusV.configure(font="Arial 14")
+        atStatusV.place(x=440, y=490, width=310, height=30)
+        atStatusV.insert(0, StatussVE)
 
+        btnSalvarVE = Button(FrameAttVE, text="Salvar Alterações", background="#fd0", foreground="#000", font="ArialBlk 12 bold", command=UpdateVE)
+        btnSalvarVE.place(x=360, y=550, width=150, height=30)
 
+        AppATTve.mainloop()
+    except:
+        messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
 
-
-    AppATTve.mainloop()
+def UpdateVE():
+    pass
 
 def semComando():
     pass

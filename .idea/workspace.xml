@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="936b55a2-69f3-4f98-810d-79ad0c069ba3" name="Default Changelist" comment="" />
+    <list default="true" id="936b55a2-69f3-4f98-810d-79ad0c069ba3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VCU_DB.db" beforeDir="false" afterPath="$PROJECT_DIR$/VCU_DB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VCU_System.py" beforeDir="false" afterPath="$PROJECT_DIR$/VCU_System.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +36,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1hyRtkZOY0QKpIU8gji56u4Xtq0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -63,6 +89,17 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
     <state x="1021" y="187" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602437260798">
       <screen x="0" y="0" width="2560" height="1040" />
@@ -72,22 +109,22 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1267" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1040@0.0.2560.1040" timestamp="1601161601166" />
-    <state width="1706" height="121" key="GridCell.Tab.0.bottom" timestamp="1602437310960">
+    <state width="1561" height="137" key="GridCell.Tab.0.bottom" timestamp="1602474154769">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1706" height="121" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1602437310960" />
-    <state width="1706" height="121" key="GridCell.Tab.0.center" timestamp="1602437310960">
+    <state width="1561" height="137" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1602474154769" />
+    <state width="1561" height="137" key="GridCell.Tab.0.center" timestamp="1602474154769">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1706" height="121" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1602437310960" />
-    <state width="1706" height="121" key="GridCell.Tab.0.left" timestamp="1602437310960">
+    <state width="1561" height="137" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1602474154769" />
+    <state width="1561" height="137" key="GridCell.Tab.0.left" timestamp="1602474154769">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1706" height="121" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1602437310960" />
-    <state width="1706" height="121" key="GridCell.Tab.0.right" timestamp="1602437310960">
+    <state width="1561" height="137" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1602474154769" />
+    <state width="1561" height="137" key="GridCell.Tab.0.right" timestamp="1602474154769">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1706" height="121" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1602437310960" />
+    <state width="1561" height="137" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1602474154769" />
     <state width="1514" height="314" key="GridCell.Tab.1.bottom" timestamp="1601504062077">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
