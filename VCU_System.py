@@ -90,25 +90,17 @@ def ListarProprietarios():
     for x in linhas:
         tv1.insert("", "end", values=x)
 
-def PesquisarMODE():
-    tv.delete(*tv.get_children())
-    if nomePesq.get() != "":
-        vquery = "SELECT * FROM VEICULOS WHERE Modelo LIKE '%"+nomePesq.get()+"%'"
-        linhas = VCU_QUERY.DQL(vquery)
-        nomePesq.delete(0, END)
-        for x in linhas:
-            tv.insert("", "end", values=x)
-    else:
-        messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
-
 def PesquisarNOME():
     tv1.delete(*tv1.get_children())
     if nomePesq4.get() != "":
         vquery = "SELECT Nome, CPF, Endereço, Telefone, Habilitação FROM PROPRIETARIOS WHERE NOME LIKE '%"+nomePesq4.get()+"%'"
         linhas = VCU_QUERY.DQL(vquery)
-        nomePesq.delete(0, END)
-        for x in linhas:
-            tv1.insert("", "end", values=x)
+        nomePesq4.delete(0, END)
+        if linhas != []:
+            for x in linhas:
+                tv1.insert("", "end", values=x)
+        else:
+            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos Proprietários com esse Nome!")
     else:
         messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
 
@@ -117,42 +109,74 @@ def PesquisarCPF():
     if nomePesq6.get() != "":
         vquery = "SELECT Nome, CPF, Endereço, Telefone, Habilitação FROM PROPRIETARIOS WHERE CPF LIKE '%"+nomePesq6.get()+"%'"
         linhas = VCU_QUERY.DQL(vquery)
-        nomePesq.delete(0, END)
-        for x in linhas:
-            tv1.insert("", "end", values=x)
+        nomePesq6.delete(0, END)
+        if linhas != []:
+            for x in linhas:
+                tv1.insert("", "end", values=x)
+        else:
+            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos Proprietários com este CPF!")
     else:
         messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
 
+# ABA Consultar Veículo
+def PesquisarMODE():
+    tv.delete(*tv.get_children())
+    if nomePesq.get() != "":
+        vquery = "SELECT * FROM VEICULOS WHERE Modelo LIKE '%"+nomePesq.get()+"%'"
+        linhas = VCU_QUERY.DQL(vquery)
+        nomePesq.delete(0, END)
+        if linhas != []:
+            for x in linhas:
+                tv.insert("", "end", values=x)
+        else:
+            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos veículos com esse Modelo!")
+    else:
+        messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
+
+# ABA Consultar Veículo
 def PesquisarPROP():
     tv.delete(*tv.get_children())
     if nomePesq1.get() != "":
         vquery = "SELECT * FROM VEICULOS WHERE Proprietario LIKE '%"+nomePesq1.get()+"%'"
         linhas = VCU_QUERY.DQL(vquery)
-        for x in linhas:
-            tv.insert("", "end", values=x)
+        nomePesq1.delete(0, END)
+        if linhas != []:
+            for x in linhas:
+                tv.insert("", "end", values=x)
+        else:
+            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos veículos com esse Proprietário!")
     else:
         messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
 
+# ABA Consultar Veículo
 def PesquisarPLAC():
     tv.delete(*tv.get_children())
     if nomePesq2.get() != "":
         vquery = "SELECT * FROM VEICULOS WHERE Placa LIKE '%"+nomePesq2.get()+"%'"
         linhas = VCU_QUERY.DQL(vquery)
-        for x in linhas:
-            tv.insert("", "end", values=x)
+        nomePesq2.delete(0, END)
+        if linhas != []:
+            for x in linhas:
+                tv.insert("", "end", values=x)
+        else:
+            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos veículos com essa Placa!")
     else:
         messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
 
+# ABA Consultar Veículo
 def PesquisarSTAT():
     tv.delete(*tv.get_children())
     if txtBuscStt.get() != "":
         Status = txtBuscStt.get()
         vquery = "SELECT * FROM VEICULOS WHERE Status ='"+Status+"'"
         linhas = VCU_QUERY.DQL(vquery)
-        for x in linhas:
-            tv.insert("", "end", values=x)
+        if linhas != []:
+            for x in linhas:
+                tv.insert("", "end", values=x)
+        else:
+            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos veículos com esse Status!")
     else:
-        messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
+        messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma Opção escolhida!")
 
 def AtuaListPRO():
     squery = "SELECT Nome FROM PROPRIETARIOS"
