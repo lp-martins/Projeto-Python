@@ -5,7 +5,7 @@ import VCU_QUERY
 
 #   propriedades da janela  #
 appVCU = Tk()
-appVCU.title(" - Venda de Carros Usados")
+appVCU.title(" - Venda de Carros Usados®")
 appVCU.geometry("1400x860")
 appVCU.resizable(False, False)
 appVCU.configure(background="#ddf")
@@ -183,9 +183,10 @@ def PesquisarSTAT():
         messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma Opção escolhida!")
 
 # Mini Botão na ABA de cadastrar Veículos, para atualizar a lista de proprietários
-def AtuaListPRO():
+#def AtuaListPRO():
     squery = "SELECT Nome FROM PROPRIETARIOS"
     ListaPRO = (VCU_QUERY.DQL(squery))
+    vProprietario.set(ListaPRO)
     return (ListaPRO)
 
 def DeletarPRO():
@@ -196,7 +197,7 @@ def DeletarPRO():
         Valores = tv1.item(ItemSelect, "values")
         ValorSelect = Valores[0]
         if ValorSelect not in str(PropricomVE):
-            MsgResult = messagebox.askyesno(title="VCU - Atenção!!!", message="Deseja mesmo exluir o Profissional selecionado?")
+            MsgResult = messagebox.askyesno(title="VCU - Atenção!!!", message="Deseja mesmo exluir o Proprietário selecionado?")
             if MsgResult == True:
                 dquery = "DELETE FROM PROPRIETARIOS WHERE Nome ='" + ValorSelect + "'"
                 tv1.delete(ItemSelect)
@@ -444,6 +445,11 @@ def AtualizarVE():
     except:
         messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
 
+def AtuaListPRO():
+    squery = "SELECT Nome FROM PROPRIETARIOS"
+    ListaPRO = VCU_QUERY.DQL(squery)
+    vProprietario['values'] = ListaPRO
+
 def semComando():
     pass
 
@@ -491,20 +497,20 @@ quadroGrid.place(x=10, y=10, width=1180, height=760)
 
 tv = ttk.Treeview(quadroGrid, columns=('Modelo', 'Marca', 'Cor', 'Ano', 'Combustivel', 'Proprietário', 'Formas de Pagamento', 'Renavam', 'Placa', 'Situação Financeira', 'Valor FIPE', 'Valor do Proprietário', 'Acessórios', 'Status'), show='headings')
 tv.configure(height=22)
-tv.column('Modelo', minwidth=80, width=80)
+tv.column('Modelo', minwidth=75, width=80)
 tv.column('Marca', minwidth=50, width=50)
 tv.column('Cor', minwidth=40, width=40)
 tv.column('Ano', minwidth=50, width=50)
-tv.column('Combustivel', minwidth=80, width=80)
-tv.column('Proprietário', minwidth=80, width=100)
-tv.column('Formas de Pagamento', minwidth=120, width=130)
-tv.column('Renavam', minwidth=60, width=60)
-tv.column('Placa', minwidth=60, width=60)
+tv.column('Combustivel', minwidth=75, width=80)
+tv.column('Proprietário', minwidth=95, width=100)
+tv.column('Formas de Pagamento', minwidth=130, width=130)
+tv.column('Renavam', minwidth=55, width=60)
+tv.column('Placa', minwidth=55, width=60)
 tv.column('Situação Financeira', minwidth=110, width=110)
-tv.column('Valor FIPE', minwidth=70, width=80)
-tv.column('Valor do Proprietário', minwidth=100, width=120)
-tv.column('Acessórios', minwidth=80, width=100)
-tv.column('Status', minwidth=60, width=80)
+tv.column('Valor FIPE', minwidth=75, width=80)
+tv.column('Valor do Proprietário', minwidth=115, width=120)
+tv.column('Acessórios', minwidth=95, width=100)
+tv.column('Status', minwidth=75, width=80)
 
 tv.heading('Modelo', text='Modelo')
 tv.heading('Marca', text='Marca')
@@ -726,7 +732,7 @@ vPrecoPro.place(x=380, y=350, width=310, height=30)
 
 Label(FrameLab2, text="Proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=50, y=398)
 
-vProprietario = ttk.Combobox(FrameLab2, values=AtuaListPRO())
+vProprietario = ttk.Combobox(FrameLab2)
 vProprietario.configure(font="Arial 14")
 vProprietario.place(x=50, y=420, width=310, height=30)
 
