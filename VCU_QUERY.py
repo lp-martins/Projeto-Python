@@ -7,12 +7,13 @@ pastaAPP_VCU = os.path.dirname(__file__)
 nameDB = pastaAPP_VCU+"\VCU_DB.db"
 
 # Conexão com Banco de Dados
+# noinspection PyUnboundLocalVariable
 def ConexaoDB():
     try:
-        conex = sqlite3.connect(nameDB)
+        conectDB = sqlite3.connect(nameDB)
     except Error as ex:
         messagebox.showwarning(title="VCU - Ocorreu um Erro!", message=ex)
-    return conex
+    return conectDB
 
 def DQL(query): #SELECT
     vcon = ConexaoDB()

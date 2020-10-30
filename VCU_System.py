@@ -3,13 +3,13 @@ from tkinter import messagebox
 from tkinter import ttk
 import VCU_QUERY
 
-
 #   propriedades da janela  #
 appVCU = Tk()
-appVCU.title("VCU - Venda de Carros Usados")
+appVCU.title(" - Venda de Carros Usados")
 appVCU.geometry("1400x860")
 appVCU.resizable(False, False)
 appVCU.configure(background="#ddf")
+appVCU.wm_iconbitmap('icon_VCU.ico')
 
 def salvardadosPRO():
     Ssql = "SELECT CPF FROM PROPRIETARIOS"
@@ -76,13 +76,7 @@ def novocadastro():
     vTelefone.delete(0, END)
     vHabilita.delete(0, END)
 
-def ListarVeiculos():
-    tv.delete(*tv.get_children())
-    vquery="SELECT * FROM VEICULOS order by Modelo"
-    linhas = VCU_QUERY.DQL(vquery)
-    for x in linhas:
-        tv.insert("", "end", values=x)
-
+# ABA Consultar Proprietário
 def ListarProprietarios():
     tv1.delete(*tv1.get_children())
     vquery="SELECT Nome, CPF, Endereço, Telefone, Habilitação FROM PROPRIETARIOS"
@@ -90,6 +84,7 @@ def ListarProprietarios():
     for x in linhas:
         tv1.insert("", "end", values=x)
 
+# ABA Consultar Proprietário
 def PesquisarNOME():
     tv1.delete(*tv1.get_children())
     if nomePesq4.get() != "":
@@ -104,6 +99,7 @@ def PesquisarNOME():
     else:
         messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
 
+# ABA Consultar Proprietário
 def PesquisarCPF():
     tv1.delete(*tv1.get_children())
     if nomePesq6.get() != "":
@@ -117,6 +113,14 @@ def PesquisarCPF():
             messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos Proprietários com este CPF!")
     else:
         messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
+
+# ABA Consultar Veículo
+def ListarVeiculos():
+    tv.delete(*tv.get_children())
+    vquery="SELECT * FROM VEICULOS order by Modelo"
+    linhas = VCU_QUERY.DQL(vquery)
+    for x in linhas:
+        tv.insert("", "end", values=x)
 
 # ABA Consultar Veículo
 def PesquisarMODE():
@@ -178,6 +182,7 @@ def PesquisarSTAT():
     else:
         messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma Opção escolhida!")
 
+# Mini Botão na ABA de cadastrar Veículos, para atualizar a lista de proprietários
 def AtuaListPRO():
     squery = "SELECT Nome FROM PROPRIETARIOS"
     ListaPRO = (VCU_QUERY.DQL(squery))
@@ -474,11 +479,11 @@ FrameLab2.place(x=280, y=100, width=750, height=680)
 
 FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic", borderwidth='1', relief="solid")
 FrameLab3.configure(background="#e6e6e6")
-FrameLab3.place(x=220, y=20, width=900, height=800)
+FrameLab3.place(x=220, y=10, width=900, height=800)
 
 FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 italic", borderwidth='1', relief="solid")
 FrameLab4.configure(background="#e6e6e6")
-FrameLab4.place(x=90, y=20, width=1200, height=800)
+FrameLab4.place(x=90, y=10, width=1200, height=800)
 
 ### Gridview da ABA CONSULTAR VEÍCULO ###
 quadroGrid = LabelFrame(FrameLab4, text="Dados dos Veículos", relief="flat", background="#e6e6e6")
