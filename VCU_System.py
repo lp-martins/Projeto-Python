@@ -718,7 +718,7 @@ vFipe.configure(font="Arial 14")
 vFipe.place(x=380, y=280, width=310, height=30)
 
 Label(FrameLab2, text="Combustível: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=50, y=328)
-vCombust = ttk.Combobox(FrameLab2, values="Gasolina Etanol Gasolina/Etanol Diesel Elétrico ")
+vCombust = ttk.Combobox(FrameLab2, values="Gasolina Etanol Gasolina/Etanol Diesel Elétrico ", state="readonly")
 vCombust.configure(font="Arial 14")
 vCombust.place(x=50, y=350, width=310, height=30)
 
@@ -731,8 +731,7 @@ vPrecoPro.configure(font="Arial 14")
 vPrecoPro.place(x=380, y=350, width=310, height=30)
 
 Label(FrameLab2, text="Proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=50, y=398)
-
-vProprietario = ttk.Combobox(FrameLab2)
+vProprietario = ttk.Combobox(FrameLab2, state="readonly")
 vProprietario.configure(font="Arial 14")
 vProprietario.place(x=50, y=420, width=310, height=30)
 
@@ -747,7 +746,7 @@ vPagamento.configure(font="Arial 14")
 vPagamento.place(x=50, y=490, width=310, height=30)
 
 Label(FrameLab2, text="Status: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=380, y=468)
-vStatus = ttk.Combobox(FrameLab2, values="Disponível Vendido")
+vStatus = ttk.Combobox(FrameLab2, values="Disponível Vendido", state="readonly")
 vStatus.configure(font="Arial 14")
 vStatus.place(x=380, y=490, width=310, height=30)
 
@@ -800,7 +799,7 @@ LabelPesq3.configure(font="Arial 12", background="#e6e6e6")
 LabelPesq3.place(x=550, y=50)
 
 txtBuscStt = ttk.Combobox(FrameBusca, values="Disponível Vendido")
-txtBuscStt.configure(width=20, font="arial 14")
+txtBuscStt.configure(width=20, font="arial 14", state="readonly")
 txtBuscStt.place(x=680, y=50)
 
 btnPesq3 = Button(FrameBusca, text="Pesquisar", command=PesquisarSTAT)
