@@ -231,7 +231,7 @@ def AtualizarPRO():
         TelefonePRO = valoresPRO[3]
         HabilitaPRO = valoresPRO[4]
 
-        AppATTpro = Tk()
+        AppATTpro = Toplevel()
         AppATTpro.title("VCU - Atualizando dados do Proprietário")
         AppATTpro.geometry("900x800")
         AppATTpro.resizable(False, False)
@@ -279,6 +279,7 @@ def AtualizarPRO():
         btnSalvarAttPRO = Button(FrameAttPro, text="Salvar Alterações", background="#fd0", foreground="#000", font="ArialBlk 12 bold", command=UpdatePRO)
         btnSalvarAttPRO.place(x=350, y=500, width=180, height=30)
 
+        AppATTpro.transient(appVCU)
         AppATTpro.mainloop()
     except:
         messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
@@ -339,7 +340,7 @@ def AtualizarVE():
         AcessoVE = ValoresVE[12]
         StatussVE = ValoresVE[13]
 
-        AppATTve = Tk()
+        AppATTve = Toplevel()
         AppATTve.title("VCU - Atualizando dados do Veículo")
         AppATTve.geometry("900x800")
         AppATTve.resizable(False, False)
@@ -441,6 +442,7 @@ def AtualizarVE():
         btnSalvarVE = Button(FrameAttVE, text="Salvar Alterações", background="#fd0", foreground="#000", font="ArialBlk 12 bold", command=UpdateVE)
         btnSalvarVE.place(x=360, y=550, width=150, height=30)
 
+        AppATTve.transient(appVCU)
         AppATTve.mainloop()
     except:
         messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
