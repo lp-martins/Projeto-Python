@@ -5,7 +5,7 @@ import VCU_QUERY
 
 #   propriedades da janela  #
 appVCU = Tk()
-appVCU.title(" - Venda de Carros Usados®")
+appVCU.title(" Venda de Carros Usados®")
 appVCU.geometry("1400x860")
 appVCU.resizable(False, False)
 appVCU.configure(background="#ddf")
@@ -24,9 +24,9 @@ def salvardadosPRO():
         sHabilita = vHabilita.get()
         squery = "INSERT INTO PROPRIETARIOS(Nome, CPF, Endereço, Telefone, Habilitação) VALUES ('"+sNome+"', '"+sCPF+"', '"+sEndereco+"', '" +sTelefone+"', '"+sHabilita+"')"
         VCU_QUERY.DML(squery)
-        messagebox.showinfo(title="VCU - Vendas de Carros Usados", message="Dados cadastrados com sucesso!")
+        messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados cadastrados com sucesso!")
     else:
-        messagebox.showwarning(title="VCU - Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
+        messagebox.showwarning(title=" Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
 
 def salvardadosVE():
     sModelo = vModelo.get()
@@ -47,11 +47,11 @@ def salvardadosVE():
     PropList = VCU_QUERY.DQL(Squery)
 
     if (vModelo.get() == "") or (vMarca.get() == "") or (vCor.get() == "") or (vAno.get() == "") or (vCombust.get() == "") or (vProprietario.get() == "") or (vPagamento.get() == "") or (vRenav.get() == "") or (vPlaca.get() == "") or (vFinanceiro.get() == "") or (vFipe.get() == "") or (vPrecoPro.get() == "") or (vAcessorios.get() == "") or (vStatus.get() == ""):
-        messagebox.showwarning(title="VCU - Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
+        messagebox.showwarning(title=" Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
     elif vProprietario.get() in str(PropList):
         squery = "INSERT INTO VEICULOS(Modelo, Marca, Cor, Ano_de_Lançamento, Combustivel, Proprietario, Formas_de_Pagamento, Renavam, Placa, Situação_Financeira, Valor_FIPE, Valor_Proprietario, Acessorios, Status) VALUES ('"+sModelo+"', '"+sMarca+"', '"+sCor+"', '"+sAno+"', '"+sCombust+"', '"+sProp+"', '"+sPagamento+"', '"+sRenavam+"', '"+sPlaca+"', '"+sFinanceiro+"', '"+sFipe+"', '"+sValorPRO+"', '"+sAcessorio+"', '"+sStatus+"')"
         VCU_QUERY.DML(squery)
-        messagebox.showinfo(title="VCU - Vendas de Carros Usados", message="Dados do Veículo Salvo com Sucesso!")
+        messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados do Veículo Salvo com Sucesso!")
         vModelo.delete(0, END)
         vMarca.delete(0, END)
         vRenav.delete(0, END)
@@ -67,7 +67,7 @@ def salvardadosVE():
         vPagamento.delete(0, END)
         vStatus.set("")
     else:
-        messagebox.showwarning(title="VCU - Proprietário Não Cadastrado!", message="Este proprietário não está cadastrado! Verifique o nome e tente novamente!")
+        messagebox.showwarning(title=" Proprietário Não Cadastrado!", message="Este proprietário não está cadastrado! Verifique o nome e tente novamente!")
 
 def novocadastro():
     vNome.delete(0, END)
@@ -95,9 +95,9 @@ def PesquisarNOME():
             for x in linhas:
                 tv1.insert("", "end", values=x)
         else:
-            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos Proprietários com esse Nome!")
+            messagebox.showinfo(title=" Atenção!", message="Não encontramos Proprietários com esse Nome!")
     else:
-        messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
+        messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
 
 # ABA Consultar Proprietário
 def PesquisarCPF():
@@ -110,9 +110,9 @@ def PesquisarCPF():
             for x in linhas:
                 tv1.insert("", "end", values=x)
         else:
-            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos Proprietários com este CPF!")
+            messagebox.showinfo(title=" Atenção!", message="Não encontramos Proprietários com este CPF!")
     else:
-        messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
+        messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
 
 # ABA Consultar Veículo
 def ListarVeiculos():
@@ -133,9 +133,9 @@ def PesquisarMODE():
             for x in linhas:
                 tv.insert("", "end", values=x)
         else:
-            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos veículos com esse Modelo!")
+            messagebox.showinfo(title=" Atenção!", message="Não encontramos veículos com esse Modelo!")
     else:
-        messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
+        messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
 
 # ABA Consultar Veículo
 def PesquisarPROP():
@@ -148,9 +148,9 @@ def PesquisarPROP():
             for x in linhas:
                 tv.insert("", "end", values=x)
         else:
-            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos veículos com esse Proprietário!")
+            messagebox.showinfo(title=" Atenção!", message="Não encontramos veículos com esse Proprietário!")
     else:
-        messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
+        messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
 
 # ABA Consultar Veículo
 def PesquisarPLAC():
@@ -163,9 +163,9 @@ def PesquisarPLAC():
             for x in linhas:
                 tv.insert("", "end", values=x)
         else:
-            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos veículos com essa Placa!")
+            messagebox.showinfo(title=" Atenção!", message="Não encontramos veículos com essa Placa!")
     else:
-        messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma informação digitada!")
+        messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
 
 # ABA Consultar Veículo
 def PesquisarSTAT():
@@ -178,9 +178,9 @@ def PesquisarSTAT():
             for x in linhas:
                 tv.insert("", "end", values=x)
         else:
-            messagebox.showinfo(title="VCU: Atenção!", message="Não encontramos veículos com esse Status!")
+            messagebox.showinfo(title=" Atenção!", message="Não encontramos veículos com esse Status!")
     else:
-        messagebox.showinfo(title="VCU: Atenção!", message="Nenhuma Opção escolhida!")
+        messagebox.showinfo(title=" Atenção!", message="Nenhuma Opção escolhida!")
 
 # Mini Botão na ABA de cadastrar Veículos, para atualizar a lista de proprietários
 #def AtuaListPRO():
@@ -197,15 +197,15 @@ def DeletarPRO():
         Valores = tv1.item(ItemSelect, "values")
         ValorSelect = Valores[0]
         if ValorSelect not in str(PropricomVE):
-            MsgResult = messagebox.askyesno(title="VCU - Atenção!!!", message="Deseja mesmo exluir o Proprietário selecionado?")
+            MsgResult = messagebox.askyesno(title=" Atenção!!!", message="Deseja mesmo exluir o Proprietário selecionado?")
             if MsgResult == True:
                 dquery = "DELETE FROM PROPRIETARIOS WHERE Nome ='" + ValorSelect + "'"
                 tv1.delete(ItemSelect)
                 VCU_QUERY.DML(dquery)
         else:
-            messagebox.showwarning(title="VCU - Atenção!!!", message="Não é possivel excluir um proprietário que tenha veículos disponíveis!")
+            messagebox.showwarning(title=" Atenção!!!", message="Não é possivel excluir um proprietário que tenha veículos disponíveis!")
     except:
-        messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
+        messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
 
 def AtualizarPRO():
     def UpdatePRO():
@@ -219,9 +219,9 @@ def AtualizarPRO():
             QUERYup = "UPDATE VEICULOS SET Proprietario='"+AtNome.get()+"' WHERE Proprietario='"+NomePRO+"'"
             VCU_QUERY.DML(Upquery)
             VCU_QUERY.DML(QUERYup)
-            messagebox.showinfo(title="VCU - Vendas de Carros Usados", message="Dados Atualizados com sucesso!")
+            messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados Atualizados com sucesso!")
         else:
-            messagebox.showwarning(title="VCU - Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
+            messagebox.showwarning(title=" Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
     try:
         ItemSelectPRO = tv1.selection()[0]
         valoresPRO = tv1.item(ItemSelectPRO, "values")
@@ -232,7 +232,7 @@ def AtualizarPRO():
         HabilitaPRO = valoresPRO[4]
 
         AppATTpro = Toplevel()
-        AppATTpro.title("VCU - Atualizando dados do Proprietário")
+        AppATTpro.title(" Atualizando dados do Proprietário")
         AppATTpro.geometry("900x800")
         AppATTpro.resizable(False, False)
         AppATTpro.configure(background="#fd0")
@@ -282,20 +282,20 @@ def AtualizarPRO():
         AppATTpro.transient(appVCU)
         AppATTpro.mainloop()
     except:
-        messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
+        messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
 
 def DeletarVE():
     try:
         ItemSelect = tv.selection()[0]
         Valores = tv.item(ItemSelect, "values")
         ValorSelect = Valores[8]
-        MsgResult = messagebox.askyesno(title="VCU - Atenção!!!", message="Deseja mesmo exluir o Veículo selecionado?")
+        MsgResult = messagebox.askyesno(title=" Atenção!!!", message="Deseja mesmo exluir o Veículo selecionado?")
         if MsgResult == True:
             dquery = "DELETE FROM VEICULOS WHERE Placa ='" + ValorSelect + "'"
             tv.delete(ItemSelect)
             VCU_QUERY.DML(dquery)
     except:
-        messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
+        messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
 
 def AtualizarVE():
     def UpdateVE():
@@ -317,9 +317,9 @@ def AtualizarVE():
 
             Upquery = "UPDATE VEICULOS SET Modelo='"+UpModelo+"', Marca='"+UpMarca+"', Cor='"+UpCor+"', Ano_de_Lançamento='"+UpAnoLanc+"', Combustivel='"+UpCombust+"', Proprietario='"+UpProprieta+"', Formas_de_Pagamento='"+UpFormPag+"', Renavam='"+UpRenavam+"', Placa='"+UpPlaca+"', Situação_Financeira='"+UpSituaFin+"', Valor_FIPE='"+UpValorFip+"', Valor_Proprietario='"+UpValorPRO+"', Acessorios='"+UpAcessorio+"', Status='"+UpStatus+"' WHERE Placa = '" + UpPlaca + "'"
             VCU_QUERY.DML(Upquery)
-            messagebox.showinfo(title="VCU - Vendas de Carros Usados", message="Dados Atualizados com sucesso!")
+            messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados Atualizados com sucesso!")
         else:
-            messagebox.showwarning(title="VCU - Campos Vazios!",
+            messagebox.showwarning(title=" Campos Vazios!",
                                    message="Por favor, preencha todos os campos para realizar o cadastro!")
 
     try:
@@ -341,7 +341,7 @@ def AtualizarVE():
         StatussVE = ValoresVE[13]
 
         AppATTve = Toplevel()
-        AppATTve.title("VCU - Atualizando dados do Veículo")
+        AppATTve.title(" Atualizando dados do Veículo")
         AppATTve.geometry("900x800")
         AppATTve.resizable(False, False)
         AppATTve.configure(background="#fd0")
@@ -445,7 +445,133 @@ def AtualizarVE():
         AppATTve.transient(appVCU)
         AppATTve.mainloop()
     except:
-        messagebox.showinfo(title="VCU - Atenção", message="Nenhum item selecionado!")
+        messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
+
+def VenderVE():
+    try:
+        ItemSelectVE = tv.selection()[0]
+        ValoresVE = tv.item(ItemSelectVE, "values")
+        ModeloVE = ValoresVE[0]
+        MarcaVE = ValoresVE[1]
+        CorVE = ValoresVE[2]
+        AnoLancVE = ValoresVE[3]
+        CombustVE = ValoresVE[4]
+        ProprietaVE = ValoresVE[5]
+        FormPagVE = ValoresVE[6]
+        RenavVE = ValoresVE[7]
+        PlaacaVE = ValoresVE[8]
+        SituaFinVE = ValoresVE[9]
+        ValorFipVE = ValoresVE[10]
+        ValorPropVE = ValoresVE[11]
+        AcessoVE = ValoresVE[12]
+        StatussVE = ValoresVE[13]
+
+        AppVENDA = Toplevel()
+        AppVENDA.title(" Operação de Venda do Veículo")
+        AppVENDA.geometry("900x800")
+        AppVENDA.resizable(False, False)
+        AppVENDA.configure(background="#0f3")
+        AppVENDA.focus_force()
+        AppVENDA.grab_set()
+
+        ABAattVE = ttk.Notebook(AppVENDA)
+        ABAattVE.place(x=10, y=10, width=880, height=780)
+
+        FrameAttVE = LabelFrame(ABAattVE, text="Operações de VENDA", font="Arial 12 italic", borderwidth='1', relief="solid")
+        FrameAttVE.configure(background="#e6e6e6")
+        FrameAttVE.place(x=0, y=0, width=880, height=780)
+
+        Label(FrameAttVE, text="Modelo: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=48)
+        atModeloV = Entry(FrameAttVE)
+        atModeloV.configure(font="Arial 14")
+        atModeloV.place(x=110, y=70, width=310, height=30)
+        atModeloV.insert(0, ModeloVE)
+
+        Label(FrameAttVE, text="Renavan: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=48)
+        atRenavV = Entry(FrameAttVE)
+        atRenavV.configure(font="Arial 14")
+        atRenavV.place(x=440, y=70, width=310, height=30)
+        atRenavV.insert(0, RenavVE)
+
+        Label(FrameAttVE, text="Marca: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=118)
+        atMarcaV = Entry(FrameAttVE)
+        atMarcaV.configure(font="Arial 14")
+        atMarcaV.place(x=110, y=140, width=310, height=30)
+        atMarcaV.insert(0, MarcaVE)
+
+        Label(FrameAttVE, text="Placa: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=118)
+        atPlacaV = Entry(FrameAttVE)
+        atPlacaV.configure(font="Arial 14")
+        atPlacaV.place(x=440, y=140, width=310, height=30)
+        atPlacaV.insert(0, PlaacaVE)
+
+        Label(FrameAttVE, text="Cor: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=188)
+        atCorV = Entry(FrameAttVE)
+        atCorV.configure(font="Arial 14")
+        atCorV.place(x=110, y=210, width=310, height=30)
+        atCorV.insert(0, CorVE)
+
+        Label(FrameAttVE, text="Situação Financeira: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=188)
+        atFinanceiroV = Entry(FrameAttVE)
+        atFinanceiroV.configure(font="Arial 14")
+        atFinanceiroV.place(x=440, y=210, width=310, height=30)
+        atFinanceiroV.insert(0, SituaFinVE)
+
+        Label(FrameAttVE, text="Ano de Lançamento: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=258)
+        atAnoV = Entry(FrameAttVE)
+        atAnoV.configure(font="Arial 14")
+        atAnoV.place(x=110, y=280, width=310, height=30)
+        atAnoV.insert(0, AnoLancVE)
+
+        Label(FrameAttVE, text="Valor na Tabela FIPE: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=258)
+        atFipeV = Entry(FrameAttVE)
+        atFipeV.configure(font="Arial 14")
+        atFipeV.place(x=440, y=280, width=310, height=30)
+        atFipeV.insert(0, ValorFipVE)
+
+        Label(FrameAttVE, text="Combustível: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=328)
+        atCombustV = ttk.Combobox(FrameAttVE, values="Gasolina Etanol Gasolina/Etanol Diesel Elétrico ")
+        atCombustV.configure(font="Arial 14")
+        atCombustV.place(x=110, y=350, width=310, height=30)
+        atCombustV.insert(0, CombustVE)
+
+        Label(FrameAttVE, text="Valor do proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=328)
+        atPrecoProV = Entry(FrameAttVE)
+        atPrecoProV.configure(font="Arial 14")
+        atPrecoProV.place(x=440, y=350, width=310, height=30)
+        atPrecoProV.insert(0, ValorPropVE)
+
+        Label(FrameAttVE, text="Proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=398)
+        atProprietarioV = ttk.Combobox(FrameAttVE, values=AtuaListPRO())
+        atProprietarioV.configure(font="Arial 14")
+        atProprietarioV.place(x=110, y=420, width=310, height=30)
+        atProprietarioV.insert(0, ProprietaVE)
+
+        Label(FrameAttVE, text="Acessórios: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=398)
+        atAcessoriosV = Entry(FrameAttVE)
+        atAcessoriosV.configure(font="Arial 14")
+        atAcessoriosV.place(x=440, y=420, width=310, height=30)
+        atAcessoriosV.insert(0, AcessoVE)
+
+        Label(FrameAttVE, text="Formas de pagamento: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=468)
+        atPagamentoV = Entry(FrameAttVE)
+        atPagamentoV.configure(font="Arial 14")
+        atPagamentoV.place(x=110, y=490, width=310, height=30)
+        atPagamentoV.insert(0, FormPagVE)
+
+        Label(FrameAttVE, text="Status: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=468)
+        atStatusV = ttk.Combobox(FrameAttVE, values="Disponível Vendido")
+        atStatusV.configure(font="Arial 14")
+        atStatusV.place(x=440, y=490, width=310, height=30)
+        atStatusV.insert(0, StatussVE)
+
+        btnSalvarVE = Button(FrameAttVE, text="Salvar Alterações", background="#fd0", foreground="#000", font="ArialBlk 12 bold")
+        btnSalvarVE.place(x=360, y=550, width=150, height=30)
+
+        AppVENDA.transient(appVCU)
+        AppVENDA.mainloop()
+    except:
+        messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
 
 def AtuaListPRO():
     squery = "SELECT Nome FROM PROPRIETARIOS"
@@ -824,7 +950,7 @@ btnExcVE.configure(font="arial 12 bold", background="#f00", foreground="#fff")
 btnExcVE.place(x=50, y=20, width=220, height=40)
 
 # botao Vender na ABA Consultar VEICULOS
-btnVendVE = Button(FrameVendaVE, text="Vender Veículo", command=semComando)
+btnVendVE = Button(FrameVendaVE, text="Vender Veículo", command=VenderVE)
 btnVendVE.configure(font="arial 12 bold", background="#0f3", foreground="#000")
 btnVendVE.place(x=50, y=20, width=220, height=40)
 
