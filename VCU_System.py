@@ -345,6 +345,7 @@ def AtualizarVE():
         AppATTve.geometry("900x800")
         AppATTve.resizable(False, False)
         AppATTve.configure(background="#fd0")
+        AppATTve.wm_iconbitmap('icon_VCU.ico')
         AppATTve.focus_force()
         AppATTve.grab_set()
 
@@ -457,116 +458,149 @@ def VenderVE():
         AnoLancVE = ValoresVE[3]
         CombustVE = ValoresVE[4]
         ProprietaVE = ValoresVE[5]
-        FormPagVE = ValoresVE[6]
         RenavVE = ValoresVE[7]
         PlaacaVE = ValoresVE[8]
         SituaFinVE = ValoresVE[9]
         ValorFipVE = ValoresVE[10]
         ValorPropVE = ValoresVE[11]
         AcessoVE = ValoresVE[12]
-        StatussVE = ValoresVE[13]
 
         AppVENDA = Toplevel()
         AppVENDA.title(" Operação de Venda do Veículo")
         AppVENDA.geometry("900x800")
         AppVENDA.resizable(False, False)
         AppVENDA.configure(background="#0f3")
+        AppVENDA.wm_iconbitmap('icon_VCU.ico')
         AppVENDA.focus_force()
         AppVENDA.grab_set()
 
-        ABAattVE = ttk.Notebook(AppVENDA)
-        ABAattVE.place(x=10, y=10, width=880, height=780)
+        ABAvenda = ttk.Notebook(AppVENDA)
+        ABAvenda.place(x=10, y=10, width=880, height=780)
 
-        FrameAttVE = LabelFrame(ABAattVE, text="Operações de VENDA", font="Arial 12 italic", borderwidth='1', relief="solid")
-        FrameAttVE.configure(background="#e6e6e6")
-        FrameAttVE.place(x=0, y=0, width=880, height=780)
+        FrameVENDA = LabelFrame(ABAvenda, text="Operações de VENDA", font="Arial 12 italic", borderwidth='1', relief="solid")
+        FrameVENDA.configure(background="#e6e6e6")
+        FrameVENDA.place(x=0, y=0, width=880, height=780)
 
-        Label(FrameAttVE, text="Modelo: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=48)
-        atModeloV = Entry(FrameAttVE)
-        atModeloV.configure(font="Arial 14")
-        atModeloV.place(x=110, y=70, width=310, height=30)
-        atModeloV.insert(0, ModeloVE)
+# __________________________Frame dados do Veículo___________________________#
 
-        Label(FrameAttVE, text="Renavan: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=48)
-        atRenavV = Entry(FrameAttVE)
-        atRenavV.configure(font="Arial 14")
-        atRenavV.place(x=440, y=70, width=310, height=30)
-        atRenavV.insert(0, RenavVE)
+        FrameDadosVE = LabelFrame(FrameVENDA, text="Dados do Veículo", font="Arial 10 bold", borderwidth='3')
+        FrameDadosVE.configure(background="#e6e6e6")
+        FrameDadosVE.place(x=20, y=10, width=840, height=220)
 
-        Label(FrameAttVE, text="Marca: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=118)
-        atMarcaV = Entry(FrameAttVE)
-        atMarcaV.configure(font="Arial 14")
-        atMarcaV.place(x=110, y=140, width=310, height=30)
-        atMarcaV.insert(0, MarcaVE)
+        Label(FrameDadosVE, text="Modelo: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=10)
+        ModeloVEND = Entry(FrameDadosVE)
+        ModeloVEND.configure(font="Arial 10")
+        ModeloVEND.place(x=70, y=10, width=270, height=20)
+        ModeloVEND.insert(0, ModeloVE)
 
-        Label(FrameAttVE, text="Placa: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=118)
-        atPlacaV = Entry(FrameAttVE)
-        atPlacaV.configure(font="Arial 14")
-        atPlacaV.place(x=440, y=140, width=310, height=30)
-        atPlacaV.insert(0, PlaacaVE)
+        Label(FrameDadosVE, text="Renavan: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=350, y=10)
+        RenavVEND = Entry(FrameDadosVE)
+        RenavVEND.configure(font="Arial 10")
+        RenavVEND.place(x=410, y=10, width=150, height=20)
+        RenavVEND.insert(0, RenavVE)
 
-        Label(FrameAttVE, text="Cor: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=188)
-        atCorV = Entry(FrameAttVE)
-        atCorV.configure(font="Arial 14")
-        atCorV.place(x=110, y=210, width=310, height=30)
-        atCorV.insert(0, CorVE)
+        Label(FrameDadosVE, text="Placa: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=570, y=10)
+        PlacaVEND = Entry(FrameDadosVE)
+        PlacaVEND.configure(font="Arial 10")
+        PlacaVEND.place(x=615, y=10, width=150, height=20)
+        PlacaVEND.insert(0, PlaacaVE)
 
-        Label(FrameAttVE, text="Situação Financeira: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=188)
-        atFinanceiroV = Entry(FrameAttVE)
-        atFinanceiroV.configure(font="Arial 14")
-        atFinanceiroV.place(x=440, y=210, width=310, height=30)
-        atFinanceiroV.insert(0, SituaFinVE)
+        Label(FrameDadosVE, text="Marca: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=40)
+        MarcaVEND = Entry(FrameDadosVE)
+        MarcaVEND.configure(font="Arial 10")
+        MarcaVEND.place(x=65, y=40, width=235, height=20)
+        MarcaVEND.insert(0, MarcaVE)
 
-        Label(FrameAttVE, text="Ano de Lançamento: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=258)
-        atAnoV = Entry(FrameAttVE)
-        atAnoV.configure(font="Arial 14")
-        atAnoV.place(x=110, y=280, width=310, height=30)
-        atAnoV.insert(0, AnoLancVE)
+        Label(FrameDadosVE, text="Ano de Lançamento: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=310, y=40)
+        AnoVEND = Entry(FrameDadosVE)
+        AnoVEND.configure(font="Arial 10")
+        AnoVEND.place(x=440, y=40, width=150, height=20)
+        AnoVEND.insert(0, AnoLancVE)
 
-        Label(FrameAttVE, text="Valor na Tabela FIPE: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=258)
-        atFipeV = Entry(FrameAttVE)
-        atFipeV.configure(font="Arial 14")
-        atFipeV.place(x=440, y=280, width=310, height=30)
-        atFipeV.insert(0, ValorFipVE)
+        Label(FrameDadosVE, text="Cor: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=600, y=40)
+        CorVEND = Entry(FrameDadosVE)
+        CorVEND.configure(font="Arial 10")
+        CorVEND.place(x=630, y=40, width=180, height=20)
+        CorVEND.insert(0, CorVE)
 
-        Label(FrameAttVE, text="Combustível: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=328)
-        atCombustV = ttk.Combobox(FrameAttVE, values="Gasolina Etanol Gasolina/Etanol Diesel Elétrico ")
-        atCombustV.configure(font="Arial 14")
-        atCombustV.place(x=110, y=350, width=310, height=30)
-        atCombustV.insert(0, CombustVE)
+        Label(FrameDadosVE, text="Combustível: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=70)
+        CombustVEND = ttk.Combobox(FrameDadosVE, values="Gasolina Etanol Gasolina/Etanol Diesel Elétrico ")
+        CombustVEND.configure(font="Arial 10")
+        CombustVEND.place(x=100, y=70, width=130, height=20)
+        CombustVEND.insert(0, CombustVE)
 
-        Label(FrameAttVE, text="Valor do proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=328)
-        atPrecoProV = Entry(FrameAttVE)
-        atPrecoProV.configure(font="Arial 14")
-        atPrecoProV.place(x=440, y=350, width=310, height=30)
-        atPrecoProV.insert(0, ValorPropVE)
+        Label(FrameDadosVE, text="Proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=240, y=70)
+        ProprieVEND = ttk.Combobox(FrameDadosVE, values=AtuaListPRO())
+        ProprieVEND.configure(font="Arial 10")
+        ProprieVEND.place(x=315, y=70, width=340, height=20)
+        ProprieVEND.insert(0, ProprietaVE)
 
-        Label(FrameAttVE, text="Proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=398)
-        atProprietarioV = ttk.Combobox(FrameAttVE, values=AtuaListPRO())
-        atProprietarioV.configure(font="Arial 14")
-        atProprietarioV.place(x=110, y=420, width=310, height=30)
-        atProprietarioV.insert(0, ProprietaVE)
+        Label(FrameDadosVE, text="Situação Financeira: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=100)
+        FinancVEND = Entry(FrameDadosVE)
+        FinancVEND.configure(font="Arial 10")
+        FinancVEND.place(x=145, y=100, width=670, height=20)
+        FinancVEND.insert(0, SituaFinVE)
 
-        Label(FrameAttVE, text="Acessórios: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=398)
-        atAcessoriosV = Entry(FrameAttVE)
-        atAcessoriosV.configure(font="Arial 14")
-        atAcessoriosV.place(x=440, y=420, width=310, height=30)
-        atAcessoriosV.insert(0, AcessoVE)
+        Label(FrameDadosVE, text="Valor na Tabela FIPE: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=130)
+        FipeVEND = Entry(FrameDadosVE)
+        FipeVEND.configure(font="Arial 10")
+        FipeVEND.place(x=155, y=130, width=100, height=20)
+        FipeVEND.insert(0, ValorFipVE)
 
-        Label(FrameAttVE, text="Formas de pagamento: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=110, y=468)
-        atPagamentoV = Entry(FrameAttVE)
-        atPagamentoV.configure(font="Arial 14")
-        atPagamentoV.place(x=110, y=490, width=310, height=30)
-        atPagamentoV.insert(0, FormPagVE)
+        Label(FrameDadosVE, text="Valor do proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=270, y=130)
+        PrecoProV = Entry(FrameDadosVE)
+        PrecoProV.configure(font="Arial 12")
+        PrecoProV.place(x=395, y=130, width=100, height=20)
+        PrecoProV.insert(0, ValorPropVE)
 
-        Label(FrameAttVE, text="Status: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=440, y=468)
-        atStatusV = ttk.Combobox(FrameAttVE, values="Disponível Vendido")
-        atStatusV.configure(font="Arial 14")
-        atStatusV.place(x=440, y=490, width=310, height=30)
-        atStatusV.insert(0, StatussVE)
+        Label(FrameDadosVE, text="Acessórios: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=160)
+        AcessorioV = Entry(FrameDadosVE)
+        AcessorioV.configure(font="Arial 10")
+        AcessorioV.place(x=95, y=160, width=720, height=20)
+        AcessorioV.insert(0, AcessoVE)
 
-        btnSalvarVE = Button(FrameAttVE, text="Salvar Alterações", background="#fd0", foreground="#000", font="ArialBlk 12 bold")
-        btnSalvarVE.place(x=360, y=550, width=150, height=30)
+# ________________________Frame dados do Proprietário_________________________#
+
+        FrameDadosPRO = LabelFrame(FrameVENDA, text="Dados do Proprietário", font="Arial 10 bold", borderwidth='3')
+        FrameDadosPRO.configure(background="#e6e6e6")
+        FrameDadosPRO.place(x=20, y=240, width=840, height=140)
+
+        Label(FrameDadosPRO, text="Nome: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=10)
+        NomeVEND = Entry(FrameDadosPRO)
+        NomeVEND.configure(font="Arial 10")
+        NomeVEND.place(x=65, y=10, width=320, height=20)
+        NomeVEND.insert(0, ModeloVE)
+
+        Label(FrameDadosPRO, text="CPF: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=390, y=10)
+        CpfVEND = Entry(FrameDadosPRO)
+        CpfVEND.configure(font="Arial 10")
+        CpfVEND.place(x=430, y=10, width=150, height=20)
+        CpfVEND.insert(0, RenavVE)
+
+        Label(FrameDadosPRO, text="Telefone: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=590, y=10)
+        FoneVEND = Entry(FrameDadosPRO)
+        FoneVEND.configure(font="Arial 10")
+        FoneVEND.place(x=650, y=10, width=160, height=20)
+        FoneVEND.insert(0, PlaacaVE)
+
+        Label(FrameDadosPRO, text="Endereço: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=40)
+        EnderecVEND = Entry(FrameDadosPRO)
+        EnderecVEND.configure(font="Arial 10")
+        EnderecVEND.place(x=85, y=40, width=725, height=20)
+        EnderecVEND.insert(0, MarcaVE)
+
+# ________________________Frame dados do Cliente/Comprador_________________________#
+
+        FrameDadosCLI = LabelFrame(FrameVENDA, text="Dados do Cliente/Comprador", font="Arial 10 bold", borderwidth='3')
+        FrameDadosCLI.configure(background="#e6e6e6")
+        FrameDadosCLI.place(x=20, y=390, width=840, height=160)
+
+# ________________________Frame dados Monetários_________________________#
+
+        FrameDadosFIN = LabelFrame(FrameVENDA, text="Dados Financeiros", font="Arial 10 bold", borderwidth='3')
+        FrameDadosFIN.configure(background="#e6e6e6")
+        FrameDadosFIN.place(x=20, y=560, width=840, height=180)
+
 
         AppVENDA.transient(appVCU)
         AppVENDA.mainloop()
@@ -587,7 +621,7 @@ ABA = ttk.Notebook(appVCU)
 ABA.place(x=0, y=0, width=1400, height=860)
 
 aba1 = Frame(ABA)
-ABA.add(aba1, text="Cadastrar Cliente")
+ABA.add(aba1, text="Cadastrar Proprietário")
 aba1.configure(background="#5f0")
 
 aba2 = Frame(ABA)
@@ -701,35 +735,35 @@ tv1.configure(yscrollcommand=VScroll2.set, xscrollcommand=OScroll2.set)
 
 ### FRAMES da ABA CONSULTAR PROPRIETARIOS ###
 # Frame de SELECT
-FrameBusca1 = LabelFrame(quadroGrid1, text="Opções de busca", font="Arial 12 italic", borderwidth='1', relief="solid")
+FrameBusca1 = LabelFrame(quadroGrid1, text="Opções de busca", font="Arial 12 italic", borderwidth='3')
 FrameBusca1.configure(background="#e6e6e6")
 FrameBusca1.place(x=2, y=510, width=850, height=108)
 
 # Frame de Atualizar
-FrameAtualizar = LabelFrame(quadroGrid1, text="Atualizar Registro Selecionado", font="Arial 12 italic", borderwidth='1', relief="solid")
+FrameAtualizar = LabelFrame(quadroGrid1, text="Atualizar Registro Selecionado", font="Arial 12 italic", borderwidth='3')
 FrameAtualizar.configure(background="#e6e6e6")
 FrameAtualizar.place(x=2, y=630, width=420, height=108)
 
 # Frame de Excluir
-FrameExcluir = LabelFrame(quadroGrid1, text="Excluir Registro Selecionado", font="Arial 12 italic", borderwidth='1', relief="solid")
+FrameExcluir = LabelFrame(quadroGrid1, text="Excluir Registro Selecionado", font="Arial 12 italic", borderwidth='3')
 FrameExcluir.configure(background="#e6e6e6")
 FrameExcluir.place(x=430, y=630, width=420, height=108)
 
 ### FRAMES da ABA CONSULTAR VEÍCULOS ###
 # Frame de SELECT
-FrameBusca = LabelFrame(quadroGrid, text="Opções de busca", font="Arial 12 italic", borderwidth='1', relief="solid")
+FrameBusca = LabelFrame(quadroGrid, text="Opções de busca", font="Arial 12 italic", borderwidth='3')
 FrameBusca.configure(background="#e6e6e6")
 FrameBusca.place(x=2, y=500, width=1170, height=108)
 
-FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", font="Arial 12 italic", borderwidth='1', relief="solid")
+FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", font="Arial 12 italic", borderwidth='3')
 FrameAttVE.configure(background="#e6e6e6")
 FrameAttVE.place(x=2, y=620, width=330, height=108)
 
-FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", font="Arial 12 italic", borderwidth='1', relief="solid")
+FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", font="Arial 12 italic", borderwidth='3')
 FrameDelVE.configure(background="#e6e6e6")
 FrameDelVE.place(x=415, y=620, width=330, height=108)
 
-FrameVendaVE = LabelFrame(quadroGrid, text="Realizar Venda do Veículo Selecionado", font="Arial 12 italic", borderwidth='1', relief="solid")
+FrameVendaVE = LabelFrame(quadroGrid, text="Realizar Venda do Veículo Selecionado", font="Arial 12 italic", borderwidth='3')
 FrameVendaVE.configure(background="#e6e6e6")
 FrameVendaVE.place(x=840, y=620, width=330, height=108)
 
