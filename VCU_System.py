@@ -6,8 +6,7 @@ import VCU_QUERY
 #   propriedades da janela  #
 appVCU = Tk()
 appVCU.title(" Venda de Carros Usados®")
-appVCU.geometry("1400x860")
-appVCU.resizable(False, False)
+appVCU.geometry("1280x860")
 appVCU.configure(background="#ddf")
 appVCU.wm_iconbitmap('icon_VCU.ico')
 
@@ -489,75 +488,75 @@ def VenderVE():
 
         Label(FrameDadosVE, text="Modelo: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=10)
         ModeloVEND = Entry(FrameDadosVE)
-        ModeloVEND.configure(font="Arial 10")
         ModeloVEND.place(x=70, y=10, width=270, height=20)
         ModeloVEND.insert(0, ModeloVE)
+        ModeloVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosVE, text="Renavan: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=350, y=10)
         RenavVEND = Entry(FrameDadosVE)
-        RenavVEND.configure(font="Arial 10")
         RenavVEND.place(x=410, y=10, width=150, height=20)
         RenavVEND.insert(0, RenavVE)
+        RenavVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosVE, text="Placa: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=570, y=10)
         PlacaVEND = Entry(FrameDadosVE)
-        PlacaVEND.configure(font="Arial 10")
         PlacaVEND.place(x=615, y=10, width=150, height=20)
         PlacaVEND.insert(0, PlaacaVE)
+        PlacaVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosVE, text="Marca: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=40)
         MarcaVEND = Entry(FrameDadosVE)
-        MarcaVEND.configure(font="Arial 10")
         MarcaVEND.place(x=65, y=40, width=235, height=20)
         MarcaVEND.insert(0, MarcaVE)
+        MarcaVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosVE, text="Ano de Lançamento: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=310, y=40)
         AnoVEND = Entry(FrameDadosVE)
-        AnoVEND.configure(font="Arial 10")
         AnoVEND.place(x=440, y=40, width=150, height=20)
         AnoVEND.insert(0, AnoLancVE)
+        AnoVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosVE, text="Cor: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=600, y=40)
         CorVEND = Entry(FrameDadosVE)
-        CorVEND.configure(font="Arial 10")
-        CorVEND.place(x=630, y=40, width=180, height=20)
+        CorVEND.place(x=630, y=40, width=185, height=20)
         CorVEND.insert(0, CorVE)
+        CorVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosVE, text="Combustível: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=70)
-        CombustVEND = ttk.Combobox(FrameDadosVE, values="Gasolina Etanol Gasolina/Etanol Diesel Elétrico ")
-        CombustVEND.configure(font="Arial 10")
+        CombustVEND = Entry(FrameDadosVE)
         CombustVEND.place(x=100, y=70, width=130, height=20)
         CombustVEND.insert(0, CombustVE)
+        CombustVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosVE, text="Proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=240, y=70)
-        ProprieVEND = ttk.Combobox(FrameDadosVE, values=AtuaListPRO())
-        ProprieVEND.configure(font="Arial 10")
+        ProprieVEND = Entry(FrameDadosVE)
         ProprieVEND.place(x=315, y=70, width=340, height=20)
         ProprieVEND.insert(0, ProprietaVE)
+        ProprieVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosVE, text="Situação Financeira: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=100)
         FinancVEND = Entry(FrameDadosVE)
-        FinancVEND.configure(font="Arial 10")
         FinancVEND.place(x=145, y=100, width=670, height=20)
         FinancVEND.insert(0, SituaFinVE)
+        FinancVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosVE, text="Valor na Tabela FIPE: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=130)
         FipeVEND = Entry(FrameDadosVE)
-        FipeVEND.configure(font="Arial 10")
         FipeVEND.place(x=155, y=130, width=100, height=20)
         FipeVEND.insert(0, ValorFipVE)
+        FipeVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosVE, text="Valor do proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=270, y=130)
         PrecoProV = Entry(FrameDadosVE)
-        PrecoProV.configure(font="Arial 12")
         PrecoProV.place(x=395, y=130, width=100, height=20)
         PrecoProV.insert(0, ValorPropVE)
+        PrecoProV.configure(font="Arial 12", state="readonly")
 
         Label(FrameDadosVE, text="Acessórios: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=160)
         AcessorioV = Entry(FrameDadosVE)
-        AcessorioV.configure(font="Arial 10")
         AcessorioV.place(x=95, y=160, width=720, height=20)
         AcessorioV.insert(0, AcessoVE)
+        AcessorioV.configure(font="Arial 10", state="readonly")
 
 # ________________________Frame dados do Proprietário_________________________#
 
@@ -567,27 +566,27 @@ def VenderVE():
 
         Label(FrameDadosPRO, text="Nome: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=10)
         NomeVEND = Entry(FrameDadosPRO)
-        NomeVEND.configure(font="Arial 10")
         NomeVEND.place(x=65, y=10, width=320, height=20)
         NomeVEND.insert(0, ModeloVE)
+        NomeVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosPRO, text="CPF: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=390, y=10)
         CpfVEND = Entry(FrameDadosPRO)
-        CpfVEND.configure(font="Arial 10")
         CpfVEND.place(x=430, y=10, width=150, height=20)
         CpfVEND.insert(0, RenavVE)
+        CpfVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosPRO, text="Telefone: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=590, y=10)
         FoneVEND = Entry(FrameDadosPRO)
-        FoneVEND.configure(font="Arial 10")
         FoneVEND.place(x=650, y=10, width=160, height=20)
         FoneVEND.insert(0, PlaacaVE)
+        FoneVEND.configure(font="Arial 10", state="readonly")
 
         Label(FrameDadosPRO, text="Endereço: ", background="#e6e6e6", foreground="#009", font="Arial 10").place(x=20, y=40)
         EnderecVEND = Entry(FrameDadosPRO)
-        EnderecVEND.configure(font="Arial 10")
         EnderecVEND.place(x=85, y=40, width=725, height=20)
         EnderecVEND.insert(0, MarcaVE)
+        EnderecVEND.configure(font="Arial 10", state="readonly")
 
 # ________________________Frame dados do Cliente/Comprador_________________________#
 
@@ -618,15 +617,17 @@ def semComando():
 
 #  Criação das ABAS  #
 ABA = ttk.Notebook(appVCU)
-ABA.place(x=0, y=0, width=1400, height=860)
+ABA.pack(fill='both', expand=1)
 
 aba1 = Frame(ABA)
 ABA.add(aba1, text="Cadastrar Proprietário")
 aba1.configure(background="#5f0")
+Label(aba1, text="Cadastro de Proprietário de Veículo(s)", background="#009", font="Georgia 20 bold italic", foreground="#fff").pack(pady=20, ipadx=30, ipady=15)
 
 aba2 = Frame(ABA)
 ABA.add(aba2, text="Cadastrar Veículo")
 aba2.configure(background="#5f0")
+Label(aba2, text="Cadastro de Informações do Veículo", background="#009", font="Georgia 20 bold italic", foreground="#fff").pack(pady=20, ipadx=120, ipady=15)
 
 aba3 = Frame(ABA)
 ABA.add(aba3, text="Consultar Proprietário")
@@ -639,19 +640,20 @@ aba4.configure(background="#06f")
 # label FRAME = Dados Pessoais do Proprietário
 FrameLab1 = LabelFrame(aba1, text="Dados Pessoais do Proprietário", font="Arial 12 italic", borderwidth='1', relief="solid")
 FrameLab1.configure(background="#e6e6e6")
-FrameLab1.place(x=385, y=100, width=600, height=680)
-
-FrameLab2 = LabelFrame(aba2, text="Dados do Veículo", font="Arial 12 italic", borderwidth='1', relief="solid")
-FrameLab2.configure(background="#e6e6e6")
-FrameLab2.place(x=280, y=100, width=750, height=680)
+FrameLab1.pack(pady=0, ipadx=300, ipady=350)
 
 FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic", borderwidth='1', relief="solid")
 FrameLab3.configure(background="#e6e6e6")
-FrameLab3.place(x=220, y=10, width=900, height=800)
+FrameLab3.pack(pady=10, ipadx=440, ipady=400)
+
+# label FRAME = Dados do Veículo
+FrameLab2 = LabelFrame(aba2, text="Dados do Veículo", font="Arial 12 italic", borderwidth='1', relief="solid")
+FrameLab2.configure(background="#e6e6e6")
+FrameLab2.pack(pady=0, ipadx=380, ipady=350)
 
 FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 italic", borderwidth='1', relief="solid")
 FrameLab4.configure(background="#e6e6e6")
-FrameLab4.place(x=90, y=10, width=1200, height=800)
+FrameLab4.pack(pady=15, ipadx=595, ipady=390)
 
 ### Gridview da ABA CONSULTAR VEÍCULO ###
 quadroGrid = LabelFrame(FrameLab4, text="Dados dos Veículos", relief="flat", background="#e6e6e6")
@@ -800,8 +802,7 @@ menuVCU.add_separator()
 menuVCU.add_command(label="Redes Sociais do Software", command=semComando)
 barraMenu.add_cascade(label="Destalhes do software", menu=menuVCU)
 
-# Criação da Tabela para dados cadastrais do proprietario # Criação da Tabela para dados cadastrais do proprietario
-Label(aba1, text="Cadastro dos Proprietários de Veículos", background="#009", font="Georgia 20 bold italic", foreground="#fff").place(x=385, y=10, width=600, height=50)
+# Criação da Tabela para dados cadastrais do proprietario
 
 Label(FrameLab1, text="Nome Completo: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=130, y=48)
 vNome = Entry(FrameLab1)
@@ -837,7 +838,6 @@ btnNovo.place(x=290, y=400, width=150, height=30)
 Label(FrameLab1, text="VCU", background="#e6e6e6", foreground="#009", font="ArialBlk 140 bold").place(x=100, y=450, height=180)
 
 #tabela para dados cadastrais do veículo
-Label(aba2, text="Cadastro de Informações do Veículo", background="#009", font="Georgia 20 bold italic", foreground="#fff").place(x=280, y=10, width=750, height=50)
 
 Label(FrameLab2, text="Modelo: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=50, y=48)
 vModelo = Entry(FrameLab2)
