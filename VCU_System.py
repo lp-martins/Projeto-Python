@@ -13,6 +13,7 @@ appVCU.wm_iconbitmap('icon_VCU.ico')
 def semComando():
     pass
 
+
 #  Criação das ABAS  #
 ABA = ttk.Notebook(appVCU)
 ABA.pack(fill='both', expand=1)
@@ -20,35 +21,44 @@ ABA.pack(fill='both', expand=1)
 def ABA_CAD_Propri():
     aba1 = Frame(ABA)
     ABA.add(aba1, text="Cadastrar Proprietário")
-    aba1.configure(background="#5f0")
-    Label(aba1, text="Cadastro de Proprietário de Veículo(s)", background="#009", font="Georgia 20 bold italic", foreground="#fff").pack(pady=20, ipadx=30, ipady=15)
+    aba1.configure(background="#2a261d")
+    Label(aba1, text="Cadastro de Proprietário de Veículo(s)", background="#2a261d", font="Georgia 30 bold", foreground="#fff").pack(pady=30, ipadx=30, ipady=15)
 
-    FrameLab1 = LabelFrame(aba1, text="Dados Pessoais do Proprietário", font="Arial 12 italic", borderwidth='1', relief="solid")
-    FrameLab1.configure(background="#e6e6e6")
-    FrameLab1.pack(pady=0, ipadx=300, ipady=350)
+    FrameLab1 = LabelFrame(aba1, text="Dados Pessoais do Proprietário", font="Arial 12 italic bold", borderwidth='1', relief="solid")
+    FrameLab1.configure(background="#e6e6e6", foreground="#000")
+    FrameLab1.pack(pady=20, ipadx=300, ipady=300)
 
     def novocadastro():
-        vNome.delete(0, END)
-        vCPF.delete(0, END)
-        vEndereco.delete(0, END)
-        vTelefone.delete(0, END)
-        vHabilita.delete(0, END)
+        vCodPRO.delete(0, END)
+        vNomePRO.delete(0, END)
+        vCpfPRO.delete(0, END)
+        vEnderPRO.delete(0, END)
+        vFonePRO.delete(0, END)
+        vResponPRO.delete(0, END)
 
     def salvardadosPRO():
-        Ssql = "SELECT CPF FROM PROPRIETARIOS"
-        CPFs = str(VCU_QUERY.DQL(Ssql))
-        if vCPF.get() in CPFs and vCPF.get() != "":
-            messagebox.showwarning(title="VCU - CPF já Cadastrado!",
-                                   message="Este CPF já está cadastrado em nossa base de dados!")
-        elif (vNome.get() != "") and (vCPF.get() != "") and (vEndereco.get() != "") and (vTelefone != "") and (
-                vHabilita.get() != ""):
-            sNome = vNome.get()
-            sCPF = vCPF.get()
-            sEndereco = vEndereco.get()
-            sTelefone = vTelefone.get()
-            sHabilita = vHabilita.get()
-            squery = "INSERT INTO PROPRIETARIOS(Nome, CPF, Endereço, Telefone, Habilitação) VALUES ('" + sNome + "', '" + sCPF + "', '" + sEndereco + "', '" + sTelefone + "', '" + sHabilita + "')"
-            VCU_QUERY.DML(squery)
+        CpfCnpjSQL = "SELECT CpfCnpjProp FROM Proprietarios"
+        CPFs = str(VCU_QUERY.DQL(CpfCnpjSQL))
+
+        CodProSQL = "SELECT CodProp FROM Proprietarios"
+        CodigosPro = str(VCU_QUERY.DQL(CodProSQL))
+
+        if vCodPRO.get() != "" and vCodPRO.get() in CodigosPro:
+            messagebox.showwarning(title="VCU - Código já Cadastrado!",
+                                   message="Este Código já está Existe em nossa base de dados! Por favor, escolha outro")
+        elif vCpfPRO.get() in CPFs and vCpfPRO.get() != "":
+            messagebox.showwarning(title="VCU - CPF/CNPJ já Cadastrado!",
+                                   message="Este CPF/CNPJ já está cadastrado em nossa base de dados!")
+        elif (vCodPRO.get() != "" and vNomePRO.get() != "") and (vCpfPRO.get() != "") and (vEnderPRO.get() != "") and (vFonePRO != "") and (
+                vResponPRO.get() != ""):
+            sCod = vCodPRO.get()
+            sNome = vNomePRO.get()
+            sCPF = vCpfPRO.get()
+            sEndereco = vEnderPRO.get()
+            sTelefone = vFonePRO.get()
+            sResponsa = vResponPRO.get()
+            SalvarPROquery = "INSERT INTO Proprietarios(CodProp, NomeRazaoProp, CpfCnpjProp, EndeProp, FoneProp, RespProp) VALUES ('" + sCod + "', '" + sNome + "', '" + sCPF + "', '" + sEndereco + "', '" + sTelefone + "', '" + sResponsa + "')"
+            VCU_QUERY.DML(SalvarPROquery)
             messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados cadastrados com sucesso!")
         else:
             messagebox.showwarning(title=" Campos Vazios!",
@@ -56,180 +66,229 @@ def ABA_CAD_Propri():
 
     # Criação da Tabela para dados cadastrais do proprietario
 
-    Label(FrameLab1, text="Nome Completo: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=130, y=48)
-    vNome = Entry(FrameLab1)
-    vNome.configure(font="Arial 14")
-    vNome.place(x=130, y=70, width=310, height=30)
+    Label(FrameLab1, text="Cód. Proprietário(5): ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=28)
+    vCodPRO = Entry(FrameLab1)
+    vCodPRO.configure(font="Arial 12")
+    vCodPRO.place(x=30, y=50, width=150, height=25)
 
-    Label(FrameLab1, text="CPF: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=130, y=118)
-    vCPF = Entry(FrameLab1)
-    vCPF.configure(font="Arial 14")
-    vCPF.place(x=130, y=140, width=310, height=30)
+    Label(FrameLab1, text="Nome Completo/Razão Social: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=78)
+    vNomePRO = Entry(FrameLab1)
+    vNomePRO.configure(font="Arial 12")
+    vNomePRO.place(x=30, y=100, width=530, height=25)
 
-    Label(FrameLab1, text="Endereço: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=130, y=188)
-    vEndereco = Entry(FrameLab1)
-    vEndereco.configure(font="Arial 14")
-    vEndereco.place(x=130, y=210, width=310, height=30)
+    Label(FrameLab1, text="CPF/CNPJ: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=128)
+    vCpfPRO = Entry(FrameLab1)
+    vCpfPRO.configure(font="Arial 12")
+    vCpfPRO.place(x=30, y=150, width=260, height=25)
 
-    Label(FrameLab1, text="Telefone para Contato: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=130, y=258)
-    vTelefone = Entry(FrameLab1)
-    vTelefone.configure(font="Arial 14")
-    vTelefone.place(x=130, y=280, width=310, height=30)
+    Label(FrameLab1, text="Telefone para Contato: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=300, y=128)
+    vFonePRO = Entry(FrameLab1)
+    vFonePRO.configure(font="Arial 12")
+    vFonePRO.place(x=300, y=150, width=260, height=25)
 
-    Label(FrameLab1, text="Habilitação: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=130, y=328)
-    vHabilita = Entry(FrameLab1)
-    vHabilita.configure(font="Arial 14")
-    vHabilita.place(x=130, y=350, width=310, height=30)
+    Label(FrameLab1, text="Endereço: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=178)
+    vEnderPRO = Entry(FrameLab1)
+    vEnderPRO.configure(font="Arial 12")
+    vEnderPRO.place(x=30, y=200, width=530, height=25)
+
+    Label(FrameLab1, text="Responsável: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=228)
+    vResponPRO = Entry(FrameLab1)
+    vResponPRO.configure(font="Arial 12")
+    vResponPRO.place(x=30, y=250, width=530, height=25)
 
     btnSalvar = Button(FrameLab1, text="Cadastrar", background="#009", foreground="#fff", font="ArialBlk 12 bold", command=salvardadosPRO)
-    btnSalvar.place(x=130, y=400, width=150, height=30)
+    btnSalvar.place(x=130, y=290, width=150, height=30)
 
     btnNovo = Button(FrameLab1, text="Novo Cadastro", background="#090", foreground="#fff", font="ArialBlk 12 bold", command=novocadastro)
-    btnNovo.place(x=290, y=400, width=150, height=30)
+    btnNovo.place(x=300, y=290, width=150, height=30)
 
-    Label(FrameLab1, text="VCU", background="#e6e6e6", foreground="#009", font="ArialBlk 140 bold").place(x=100, y=450, height=180)
-
+    Label(FrameLab1, text="V.C.U", background="#e6e6e6", foreground="#009", font="ArialBlk 140 bold").place(x=50, y=340, height=180)
+    Label(FrameLab1, text="Sistema de Venda de Carros Usados®", background="#e6e6e6", foreground="#009", font="ArialBlk 22 bold").place(x=35, y=510, height=40)
 
 
 def ABA_CAD_Veic():
     aba2 = Frame(ABA)
     ABA.add(aba2, text="Cadastrar Veículo")
-    aba2.configure(background="#5f0")
-    Label(aba2, text="Cadastro de Informações do Veículo", background="#009", font="Georgia 20 bold italic", foreground="#fff").pack(pady=20, ipadx=120, ipady=15)
-
-    def AtuaListPRO():
-        squery = "SELECT Nome FROM PROPRIETARIOS"
-        ListaPRO = VCU_QUERY.DQL(squery)
-        vProprietario['values'] = ListaPRO
+    aba2.configure(background="#2a261d")
+    Label(aba2, text="Cadastro de Informações do Veículo", background="#2a261d", font="Georgia 30 bold", foreground="#fff").pack(pady=20, ipadx=120, ipady=15)
 
     def salvardadosVE():
-        sModelo = vModelo.get()
+        sCodVE = vCodVE.get()
+        sCodPRO = vCodProV.get()
         sMarca = vMarca.get()
+        sModelo = vModelo.get()
+        sFabric = vAnoFabric.get()
         sCor = vCor.get()
-        sAno = vAno.get()
         sCombust = vCombust.get()
-        sProp = vProprietario.get()
-        sPagamento = vPagamento.get()
-        sRenavam = vRenav.get()
         sPlaca = vPlaca.get()
-        sFinanceiro = vFinanceiro.get()
-        sFipe = vFipe.get()
-        sValorPRO = vPrecoPro.get()
-        sAcessorio = vAcessorios.get()
-        sStatus = vStatus.get()
-        Squery = "SELECT Nome FROM PROPRIETARIOS"
-        PropList = VCU_QUERY.DQL(Squery)
+        sRenavam = vRenav.get()
+        sPortas = vPortas.get()
+        sVidroEl = vVidroElet.get()
+        sTravaEl = vTravaElet.get()
+        sAlarme = vAlarme.get()
+        sArCondic = vArCondic.get()
+        sSom = vSom.get()
+        sOutrosAce = vOutroAces.get()
+        sVencIPVA = vVencIPVA.get()
+        sValorMulta = vValorMultas.get()
+        sValorFipe = vValorFipe.get()
+        sValorPro = vValorPro.get()
 
-        if (vModelo.get() == "") or (vMarca.get() == "") or (vCor.get() == "") or (vAno.get() == "") or (
-                vCombust.get() == "") or (vProprietario.get() == "") or (vPagamento.get() == "") or (
-                vRenav.get() == "") or (vPlaca.get() == "") or (vFinanceiro.get() == "") or (vFipe.get() == "") or (
-                vPrecoPro.get() == "") or (vAcessorios.get() == "") or (vStatus.get() == ""):
+
+        Squery = "SELECT CodProp FROM Proprietarios"
+        CodPropList = VCU_QUERY.DQL(Squery)
+
+        VEquery = "SELECT CodVeicV FROM Veiculos"
+        CodVeList = VCU_QUERY.DQL(VEquery)
+
+        if (sCodVE == "") or (sCodPRO == "") or (sMarca == "") or (sModelo == "") or (sFabric == "") or (sCor == "") or (sCombust == "") or (
+                sPlaca == "") or (sRenavam == "") or (sPortas == "") or (
+                sVidroEl == "") or (sTravaEl == "") or (sAlarme == "") or (sArCondic == "") or (
+                sSom == "") or (sOutrosAce == "") or (sVencIPVA == "") or (sValorMulta == "") or (sValorFipe == "") or (sValorPro == ""):
             messagebox.showwarning(title=" Campos Vazios!",
                                    message="Por favor, preencha todos os campos para realizar o cadastro!")
-        elif vProprietario.get() in str(PropList):
-            squery = "INSERT INTO VEICULOS(Modelo, Marca, Cor, Ano_de_Lançamento, Combustivel, Proprietario, Formas_de_Pagamento, Renavam, Placa, Situação_Financeira, Valor_FIPE, Valor_Proprietario, Acessorios, Status) VALUES ('" + sModelo + "', '" + sMarca + "', '" + sCor + "', '" + sAno + "', '" + sCombust + "', '" + sProp + "', '" + sPagamento + "', '" + sRenavam + "', '" + sPlaca + "', '" + sFinanceiro + "', '" + sFipe + "', '" + sValorPRO + "', '" + sAcessorio + "', '" + sStatus + "')"
-            VCU_QUERY.DML(squery)
+        elif sCodVE in str(CodVeList):
+            messagebox.showwarning(title=" Código de Veículo já existe!",
+                                   message="O Código do veículo informado já existe! Por favor digite outro!")
+        elif sCodPRO in str(CodPropList):
+            SalvarVEquery = "INSERT INTO Veiculos(CodVeicV, fk_CodProp, MarcaV, ModeloV, AnoFabV, CorV, CombV, PlacaV, RenavanV, PortasV, AcessVEV, AcessTEV, AcessAlV, AcessArV, AcessSomV, AcessOutV, VencIPVA, DocMultasV, ValFipeV, ValVendaMinV) VALUES ('" + sCodVE + "', '" + sCodPRO + "', '" + sMarca + "', '" + sModelo + "', '" + sFabric + "', '" + sCor + "', '" + sCombust + "', '" + sPlaca + "', '" + sRenavam + "', '" + sPortas + "', '" + sVidroEl + "', '" + sTravaEl + "', '" + sAlarme + "', '" + sArCondic + "', '" + sSom + "', '" + sOutrosAce + "', '" + sVencIPVA + "', '" + sValorMulta + "', '" + sValorFipe + "', '" + sValorPro + "')"
+            VCU_QUERY.DML(SalvarVEquery)
             messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados do Veículo Salvo com Sucesso!")
-            vModelo.delete(0, END)
+            vCodVE.delete(0, END)
+            vCodProV.delete(0, END)
             vMarca.delete(0, END)
-            vRenav.delete(0, END)
-            vPlaca.delete(0, END)
+            vModelo.delete(0, END)
+            vAnoFabric.delete(0, END)
             vCor.delete(0, END)
-            vFinanceiro.delete(0, END)
-            vAno.delete(0, END)
-            vFipe.delete(0, END)
             vCombust.set("")
-            vPrecoPro.delete(0, END)
-            vProprietario.set("")
-            vAcessorios.delete(0, END)
-            vPagamento.delete(0, END)
-            vStatus.set("")
+            vPlaca.delete(0, END)
+            vRenav.delete(0, END)
+            vPortas.set("")
+            vVidroElet.set("")
+            vTravaElet.set("")
+            vAlarme.set("")
+            vArCondic.set("")
+            vSom.set("")
+            vOutroAces.delete(0, END)
+            vVencIPVA.delete(0, END)
+            vValorMultas.delete(0, END)
+            vValorFipe.delete(0, END)
+            vValorPro.delete(0, END)
         else:
             messagebox.showwarning(title=" Proprietário Não Cadastrado!",
-                                   message="Este proprietário não está cadastrado! Verifique o nome e tente novamente!")
+                                   message="Código de proprietário não confere com nenhum proprietário Cadastrado! Verifique o código digitado e tente novamente!")
 
-    FrameLab2 = LabelFrame(aba2, text="Dados do Veículo", font="Arial 12 italic", borderwidth='1', relief="solid")
+    FrameLab2 = LabelFrame(aba2, text="Dados do Veículo", font="Arial 12 italic bold", borderwidth='1', relief="solid")
     FrameLab2.configure(background="#e6e6e6")
-    FrameLab2.pack(pady=0, ipadx=380, ipady=350)
+    FrameLab2.pack(pady=0, ipadx=380, ipady=320)
 
     # tabela para dados cadastrais do veículo
 
-    Label(FrameLab2, text="Modelo: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=50, y=48)
-    vModelo = Entry(FrameLab2)
-    vModelo.configure(font="Arial 14")
-    vModelo.place(x=50, y=70, width=310, height=30)
+    Label(FrameLab2, text="Código Veículo(5): ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=28)
+    vCodVE = Entry(FrameLab2)
+    vCodVE.configure(font="Arial 12")
+    vCodVE.place(x=30, y=50, width=130, height=25)
 
-    Label(FrameLab2, text="Renavan: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=380, y=48)
-    vRenav = Entry(FrameLab2)
-    vRenav.configure(font="Arial 14")
-    vRenav.place(x=380, y=70, width=310, height=30)
+    Label(FrameLab2, text="Código Proprietário(5): ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=180, y=28)
+    vCodProV = Entry(FrameLab2)
+    vCodProV.configure(font="Arial 12")
+    vCodProV.place(x=180, y=50, width=150, height=25)
 
-    Label(FrameLab2, text="Marca: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=50, y=118)
+    Label(FrameLab2, text="Marca: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=78)
     vMarca = Entry(FrameLab2)
-    vMarca.configure(font="Arial 14")
-    vMarca.place(x=50, y=140, width=310, height=30)
+    vMarca.configure(font="Arial 12")
+    vMarca.place(x=30, y=100, width=310, height=25)
 
-    Label(FrameLab2, text="Placa: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=380, y=118)
-    vPlaca = Entry(FrameLab2)
-    vPlaca.configure(font="Arial 14")
-    vPlaca.place(x=380, y=140, width=310, height=30)
+    Label(FrameLab2, text="Modelo: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=360, y=78)
+    vModelo = Entry(FrameLab2)
+    vModelo.configure(font="Arial 12")
+    vModelo.place(x=360, y=100, width=370, height=25)
 
-    Label(FrameLab2, text="Cor: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=50, y=188)
+    Label(FrameLab2, text="Ano de Fabricação: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=128)
+    vAnoFabric = Entry(FrameLab2)
+    vAnoFabric.configure(font="Arial 12")
+    vAnoFabric.place(x=30, y=150, width=180, height=25)
+
+    Label(FrameLab2, text="Cor: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=230, y=128)
     vCor = Entry(FrameLab2)
-    vCor.configure(font="Arial 14")
-    vCor.place(x=50, y=210, width=310, height=30)
+    vCor.configure(font="Arial 12")
+    vCor.place(x=230, y=150, width=240, height=25)
 
-    Label(FrameLab2, text="Situação Financeira: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=380, y=188)
-    vFinanceiro = Entry(FrameLab2)
-    vFinanceiro.configure(font="Arial 14")
-    vFinanceiro.place(x=380, y=210, width=310, height=30)
+    Label(FrameLab2, text="Combustível: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=490, y=128)
+    vCombust = ttk.Combobox(FrameLab2, values="Gasolina Etanol Flex Diesel Elétrico Energia-Solar", state="readonly")
+    vCombust.configure(font="Arial 12")
+    vCombust.place(x=490, y=150, width=240, height=25)
 
-    Label(FrameLab2, text="Ano de Lançamento: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=50,
-                                                                                                                 y=258)
-    vAno = Entry(FrameLab2)
-    vAno.configure(font="Arial 14")
-    vAno.place(x=50, y=280, width=310, height=30)
+    Label(FrameLab2, text="Placa: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=178)
+    vPlaca = Entry(FrameLab2)
+    vPlaca.configure(font="Arial 12")
+    vPlaca.place(x=30, y=200, width=310, height=25)
 
-    Label(FrameLab2, text="Valor na Tabela FIPE: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=380, y=258)
-    vFipe = Entry(FrameLab2)
-    vFipe.configure(font="Arial 14")
-    vFipe.place(x=380, y=280, width=310, height=30)
+    Label(FrameLab2, text="Renavan: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=360, y=178)
+    vRenav = Entry(FrameLab2)
+    vRenav.configure(font="Arial 12")
+    vRenav.place(x=360, y=200, width=370, height=25)
 
-    Label(FrameLab2, text="Combustível: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=50, y=328)
-    vCombust = ttk.Combobox(FrameLab2, values="Gasolina Etanol Gasolina/Etanol Diesel Elétrico ", state="readonly")
-    vCombust.configure(font="Arial 14")
-    vCombust.place(x=50, y=350, width=310, height=30)
+    Label(FrameLab2, text="Portas: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=228)
+    vPortas = ttk.Combobox(FrameLab2, values="2 3 4 ", state="readonly")
+    vPortas.configure(font="Arial 12")
+    vPortas.place(x=30, y=250, width=50, height=25)
 
-    btnAtual = Button(FrameLab2, text="Atualizar lista", background="#090", foreground="#fff", font="georgia 8 bold italic", command=AtuaListPRO)
-    btnAtual.place(x=257, y=398, height=17)
+    Label(FrameLab2, text="Vidro Elétr.: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=95, y=228)
+    vVidroElet = ttk.Combobox(FrameLab2, values="Sim Não", state="readonly")
+    vVidroElet.configure(font="Arial 12")
+    vVidroElet.place(x=95, y=250, width=80, height=25)
 
-    Label(FrameLab2, text="Valor do proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=380, y=328)
-    vPrecoPro = Entry(FrameLab2)
-    vPrecoPro.configure(font="Arial 14")
-    vPrecoPro.place(x=380, y=350, width=310, height=30)
+    Label(FrameLab2, text="Trava Elétr.: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=190, y=228)
+    vTravaElet = ttk.Combobox(FrameLab2, values="Sim Não", state="readonly")
+    vTravaElet.configure(font="Arial 12")
+    vTravaElet.place(x=190, y=250, width=80, height=25)
 
-    Label(FrameLab2, text="Proprietário: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=50, y=398)
-    vProprietario = ttk.Combobox(FrameLab2, state="readonly")
-    vProprietario.configure(font="Arial 14")
-    vProprietario.place(x=50, y=420, width=310, height=30)
+    Label(FrameLab2, text="Alarme: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=285, y=228)
+    vAlarme = ttk.Combobox(FrameLab2, values="Sim Não", state="readonly")
+    vAlarme.configure(font="Arial 12")
+    vAlarme.place(x=285, y=250, width=80, height=25)
 
-    Label(FrameLab2, text="Acessórios: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=380, y=398)
-    vAcessorios = Entry(FrameLab2)
-    vAcessorios.configure(font="Arial 14")
-    vAcessorios.place(x=380, y=420, width=310, height=30)
+    Label(FrameLab2, text="Ar Condic.: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=380, y=228)
+    vArCondic = ttk.Combobox(FrameLab2, values="Sim Não", state="readonly")
+    vArCondic.configure(font="Arial 12")
+    vArCondic.place(x=380, y=250, width=80, height=25)
 
-    Label(FrameLab2, text="Formas de pagamento: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=50, y=468)
-    vPagamento = Entry(FrameLab2)
-    vPagamento.configure(font="Arial 14")
-    vPagamento.place(x=50, y=490, width=310, height=30)
+    Label(FrameLab2, text="Som: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=475, y=228)
+    vSom = ttk.Combobox(FrameLab2, values="Sim Não", state="readonly")
+    vSom.configure(font="Arial 12")
+    vSom.place(x=475, y=250, width=80, height=25)
 
-    Label(FrameLab2, text="Status: ", background="#e6e6e6", foreground="#009", font="Arial 12").place(x=380, y=468)
-    vStatus = ttk.Combobox(FrameLab2, values="Disponível Vendido", state="readonly")
-    vStatus.configure(font="Arial 14")
-    vStatus.place(x=380, y=490, width=310, height=30)
+    Label(FrameLab2, text="Outros: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=570, y=228)
+    vOutroAces = Entry(FrameLab2)
+    vOutroAces.configure(font="Arial 12")
+    vOutroAces.place(x=570, y=250, width=160, height=25)
+
+    Label(FrameLab2, text="Vencimento IPVA: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=278)
+    vVencIPVA = Entry(FrameLab2)
+    vVencIPVA.configure(font="Arial 12")
+    vVencIPVA.place(x=30, y=300, width=130, height=25)
+
+    Label(FrameLab2, text="Valor das Multas: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=180, y=278)
+    vValorMultas = Entry(FrameLab2)
+    vValorMultas.configure(font="Arial 12")
+    vValorMultas.place(x=180, y=300, width=130, height=25)
+
+    Label(FrameLab2, text="Valor na tabela FIPE: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=330, y=278)
+    vValorFipe = Entry(FrameLab2)
+    vValorFipe.configure(font="Arial 12")
+    vValorFipe.place(x=330, y=300, width=150, height=25)
+
+    Label(FrameLab2, text="Valor do proprietário: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=500, y=278)
+    vValorPro = Entry(FrameLab2)
+    vValorPro.configure(font="Arial 12")
+    vValorPro.place(x=500, y=300, width=150, height=25)
+
+    Label(FrameLab2, text="V.C.U", background="#e6e6e6", foreground="#009", font="ArialBlk 140 bold").place(x=130, y=380, height=180)
+    Label(FrameLab2, text="Sistema de Venda de Carros Usados®", background="#e6e6e6", foreground="#009", font="ArialBlk 22 bold").place(x=115, y=550, height=40)
 
     btnSalvar = Button(FrameLab2, text="Salvar", background="#009", foreground="#fff", font="ArialBlk 12 bold", command=salvardadosVE)
-    btnSalvar.place(x=300, y=550, width=150, height=30)
+    btnSalvar.place(x=300, y=340, width=150, height=30)
 
 def ABA_Consu_Propri():
     aba3 = Frame(ABA)

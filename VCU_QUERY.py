@@ -4,7 +4,7 @@ from tkinter import messagebox
 import os
 
 pastaAPP_VCU = os.path.dirname(__file__)
-nameDB = pastaAPP_VCU+"\VCU_DB.db"
+nameDB = pastaAPP_VCU+"\databaseVCU.db"
 
 # Conexão com Banco de Dados
 # noinspection PyUnboundLocalVariable
