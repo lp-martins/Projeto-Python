@@ -295,7 +295,7 @@ def ABA_Consu_Propri():
     ABA.add(aba3, text="Consultar Proprietário")
     aba3.configure(background="#06f")
 
-    FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic", borderwidth='1', relief="solid")
+    FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic bold", borderwidth='1', relief="solid")
     FrameLab3.configure(background="#e6e6e6")
     FrameLab3.pack(pady=10, ipadx=440, ipady=400)
 
@@ -303,7 +303,7 @@ def ABA_Consu_Propri():
     def PesquisarCPF():
         tv1.delete(*tv1.get_children())
         if nomePesq6.get() != "":
-            vquery = "SELECT Nome, CPF, Endereço, Telefone, Habilitação FROM PROPRIETARIOS WHERE CPF LIKE '%" + nomePesq6.get() + "%'"
+            vquery = "SELECT CodProp, NomeRazaoProp, CpfCnpjProp, EndeProp, FoneProp, RespProp FROM Proprietarios WHERE CpfCnpjProp LIKE '%" + nomePesq6.get() + "%'"
             linhas = VCU_QUERY.DQL(vquery)
             nomePesq6.delete(0, END)
             if linhas != []:
@@ -318,7 +318,7 @@ def ABA_Consu_Propri():
     def PesquisarNOME():
         tv1.delete(*tv1.get_children())
         if nomePesq4.get() != "":
-            vquery = "SELECT Nome, CPF, Endereço, Telefone, Habilitação FROM PROPRIETARIOS WHERE NOME LIKE '%" + nomePesq4.get() + "%'"
+            vquery = "SELECT CodProp, NomeRazaoProp, CpfCnpjProp, EndeProp, FoneProp, RespProp FROM Proprietarios WHERE NomeRazaoProp LIKE '%" + nomePesq4.get() + "%'"
             linhas = VCU_QUERY.DQL(vquery)
             nomePesq4.delete(0, END)
             if linhas != []:
@@ -330,9 +330,25 @@ def ABA_Consu_Propri():
             messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
 
     # ABA Consultar Proprietário
+    def PesqCodPRO():
+        tv1.delete(*tv1.get_children())
+        if nomePesq7.get() != "":
+            vquery = "SELECT CodProp, NomeRazaoProp, CpfCnpjProp, EndeProp, FoneProp, RespProp FROM Proprietarios WHERE CodProp LIKE '%" + nomePesq7.get() + "%'"
+            linhas = VCU_QUERY.DQL(vquery)
+            nomePesq7.delete(0, END)
+            if linhas != []:
+                for x in linhas:
+                    tv1.insert("", "end", values=x)
+            else:
+                messagebox.showinfo(title=" Atenção!", message="Não encontramos Proprietários com esse Código!")
+        else:
+            messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
+
+
+    # ABA Consultar Proprietário
     def ListarProprietarios():
         tv1.delete(*tv1.get_children())
-        vquery = "SELECT Nome, CPF, Endereço, Telefone, Habilitação FROM PROPRIETARIOS"
+        vquery = "SELECT CodProp, NomeRazaoProp, CpfCnpjProp, EndeProp, FoneProp, RespProp FROM Proprietarios"
         linhas = VCU_QUERY.DQL(vquery)
         for x in linhas:
             tv1.insert("", "end", values=x)
@@ -446,23 +462,24 @@ def ABA_Consu_Propri():
 
 
     # Gridview da ABA CONSULTAR PROPRIETARIO
-    quadroGrid1 = LabelFrame(FrameLab3, text="Dados dos Proprietários", relief="flat", background="#e6e6e6")
+    quadroGrid1 = LabelFrame(FrameLab3, text="Dados dos Proprietários", foreground="#055", font="Arial 12 bold", relief="flat", background="#e6e6e6")
     quadroGrid1.place(x=10, y=10, width=860, height=760)
 
-    tv1 = ttk.Treeview(quadroGrid1, columns=('Nome Completo', 'CPF', 'Endereço', 'Telefone', 'Habilitação'),
-                       show='headings')
+    tv1 = ttk.Treeview(quadroGrid1, columns=('Código', 'Nome', 'CPF/CNPJ', 'Endereço', 'Telefone', 'Responsável'), show='headings')
     tv1.configure(height=23)
-    tv1.column('Nome Completo', minwidth=240, width=240)
-    tv1.column('CPF', minwidth=140, width=140)
-    tv1.column('Endereço', minwidth=200, width=220)
-    tv1.column('Telefone', minwidth=130, width=140)
-    tv1.column('Habilitação', minwidth=90, width=90)
+    tv1.column('Código', width=60)
+    tv1.column('Nome', minwidth=200, width=200)
+    tv1.column('CPF/CNPJ', minwidth=120, width=120)
+    tv1.column('Endereço', minwidth=180, width=200)
+    tv1.column('Telefone', minwidth=110, width=120)
+    tv1.column('Responsável', minwidth=110, width=130)
 
-    tv1.heading('Nome Completo', text='Nome Completo')
-    tv1.heading('CPF', text='CPF')
+    tv1.heading('Código', text="Código")
+    tv1.heading('Nome', text='Nome/Razão Social')
+    tv1.heading('CPF/CNPJ', text='CPF/CNPJ')
     tv1.heading('Endereço', text='Endereço')
     tv1.heading('Telefone', text='Telefone')
-    tv1.heading('Habilitação', text='Habilitação')
+    tv1.heading('Responsável', text='Responsável')
     tv1.pack(side=LEFT)
     tv1.place(x=0, y=0)
 
@@ -479,52 +496,64 @@ def ABA_Consu_Propri():
 
     ### FRAMES da ABA CONSULTAR PROPRIETARIOS ###
     # Frame de SELECT
-    FrameBusca1 = LabelFrame(quadroGrid1, text="Opções de busca", font="Arial 12 italic", borderwidth='3')
+    FrameBusca1 = LabelFrame(quadroGrid1, text="Opções de busca", font="Arial 12 bold", foreground="#055", borderwidth='3')
     FrameBusca1.configure(background="#e6e6e6")
     FrameBusca1.place(x=2, y=510, width=850, height=108)
 
-    # Frame de Atualizar
-    FrameAtualizar = LabelFrame(quadroGrid1, text="Atualizar Registro Selecionado", font="Arial 12 italic",
-                                borderwidth='3')
+    # _____Frame de Atualizar_____
+    FrameAtualizar = LabelFrame(quadroGrid1, text="Atualizar Registro Selecionado", foreground="#055", font="Arial 12 bold", borderwidth='3')
     FrameAtualizar.configure(background="#e6e6e6")
     FrameAtualizar.place(x=2, y=630, width=420, height=108)
 
-    # Frame de Excluir
-    FrameExcluir = LabelFrame(quadroGrid1, text="Excluir Registro Selecionado", font="Arial 12 italic", borderwidth='3')
+    # _____Frame de Excluir_____
+    FrameExcluir = LabelFrame(quadroGrid1, text="Excluir Registro Selecionado", foreground="#055", font="Arial 12 bold", borderwidth='3')
     FrameExcluir.configure(background="#e6e6e6")
     FrameExcluir.place(x=430, y=630, width=420, height=108)
 
     # Elementos para quadro de pesquisa da ABA Consultar PROPRIETARIOS
-    # Busca por NOME
-    LabelPesq4 = Label(FrameBusca1, text="Busca por Nome:")
+    # ____Busca por NOME____
+    LabelPesq4 = Label(FrameBusca1, text="Busca/Nome:")
     LabelPesq4.configure(font="Arial 12", background="#e6e6e6")
     LabelPesq4.place(x=10, y=10)
 
     nomePesq4 = Entry(FrameBusca1)
     nomePesq4.configure(width=15, font="arial 14")
-    nomePesq4.place(x=140, y=10)
+    nomePesq4.place(x=110, y=10)
 
     btnPesq4 = Button(FrameBusca1, text="Pesquisar", command=PesquisarNOME)
     btnPesq4.configure(font="arial 10 bold", background="#009", foreground="#fff")
-    btnPesq4.place(x=315, y=10)
+    btnPesq4.place(x=285, y=10)
 
-    # Busca por CPF
-    LabelPesq6 = Label(FrameBusca1, text="Busca por CPF:")
+    # ____Busca por CPF____
+    LabelPesq6 = Label(FrameBusca1, text="Busca/CPF:")
     LabelPesq6.configure(font="Arial 12", background="#e6e6e6")
     LabelPesq6.place(x=10, y=50)
 
     nomePesq6 = Entry(FrameBusca1)
     nomePesq6.configure(width=15, font="arial 14")
-    nomePesq6.place(x=130, y=50)
+    nomePesq6.place(x=100, y=50)
 
     btnPesq6 = Button(FrameBusca1, text="Pesquisar", command=PesquisarCPF)
     btnPesq6.configure(font="arial 10 bold", background="#009", foreground="#fff")
-    btnPesq6.place(x=305, y=50)
+    btnPesq6.place(x=275, y=50)
 
-    # botao q busca TODOS os registros na ABA Consultar PROPRIETÁRIOS
+    # ____Busca por Código____
+    LabelPesq7 = Label(FrameBusca1, text="Busca/Código:")
+    LabelPesq7.configure(font="Arial 12", background="#e6e6e6")
+    LabelPesq7.place(x=370, y=10)
+
+    nomePesq7 = Entry(FrameBusca1)
+    nomePesq7.configure(width=8, font="arial 14")
+    nomePesq7.place(x=480, y=10)
+
+    btnPesq7 = Button(FrameBusca1, text="Pesquisar", command=PesqCodPRO)
+    btnPesq7.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesq7.place(x=575, y=10)
+
+    # ____botao q busca TODOS os registros na ABA Consultar PROPRIETÁRIOS____
     btnBuscaTudo5 = Button(FrameBusca1, text="Buscar Tudo", command=ListarProprietarios)
     btnBuscaTudo5.configure(width=10, height=2, font="arial 11 bold", background="#0f3", foreground="#000")
-    btnBuscaTudo5.place(x=530, y=15, width=200, height=50)
+    btnBuscaTudo5.place(x=680, y=15, width=150, height=50)
 
     # botão Atualizar dados do Proprietário
     btnAttPRO = Button(FrameAtualizar, text="Atualizar Registro", command=AtualizarPRO)
@@ -542,9 +571,9 @@ def ABA_Consu_Veic():
     ABA.add(aba4, text="Consultar Veículo")
     aba4.configure(background="#06f")
 
-    FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 italic", borderwidth='1', relief="solid")
+    FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 bold", foreground="#055", borderwidth='1', relief="solid")
     FrameLab4.configure(background="#e6e6e6")
-    FrameLab4.pack(pady=15, ipadx=595, ipady=390)
+    FrameLab4.pack(pady=15, ipadx=635, ipady=390)
 
     def AtuaListPRO():
         pass
@@ -552,7 +581,7 @@ def ABA_Consu_Veic():
     # ABA Consultar Veículo
     def ListarVeiculos():
         tv.delete(*tv.get_children())
-        vquery = "SELECT * FROM VEICULOS order by Modelo"
+        vquery = "SELECT * FROM Veiculos order by CodVeicV"
         linhas = VCU_QUERY.DQL(vquery)
         for x in linhas:
             tv.insert("", "end", values=x)
@@ -560,11 +589,11 @@ def ABA_Consu_Veic():
     # ABA Consultar Veículo
     def PesquisarMODE():
         tv.delete(*tv.get_children())
-        if nomePesq.get() != "":
-            vquery = "SELECT * FROM VEICULOS WHERE Modelo LIKE '%" + nomePesq.get() + "%'"
+        if txtPesqMod.get() != "":
+            vquery = "SELECT * FROM Veiculos WHERE ModeloV LIKE '%" + txtPesqMod.get() + "%'"
             linhas = VCU_QUERY.DQL(vquery)
-            nomePesq.delete(0, END)
             if linhas != []:
+                txtPesqMod.delete(0, END)
                 for x in linhas:
                     tv.insert("", "end", values=x)
             else:
@@ -573,28 +602,28 @@ def ABA_Consu_Veic():
             messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
 
     # ABA Consultar Veículo
-    def PesquisarPROP():
+    def PesquisarCodPRO():
         tv.delete(*tv.get_children())
-        if nomePesq1.get() != "":
-            vquery = "SELECT * FROM VEICULOS WHERE Proprietario LIKE '%" + nomePesq1.get() + "%'"
+        if txtPesqPro.get() != "":
+            vquery = "SELECT * FROM Veiculos WHERE fk_CodProp LIKE '%" + txtPesqPro.get() + "%'"
             linhas = VCU_QUERY.DQL(vquery)
-            nomePesq1.delete(0, END)
             if linhas != []:
+                txtPesqPro.delete(0, END)
                 for x in linhas:
                     tv.insert("", "end", values=x)
             else:
-                messagebox.showinfo(title=" Atenção!", message="Não encontramos veículos com esse Proprietário!")
+                messagebox.showinfo(title=" Atenção!", message="Não encontramos veículos com esse Código de Proprietário!")
         else:
             messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
 
     # ABA Consultar Veículo
     def PesquisarPLAC():
         tv.delete(*tv.get_children())
-        if nomePesq2.get() != "":
-            vquery = "SELECT * FROM VEICULOS WHERE Placa LIKE '%" + nomePesq2.get() + "%'"
+        if txtPesqPlaca.get() != "":
+            vquery = "SELECT * FROM Veiculos WHERE PlacaV LIKE '%" + txtPesqPlaca.get() + "%'"
             linhas = VCU_QUERY.DQL(vquery)
-            nomePesq2.delete(0, END)
             if linhas != []:
+                txtPesqPlaca.delete(0, END)
                 for x in linhas:
                     tv.insert("", "end", values=x)
             else:
@@ -603,17 +632,18 @@ def ABA_Consu_Veic():
             messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
 
     # ABA Consultar Veículo
-    def PesquisarSTAT():
+    def PesquisarCodVE():
         tv.delete(*tv.get_children())
-        if txtBuscStt.get() != "":
-            Status = txtBuscStt.get()
-            vquery = "SELECT * FROM VEICULOS WHERE Status ='" + Status + "'"
+        if txtPesqCodVE.get() != "":
+            CodVE = txtPesqCodVE.get()
+            vquery = "SELECT * FROM Veiculos WHERE CodVeicV ='" + CodVE + "'"
             linhas = VCU_QUERY.DQL(vquery)
             if linhas != []:
+                txtPesqCodVE.delete(0, END)
                 for x in linhas:
                     tv.insert("", "end", values=x)
             else:
-                messagebox.showinfo(title=" Atenção!", message="Não encontramos veículos com esse Status!")
+                messagebox.showinfo(title=" Atenção!", message="Não encontramos veículos com esse Código de Veículo!")
         else:
             messagebox.showinfo(title=" Atenção!", message="Nenhuma Opção escolhida!")
 
@@ -621,10 +651,10 @@ def ABA_Consu_Veic():
         try:
             ItemSelect = tv.selection()[0]
             Valores = tv.item(ItemSelect, "values")
-            ValorSelect = Valores[8]
+            ValorSelect = Valores[0]
             MsgResult = messagebox.askyesno(title=" Atenção!!!", message="Deseja mesmo exluir o Veículo selecionado?")
             if MsgResult == True:
-                dquery = "DELETE FROM VEICULOS WHERE Placa ='" + ValorSelect + "'"
+                dquery = "DELETE FROM Veiculos WHERE CodVeicV ='" + ValorSelect + "'"
                 tv.delete(ItemSelect)
                 VCU_QUERY.DML(dquery)
         except:
@@ -1033,73 +1063,86 @@ def ABA_Consu_Veic():
             messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
 
     ### Gridview da ABA CONSULTAR VEÍCULO ###
-    quadroGrid = LabelFrame(FrameLab4, text="Dados dos Veículos", relief="flat", background="#e6e6e6")
-    quadroGrid.place(x=10, y=10, width=1180, height=760)
+    quadroGrid = LabelFrame(FrameLab4, text="Dados dos Veículos", font="Arial 12 bold", foreground="#055", relief="flat", background="#e6e6e6")
+    quadroGrid.place(x=5, y=10, width=1260, height=760)
 
     tv = ttk.Treeview(quadroGrid, columns=(
-    'Modelo', 'Marca', 'Cor', 'Ano', 'Combustivel', 'Proprietário', 'Formas de Pagamento', 'Renavam', 'Placa',
-    'Situação Financeira', 'Valor FIPE', 'Valor do Proprietário', 'Acessórios', 'Status'), show='headings')
+    'Cód. Veículo', 'Cód. Proprietário', 'Marca', 'Modelo', 'Ano de Fabricação', 'Cor', 'Combustivel', 'Placa', 'Renavan', 'qtd Portas', 'Vidro Elétr.',
+    'Trava Elétr.', 'Alarme', 'Ar Condic.', 'Som', 'outros', 'Venc. IPVA', 'Valor em Multas', 'Valor FIPE', 'Valor de Venda'), show='headings')
     tv.configure(height=22)
-    tv.column('Modelo', minwidth=75, width=80)
-    tv.column('Marca', minwidth=50, width=50)
-    tv.column('Cor', minwidth=40, width=40)
-    tv.column('Ano', minwidth=50, width=50)
-    tv.column('Combustivel', minwidth=75, width=80)
-    tv.column('Proprietário', minwidth=95, width=100)
-    tv.column('Formas de Pagamento', minwidth=130, width=130)
-    tv.column('Renavam', minwidth=55, width=60)
-    tv.column('Placa', minwidth=55, width=60)
-    tv.column('Situação Financeira', minwidth=110, width=110)
-    tv.column('Valor FIPE', minwidth=75, width=80)
-    tv.column('Valor do Proprietário', minwidth=115, width=120)
-    tv.column('Acessórios', minwidth=95, width=100)
-    tv.column('Status', minwidth=75, width=80)
+    tv.column('Cód. Veículo', width=50)
+    tv.column('Cód. Proprietário', width=55)
+    tv.column('Marca', width=65)
+    tv.column('Modelo', width=65)
+    tv.column('Ano de Fabricação', width=60)
+    tv.column('Cor', width=60)
+    tv.column('Combustivel', width=75)
+    tv.column('Placa', width=54)
+    tv.column('Renavan', width=60)
+    tv.column('qtd Portas', width=58)
+    tv.column('Vidro Elétr.', width=60)
+    tv.column('Trava Elétr.', width=64)
+    tv.column('Alarme', width=45)
+    tv.column('Ar Condic.', width=60)
+    tv.column('Som', width=40)
+    tv.column('outros', width=60)
+    tv.column('Venc. IPVA', width=70)
+    tv.column('Valor em Multas', width=80)
+    tv.column('Valor FIPE', width=70)
+    tv.column('Valor de Venda', width=80)
 
-    tv.heading('Modelo', text='Modelo')
-    tv.heading('Marca', text='Marca')
-    tv.heading('Cor', text='Cor')
-    tv.heading('Ano', text='Ano')
-    tv.heading('Combustivel', text='Combustivel')
-    tv.heading('Proprietário', text='Proprietário')
-    tv.heading('Formas de Pagamento', text='Formas de Pagamento')
-    tv.heading('Renavam', text='Renavam')
+    tv.heading('Cód. Veículo', text="Cód. Veículo")
+    tv.heading('Cód. Proprietário', text="Cód. Proprietário")
+    tv.heading('Marca', text="Marca")
+    tv.heading('Modelo', text="Modelo")
+    tv.heading('Ano de Fabricação', text="Ano/Fabricação")
+    tv.heading('Cor', text="Cor")
+    tv.heading('Combustivel', text="Combustivel")
     tv.heading('Placa', text='Placa')
-    tv.heading('Situação Financeira', text='Situação Financeira')
+    tv.heading('Renavan', text='Renavan')
+    tv.heading('qtd Portas', text='qtd Portas')
+    tv.heading('Vidro Elétr.', text='Vidro Elétr.')
+    tv.heading('Trava Elétr.', text='Trava Elétr.')
+    tv.heading('Alarme', text='Alarme')
+    tv.heading('Ar Condic.', text='Ar Condic.')
+    tv.heading('Som', text='Som')
+    tv.heading('outros', text='outros')
+    tv.heading('Venc. IPVA', text='Venc. IPVA')
     tv.heading('Valor FIPE', text='Valor FIPE')
-    tv.heading('Valor do Proprietário', text='Valor do Proprietário')
-    tv.heading('Acessórios', text='Acessórios')
-    tv.heading('Status', text='Status')
+    tv.heading('Valor em Multas', text='Valor/Multas')
+    tv.heading('Valor FIPE', text='Valor/FIPE')
+    tv.heading('Valor de Venda', text='Valor/Venda')
     tv.pack(side=LEFT)
     tv.place(x=0, y=0)
 
     # Scrollbar Vertical ABA CONSULTAR VEÍCULO
     VScroll = ttk.Scrollbar(quadroGrid, orient="vertical", command=tv.yview)
-    VScroll.place(x=1145, y=2, height=465)
+    VScroll.place(x=1235, y=2, height=465)
 
     # Scrollbar Vertical ABA CONSULTAR VEÍCULO
     OScroll = ttk.Scrollbar(quadroGrid, orient="horizontal", command=tv.xview)
-    OScroll.place(x=0, y=469, width=1145)
+    OScroll.place(x=0, y=469, width=1235)
 
     # configurar as Scrolls da ABA CONSULTAR VEÍCULO
     tv.configure(yscrollcommand=VScroll.set, xscrollcommand=OScroll.set)
 
     ### FRAMES da ABA CONSULTAR VEÍCULOS ###
     # Frame de SELECT
-    FrameBusca = LabelFrame(quadroGrid, text="Opções de busca", font="Arial 12 italic", borderwidth='3')
+    FrameBusca = LabelFrame(quadroGrid, text="Opções de busca", foreground="#055", font="Arial 12 bold", borderwidth='3')
     FrameBusca.configure(background="#e6e6e6")
-    FrameBusca.place(x=2, y=500, width=1170, height=108)
+    FrameBusca.place(x=2, y=500, width=1250, height=108)
 
-    FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", font="Arial 12 italic", borderwidth='3')
+    FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", borderwidth='3')
     FrameAttVE.configure(background="#e6e6e6")
-    FrameAttVE.place(x=2, y=620, width=330, height=108)
+    FrameAttVE.place(x=30, y=616, width=330, height=108)
 
-    FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", font="Arial 12 italic", borderwidth='3')
+    FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", borderwidth='3')
     FrameDelVE.configure(background="#e6e6e6")
-    FrameDelVE.place(x=415, y=620, width=330, height=108)
+    FrameDelVE.place(x=450, y=616, width=330, height=108)
 
-    FrameVendaVE = LabelFrame(quadroGrid, text="Realizar Venda do Veículo Selecionado", font="Arial 12 italic", borderwidth='3')
+    FrameVendaVE = LabelFrame(quadroGrid, text="Realizar Venda do Veículo Selecionado", foreground="#055", font="Arial 12 bold", borderwidth='3')
     FrameVendaVE.configure(background="#e6e6e6")
-    FrameVendaVE.place(x=840, y=620, width=330, height=108)
+    FrameVendaVE.place(x=880, y=616, width=330, height=108)
 
     ### elementos para quadro de pesquisa na ABA Consultar VEÍCULO ###
     # Busca por MODELO
@@ -1107,57 +1150,57 @@ def ABA_Consu_Veic():
     LabelPesq.configure(font="Arial 12", background="#e6e6e6")
     LabelPesq.place(x=10, y=10)
 
-    nomePesq = Entry(FrameBusca)
-    nomePesq.configure(width=25, font="arial 14")
-    nomePesq.place(x=145, y=10)
+    txtPesqMod = Entry(FrameBusca)
+    txtPesqMod.configure(width=22, font="arial 14")
+    txtPesqMod.place(x=145, y=10)
 
-    btnPesq = Button(FrameBusca, text="Pesquisar", command=PesquisarMODE)
-    btnPesq.configure(font="arial 10 bold", background="#009", foreground="#fff")
-    btnPesq.place(x=430, y=10)
+    btnPesqMod = Button(FrameBusca, text="Pesquisar", command=PesquisarMODE)
+    btnPesqMod.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesqMod.place(x=395, y=10)
 
-    # Busca por PROPRIETARIO
-    LabelPesq1 = Label(FrameBusca, text="Busca por Proprietario:")
+    # Busca por Cód. do Proprietário
+    LabelPesq1 = Label(FrameBusca, text="Busca/Cód. Proprietário:")
     LabelPesq1.configure(font="Arial 12", background="#e6e6e6")
     LabelPesq1.place(x=10, y=50)
 
-    nomePesq1 = Entry(FrameBusca)
-    nomePesq1.configure(width=25, font="arial 14")
-    nomePesq1.place(x=175, y=50)
+    txtPesqPro = Entry(FrameBusca)
+    txtPesqPro.configure(width=18, font="arial 14")
+    txtPesqPro.place(x=190, y=50)
 
-    btnPesq1 = Button(FrameBusca, text="Pesquisar", command=PesquisarPROP)
-    btnPesq1.configure(font="arial 10 bold", background="#009", foreground="#fff")
-    btnPesq1.place(x=460, y=50)
+    btnPesqCodPro = Button(FrameBusca, text="Pesquisar", command=PesquisarCodPRO)
+    btnPesqCodPro.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesqCodPro.place(x=395, y=50)
 
     # Busca por PLACA
     LabelPesq2 = Label(FrameBusca, text="Busca por Placa:")
     LabelPesq2.configure(font="Arial 12", background="#e6e6e6")
-    LabelPesq2.place(x=520, y=10)
+    LabelPesq2.place(x=500, y=10)
 
-    nomePesq2 = Entry(FrameBusca)
-    nomePesq2.configure(width=25, font="arial 14")
-    nomePesq2.place(x=645, y=10)
+    txtPesqPlaca = Entry(FrameBusca)
+    txtPesqPlaca.configure(width=20, font="arial 14")
+    txtPesqPlaca.place(x=625, y=10)
 
-    btnPesq2 = Button(FrameBusca, text="Pesquisar", command=PesquisarPLAC)
-    btnPesq2.configure(font="arial 10 bold", background="#009", foreground="#fff")
-    btnPesq2.place(x=930, y=10)
+    btnPesqPlaca = Button(FrameBusca, text="Pesquisar", command=PesquisarPLAC)
+    btnPesqPlaca.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesqPlaca.place(x=853, y=10)
 
-    # Busca por STATUS
-    LabelPesq3 = Label(FrameBusca, text="Busca por Status:")
+    # Busca por Cód. do Veículo
+    LabelPesq3 = Label(FrameBusca, text="Busca/Cód. Veículo:")
     LabelPesq3.configure(font="Arial 12", background="#e6e6e6")
-    LabelPesq3.place(x=550, y=50)
+    LabelPesq3.place(x=500, y=50)
 
-    txtBuscStt = ttk.Combobox(FrameBusca, values="Disponível Vendido")
-    txtBuscStt.configure(width=20, font="arial 14", state="readonly")
-    txtBuscStt.place(x=680, y=50)
+    txtPesqCodVE = Entry(FrameBusca)
+    txtPesqCodVE.configure(width=18, font="arial 14")
+    txtPesqCodVE.place(x=645, y=50)
 
-    btnPesq3 = Button(FrameBusca, text="Pesquisar", command=PesquisarSTAT)
-    btnPesq3.configure(font="arial 10 bold", background="#009", foreground="#fff")
-    btnPesq3.place(x=930, y=50)
+    btnPesqCodVE = Button(FrameBusca, text="Pesquisar", command=PesquisarCodVE)
+    btnPesqCodVE.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesqCodVE.place(x=850, y=50)
 
     # botao q busca TODOS os registros na ABA Consultar VEÍCULOS
     btnBuscaTudo = Button(FrameBusca, text="Buscar Tudo", command=ListarVeiculos)
-    btnBuscaTudo.configure(width=12, height=2, font="arial 11 bold", background="#009", foreground="#fff")
-    btnBuscaTudo.pack(side='right')
+    btnBuscaTudo.configure(width=14, height=2, font="arial 11 bold", background="#009", foreground="#fff")
+    btnBuscaTudo.place(x=1050, y=15)
 
     # botao Atualizar na ABA Consultar VEICULOS
     btnAttVE = Button(FrameAttVE, text="Atualizar dados do Veículo", command=AtualizarVE)
