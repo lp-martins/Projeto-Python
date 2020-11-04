@@ -881,6 +881,8 @@ def ABA_Consu_Veic():
         try:
             ItemSelectVE = tv.selection()[0]
             ValoresVE = tv.item(ItemSelectVE, "values")
+            codVendVE = ValoresVE[0]
+            codVendPRO = ValoresVE[1]
             ModeloVE = ValoresVE[0]
             MarcaVE = ValoresVE[1]
             CorVE = ValoresVE[2]
@@ -1266,6 +1268,17 @@ def ABA_Consu_Veic():
 
 #  Criando os menús da tela principal #
 barraMenu = Menu(appVCU)
+
+# Menu Gerenciar
+menuGerenciar = Menu(barraMenu, tearoff=0)
+barraMenu.add_cascade(label="Gerenciar", menu=menuGerenciar)
+menuGerenciar.add_command(label="Configurações de Vendedores", command=semComando)
+menuGerenciar.add_separator()
+menuGerenciar.add_command(label="Relatórios de Venda", command=semComando)
+menuGerenciar.add_separator()
+menuGerenciar.add_command(label="Relatório de veículos", command=semComando)
+menuGerenciar.add_separator()
+menuGerenciar.add_command(label="Relatório de Proprietários", command=semComando)
 
 # Menu do Proprietario
 menuPro = Menu(barraMenu, tearoff=0)
