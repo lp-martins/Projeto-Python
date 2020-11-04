@@ -1057,7 +1057,6 @@ def ABA_Consu_Veic():
             PrecoProV.insert(0, vVendValorPRO)
             PrecoProV.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-
             # ________________________Frame dados do Proprietário_________________________#
 
             FrameDadosPRO = LabelFrame(FrameVENDA, text="Dados do Proprietário", font="Arial 11 bold", foreground="#099", borderwidth='3')
@@ -1097,7 +1096,7 @@ def ABA_Consu_Veic():
             Label(FrameDadosPRO, text="Responsável: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=100)
             ResponVEND = Entry(FrameDadosPRO)
             ResponVEND.place(x=110, y=100, width=300, height=22.4)
-            ResponVEND.insert(0, NomePROvenda)
+            ResponVEND.insert(0, ResponPROvenda)
             ResponVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
             # ________________________Frame dados do Cliente/Comprador_________________________#
@@ -1135,7 +1134,6 @@ def ABA_Consu_Veic():
             EndCliVEND = Entry(FrameDadosCLI)
             EndCliVEND.place(x=90, y=70, width=725, height=22.4)
             EndCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
-
 
             # ________________________Frame dados Monetários_________________________#
 
@@ -1303,7 +1301,6 @@ def ABA_Consu_Veic():
     btnVendVE.configure(font="arial 12 bold", background="#0f3", foreground="#000")
     btnVendVE.place(x=50, y=20, width=220, height=40)
 
-
 #  Criando os menús da tela principal #
 barraMenu = Menu(appVCU)
 
@@ -1348,7 +1345,6 @@ menuVCU.add_command(label="Redes Sociais do Software", command=semComando)
 CloseApp = Menu(barraMenu, tearoff=0)
 barraMenu.add_cascade(label="Fechar App", menu=CloseApp)
 CloseApp.add_command(label="Sair", command=quit)
-
 
 #  executa o programa em loop  #
 appVCU.config(menu=barraMenu)
