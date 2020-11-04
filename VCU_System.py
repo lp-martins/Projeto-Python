@@ -881,33 +881,42 @@ def ABA_Consu_Veic():
         try:
             ItemSelectVE = tv.selection()[0]
             ValoresVE = tv.item(ItemSelectVE, "values")
-            codVendVE = ValoresVE[0]
-            codVendPRO = ValoresVE[1]
-            ModeloVE = ValoresVE[0]
-            MarcaVE = ValoresVE[1]
-            CorVE = ValoresVE[2]
-            AnoLancVE = ValoresVE[3]
-            CombustVE = ValoresVE[4]
-            ProprietaVE = ValoresVE[5]
-            RenavVE = ValoresVE[7]
-            PlaacaVE = ValoresVE[8]
-            SituaFinVE = ValoresVE[9]
-            ValorFipVE = ValoresVE[10]
-            ValorPropVE = ValoresVE[11]
-            AcessoVE = ValoresVE[12]
 
-            selectQuery = "SELECT * FROM PROPRIETARIOS WHERE Nome ='" + ProprietaVE + "'"
+            vVendcodVE = ValoresVE[0]
+            vVendcodPRO = ValoresVE[1]
+            vVendMarca = ValoresVE[2]
+            vVendModel = ValoresVE[3]
+            vVendAnoFabri = ValoresVE[4]
+            vVendCor = ValoresVE[5]
+            vVendCombust = ValoresVE[6]
+            vVendPlaca = ValoresVE[7]
+            vVendRenavan = ValoresVE[8]
+            vVendPortas = ValoresVE[9]
+            vVendVidroEl = ValoresVE[10]
+            vVendTravaEl = ValoresVE[11]
+            vVendAlarm = ValoresVE[12]
+            vVendArCond = ValoresVE[13]
+            vVendSom = ValoresVE[14]
+            vVendOutros = ValoresVE[15]
+            vVendVencIPVA = ValoresVE[16]
+            vVendValorMulta = ValoresVE[17]
+            vVendValorFIPE = ValoresVE[18]
+            vVendValorPRO = ValoresVE[19]
+
+            selectQuery = "SELECT * FROM Proprietarios WHERE CodProp ='" + vVendcodPRO + "'"
             PROvenda = VCU_QUERY.DQL(selectQuery)
 
             NomePROvenda = "nome"
             CpfPROvenda = "CPF"
             EndPROvenda = "Endereço"
             FonePROvenda = "telefone"
+            ResponPROvenda = "responsavel"
             for x in PROvenda:
-                NomePROvenda = x[0]
-                CpfPROvenda = x[1]
-                EndPROvenda = x[2]
-                FonePROvenda = x[3]
+                NomePROvenda = x[1]
+                CpfPROvenda = x[2]
+                EndPROvenda = x[3]
+                FonePROvenda = x[4]
+                ResponPROvenda = x[5]
 
             AppVENDA = Toplevel()
             AppVENDA.title(" Operação de Venda do Veículo")
@@ -930,180 +939,209 @@ def ABA_Consu_Veic():
 
             # __________________________Frame dados do Veículo___________________________#
 
-            FrameDadosVE = LabelFrame(FrameVENDA, text="Dados do Veículo", font="Arial 11 bold", foreground="#099",
-                                      borderwidth='3')
+            FrameDadosVE = LabelFrame(FrameVENDA, text="Dados do Veículo", font="Arial 11 bold", foreground="#099", borderwidth='3')
             FrameDadosVE.configure(background="#e6e6e6")
-            FrameDadosVE.place(x=20, y=10, width=840, height=220)
+            FrameDadosVE.place(x=20, y=5, width=840, height=195)
 
-            Label(FrameDadosVE, text="Modelo: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20,
-                                                                                                                   y=10)
-            ModeloVEND = Entry(FrameDadosVE)
-            ModeloVEND.place(x=80, y=10, width=260, height=22.499)
-            ModeloVEND.insert(0, ModeloVE)
-            ModeloVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            Label(FrameDadosVE, text="Cód. Veículo: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=10)
+            CodVeVEND = Entry(FrameDadosVE)
+            CodVeVEND.place(x=115, y=10, width=60, height=22.499)
+            CodVeVEND.insert(0, vVendcodVE)
+            CodVeVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosVE, text="Renavan: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(
-                x=350, y=10)
-            RenavVEND = Entry(FrameDadosVE)
-            RenavVEND.place(x=420, y=10, width=140, height=22.499)
-            RenavVEND.insert(0, RenavVE)
-            RenavVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
-
-            Label(FrameDadosVE, text="Placa: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=570,
-                                                                                                                  y=10)
-            PlacaVEND = Entry(FrameDadosVE)
-            PlacaVEND.place(x=620, y=10, width=150, height=22.499)
-            PlacaVEND.insert(0, PlaacaVE)
-            PlacaVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
-
-            Label(FrameDadosVE, text="Marca: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20,
-                                                                                                                  y=40)
+            Label(FrameDadosVE, text="Marca: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=185, y=10)
             MarcaVEND = Entry(FrameDadosVE)
-            MarcaVEND.place(x=70, y=40, width=230, height=22.499)
-            MarcaVEND.insert(0, MarcaVE)
-            MarcaVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            MarcaVEND.place(x=235, y=10, width=125, height=22.499)
+            MarcaVEND.insert(0, vVendMarca)
+            MarcaVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosVE, text="Ano de Lançamento: ", background="#FFF", foreground="#000",
-                  font="Arial 10 bold").place(x=310, y=40)
+            Label(FrameDadosVE, text="Modelo: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=370, y=10)
+            ModeloVEND = Entry(FrameDadosVE)
+            ModeloVEND.place(x=430, y=10, width=140, height=22.499)
+            ModeloVEND.insert(0, vVendModel)
+            ModeloVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
+
+            Label(FrameDadosVE, text="Ano de Fabricação: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=583, y=10)
             AnoVEND = Entry(FrameDadosVE)
-            AnoVEND.place(x=450, y=40, width=140, height=22.4)
-            AnoVEND.insert(0, AnoLancVE)
-            AnoVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            AnoVEND.place(x=715, y=10, width=100, height=22.4)
+            AnoVEND.insert(0, vVendAnoFabri)
+            AnoVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosVE, text="Cor: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=600,
-                                                                                                                y=40)
+            Label(FrameDadosVE, text="Cor: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=40)
             CorVEND = Entry(FrameDadosVE)
-            CorVEND.place(x=635, y=40, width=180, height=22.4)
-            CorVEND.insert(0, CorVE)
-            CorVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            CorVEND.place(x=55, y=40, width=160, height=22.4)
+            CorVEND.insert(0, vVendCor)
+            CorVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosVE, text="Combustível: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(
-                x=20, y=70)
+            Label(FrameDadosVE, text="Combustível: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=225, y=40)
             CombustVEND = Entry(FrameDadosVE)
-            CombustVEND.place(x=110, y=70, width=120, height=22.4)
-            CombustVEND.insert(0, CombustVE)
-            CombustVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            CombustVEND.place(x=315, y=40, width=120, height=22.4)
+            CombustVEND.insert(0, vVendCombust)
+            CombustVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosVE, text="Proprietário: ", background="#FFF", foreground="#000",
-                  font="Arial 10 bold").place(x=240, y=70)
-            ProprieVEND = Entry(FrameDadosVE)
-            ProprieVEND.place(x=330, y=70, width=350, height=22.4)
-            ProprieVEND.insert(0, ProprietaVE)
-            ProprieVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            Label(FrameDadosVE, text="Placa: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=445, y=40)
+            PlacaVEND = Entry(FrameDadosVE)
+            PlacaVEND.place(x=495, y=40, width=105, height=22.499)
+            PlacaVEND.insert(0, vVendPlaca)
+            PlacaVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosVE, text="Situação Financeira: ", background="#FFF", foreground="#000",
-                  font="Arial 10 bold").place(x=20, y=100)
-            FinancVEND = Entry(FrameDadosVE)
-            FinancVEND.place(x=160, y=100, width=655, height=22.4)
-            FinancVEND.insert(0, SituaFinVE)
-            FinancVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            Label(FrameDadosVE, text="Renavan: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=610, y=40)
+            RenavVEND = Entry(FrameDadosVE)
+            RenavVEND.place(x=680, y=40, width=135, height=22.499)
+            RenavVEND.insert(0, vVendRenavan)
+            RenavVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosVE, text="Valor na Tabela FIPE: ", background="#FFF", foreground="#000",
-                  font="Arial 10 bold").place(x=20, y=130)
+            Label(FrameDadosVE, text="Portas: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=70)
+            PortasVEND = Entry(FrameDadosVE)
+            PortasVEND.place(x=75, y=70, width=20, height=22.4)
+            PortasVEND.insert(0, vVendPortas)
+            PortasVEND.configure(font="Arial 11", background="#f2f2f2", foreground="#009", state="readonly")
+
+            Label(FrameDadosVE, text="Vidro Elétr.: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=105, y=70)
+            VidEleVEND = Entry(FrameDadosVE)
+            VidEleVEND.place(x=185, y=70, width=35, height=22.4)
+            VidEleVEND.insert(0, vVendVidroEl)
+            VidEleVEND.configure(font="Arial 11", background="#f2f2f2", foreground="#009", state="readonly")
+
+            Label(FrameDadosVE, text="Trava Elétr.: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=230, y=70)
+            TravEleVEND = Entry(FrameDadosVE)
+            TravEleVEND.place(x=315, y=70, width=35, height=22.4)
+            TravEleVEND.insert(0, vVendTravaEl)
+            TravEleVEND.configure(font="Arial 11", background="#f2f2f2", foreground="#009", state="readonly")
+
+            Label(FrameDadosVE, text="Alarme: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=360, y=70)
+            AlarmVEND = Entry(FrameDadosVE)
+            AlarmVEND.place(x=420, y=70, width=35, height=22.4)
+            AlarmVEND.insert(0, vVendAlarm)
+            AlarmVEND.configure(font="Arial 11", background="#f2f2f2", foreground="#009", state="readonly")
+
+            Label(FrameDadosVE, text="Ar Condic.: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=465, y=70)
+            ArCondVEND = Entry(FrameDadosVE)
+            ArCondVEND.place(x=545, y=70, width=35, height=22.4)
+            ArCondVEND.insert(0, vVendArCond)
+            ArCondVEND.configure(font="Arial 11", background="#f2f2f2", foreground="#009", state="readonly")
+
+            Label(FrameDadosVE, text="Som: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=590, y=70)
+            SomVEND = Entry(FrameDadosVE)
+            SomVEND.place(x=630, y=70, width=35, height=22.4)
+            SomVEND.insert(0, vVendSom)
+            SomVEND.configure(font="Arial 11", background="#f2f2f2", foreground="#009", state="readonly")
+
+            Label(FrameDadosVE, text="Outro: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=675, y=70)
+            OutroVEND = Entry(FrameDadosVE)
+            OutroVEND.place(x=725, y=70, width=90, height=22.4)
+            OutroVEND.insert(0, vVendOutros)
+            OutroVEND.configure(font="Arial 11", background="#f2f2f2", foreground="#009", state="readonly")
+
+            Label(FrameDadosVE, text="Vencimento IPVA: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=100)
+            VencIpvaVEND = Entry(FrameDadosVE)
+            VencIpvaVEND.place(x=145, y=100, width=100, height=22.4)
+            VencIpvaVEND.insert(0, vVendVencIPVA)
+            VencIpvaVEND.configure(font="Arial 11", background="#f2f2f2", foreground="#009", state="readonly")
+
+            Label(FrameDadosVE, text="Valor em Multas: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=255, y=100)
+            ValMultaVEND = Entry(FrameDadosVE)
+            ValMultaVEND.place(x=370, y=100, width=100, height=22.4)
+            ValMultaVEND.insert(0, vVendValorMulta)
+            ValMultaVEND.configure(font="Arial 11", background="#f2f2f2", foreground="#009", state="readonly")
+
+            Label(FrameDadosVE, text="Valor na Tabela FIPE: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=130)
             FipeVEND = Entry(FrameDadosVE)
             FipeVEND.place(x=165, y=130, width=95, height=22.4)
-            FipeVEND.insert(0, ValorFipVE)
-            FipeVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            FipeVEND.insert(0, vVendValorFIPE)
+            FipeVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosVE, text="Valor do proprietário: ", background="#FFF", foreground="#000",
-                  font="Arial 10 bold").place(x=270, y=130)
+            Label(FrameDadosVE, text="Valor do proprietário: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=270, y=130)
             PrecoProV = Entry(FrameDadosVE)
             PrecoProV.place(x=415, y=130, width=100, height=22.4)
-            PrecoProV.insert(0, ValorPropVE)
-            PrecoProV.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            PrecoProV.insert(0, vVendValorPRO)
+            PrecoProV.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosVE, text="Acessórios: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(
-                x=20, y=160)
-            AcessorioV = Entry(FrameDadosVE)
-            AcessorioV.place(x=95, y=160, width=720, height=22.4)
-            AcessorioV.insert(0, AcessoVE)
-            AcessorioV.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
 
             # ________________________Frame dados do Proprietário_________________________#
 
-            FrameDadosPRO = LabelFrame(FrameVENDA, text="Dados do Proprietário", font="Arial 11 bold",
-                                       foreground="#099", borderwidth='3')
+            FrameDadosPRO = LabelFrame(FrameVENDA, text="Dados do Proprietário", font="Arial 11 bold", foreground="#099", borderwidth='3')
             FrameDadosPRO.configure(background="#e6e6e6")
-            FrameDadosPRO.place(x=20, y=240, width=840, height=140)
+            FrameDadosPRO.place(x=20, y=205, width=840, height=160)
 
-            Label(FrameDadosPRO, text="Nome: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20,
-                                                                                                                  y=10)
+            Label(FrameDadosPRO, text="Cód. Proprietário: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=10)
+            CodProVEND = Entry(FrameDadosPRO)
+            CodProVEND.place(x=140, y=10, width=75, height=22.499)
+            CodProVEND.insert(0, vVendcodVE)
+            CodProVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
+
+            Label(FrameDadosPRO, text="Nome/Razão Social: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=225, y=10)
             NomeVEND = Entry(FrameDadosPRO)
-            NomeVEND.place(x=70, y=10, width=350, height=22.4)
+            NomeVEND.place(x=362, y=10, width=450, height=22.4)
             NomeVEND.insert(0, NomePROvenda)
-            NomeVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            NomeVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosPRO, text="CPF: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=430,
-                                                                                                                 y=10)
+            Label(FrameDadosPRO, text="CPF/CNPJ: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=40)
             CpfVEND = Entry(FrameDadosPRO)
-            CpfVEND.place(x=470, y=10, width=150, height=22.4)
+            CpfVEND.place(x=95, y=40, width=180, height=22.4)
             CpfVEND.insert(0, CpfPROvenda)
-            CpfVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            CpfVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosPRO, text="Telefone: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(
-                x=630, y=10)
+            Label(FrameDadosPRO, text="Telefone: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=290, y=40)
             FoneVEND = Entry(FrameDadosPRO)
-            FoneVEND.place(x=700, y=10, width=115, height=22.4)
+            FoneVEND.place(x=360, y=40, width=160, height=22.4)
             FoneVEND.insert(0, FonePROvenda)
-            FoneVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            FoneVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosPRO, text="Endereço: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(
-                x=20, y=40)
+            Label(FrameDadosPRO, text="Endereço: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=70)
             EnderecVEND = Entry(FrameDadosPRO)
-            EnderecVEND.place(x=90, y=40, width=725, height=22.4)
+            EnderecVEND.place(x=90, y=70, width=725, height=22.4)
             EnderecVEND.insert(0, EndPROvenda)
-            EnderecVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            EnderecVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
-            Label(FrameDadosPRO, text="Responsável: ", background="#FFF", foreground="#000",
-                  font="Arial 10 bold").place(x=20, y=70)
+            Label(FrameDadosPRO, text="Responsável: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=100)
             ResponVEND = Entry(FrameDadosPRO)
-            ResponVEND.place(x=110, y=70, width=300, height=22.4)
+            ResponVEND.place(x=110, y=100, width=300, height=22.4)
             ResponVEND.insert(0, NomePROvenda)
-            ResponVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#900", state="readonly")
+            ResponVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
             # ________________________Frame dados do Cliente/Comprador_________________________#
 
-            FrameDadosCLI = LabelFrame(FrameVENDA, text="Dados do Cliente/Comprador", font="Arial 11 bold",
-                                       foreground="#099", borderwidth='3')
+            FrameDadosCLI = LabelFrame(FrameVENDA, text="Dados do Cliente/Comprador", font="Arial 11 bold", foreground="#099", borderwidth='3')
             FrameDadosCLI.configure(background="#e6e6e6")
-            FrameDadosCLI.place(x=20, y=390, width=840, height=160)
+            FrameDadosCLI.place(x=20, y=370, width=840, height=130)
 
-            Label(FrameDadosCLI, text="Nome: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20,
-                                                                                                                  y=10)
+            Label(FrameDadosCLI, text="Cód. Cliente: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=10)
+            CodClienteVEND = Entry(FrameDadosCLI)
+            CodClienteVEND.place(x=110, y=10, width=60, height=22.499)
+            CodClienteVEND.configure(font="Arial 12", background="#f2f2f2", foreground="#009")
+
+            Label(FrameDadosCLI, text="Nome: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=190, y=10)
             NomeCliVEND = Entry(FrameDadosCLI)
-            NomeCliVEND.place(x=70, y=10, width=350, height=22.4)
+            NomeCliVEND.place(x=240, y=10, width=400, height=22.4)
             NomeCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
 
-            Label(FrameDadosCLI, text="CPF: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=430,
-                                                                                                                 y=10)
+            Label(FrameDadosCLI, text="CPF: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=40)
             CpfCliVEND = Entry(FrameDadosCLI)
-            CpfCliVEND.place(x=470, y=10, width=150, height=22.4)
+            CpfCliVEND.place(x=60, y=40, width=150, height=22.4)
             CpfCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
 
-            Label(FrameDadosCLI, text="RG: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=630,
-                                                                                                                y=10)
+            Label(FrameDadosCLI, text="RG: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=230, y=40)
             RgCliVEND = Entry(FrameDadosCLI)
-            RgCliVEND.place(x=660, y=10, width=155, height=22.4)
+            RgCliVEND.place(x=260, y=40, width=155, height=22.4)
             RgCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
 
-            Label(FrameDadosCLI, text="Endereço: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(
-                x=20, y=40)
+            Label(FrameDadosCLI, text="Fone/Whats: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=435, y=40)
+            FoneCliVEND = Entry(FrameDadosCLI)
+            FoneCliVEND.place(x=520, y=40, width=150, height=22.4)
+            FoneCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
+
+            Label(FrameDadosCLI, text="Endereço: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=70)
             EndCliVEND = Entry(FrameDadosCLI)
-            EndCliVEND.place(x=90, y=40, width=725, height=22.4)
+            EndCliVEND.place(x=90, y=70, width=725, height=22.4)
             EndCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
 
-            Label(FrameDadosCLI, text="Fone/Whats: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(
-                x=20, y=70)
-            FoneCliVEND = Entry(FrameDadosCLI)
-            FoneCliVEND.place(x=105, y=70, width=150, height=22.4)
-            FoneCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
 
             # ________________________Frame dados Monetários_________________________#
 
-            FrameDadosFIN = LabelFrame(FrameVENDA, text="Dados Financeiros", font="Arial 11 bold", foreground="#099",
-                                       borderwidth='3')
+            FrameDadosFIN = LabelFrame(FrameVENDA, text="Dados Financeiros", font="Arial 11 bold", foreground="#099", borderwidth='3')
             FrameDadosFIN.configure(background="#e6e6e6")
-            FrameDadosFIN.place(x=20, y=560, width=840, height=180)
+            FrameDadosFIN.place(x=20, y=510, width=840, height=240)
 
             AppVENDA.transient(appVCU)
             AppVENDA.mainloop()
