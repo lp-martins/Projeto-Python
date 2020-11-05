@@ -10,13 +10,33 @@ appVCU.geometry("1280x860")
 appVCU.configure(background="#f2f2f2")
 appVCU.wm_iconbitmap('icon_VCU.ico')
 
-def semComando():
-    pass
-
-
 #  Criação das ABAS  #
 ABA = ttk.Notebook(appVCU)
 ABA.pack(fill='both', expand=1)
+
+def semComando():
+    pass
+
+def Config_Vendedores():
+    abaConf_Vend = Frame(ABA)
+    ABA.add(abaConf_Vend, text="Propriedades dos Vendedores")
+    abaConf_Vend.configure(background="yellow")
+
+    # Labal Frame
+    lblFramVend = LabelFrame(abaConf_Vend, text="Opções dos Vendedores", font="arialBlack 12 bold italic", bg="yellow", fg="black", relief="ridge", borderwidth="10" )
+    lblFramVend.pack(ipadx=200, ipady=200, pady= 180)
+
+    # Botão cadastrar Vendedor
+    btnCadVend = Button(lblFramVend, text="Cadastrar Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7')
+    btnCadVend.place(x=112, y=85)
+
+    #Botão Consultar Vendedor
+    btnConsulVend = Button(lblFramVend, text="Consultar Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7')
+    btnConsulVend.place(x=112, y=160)
+
+    #Botão Excluir Vendedor
+    btnDeletVend = Button(lblFramVend, text="Excluir Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7')
+    btnDeletVend.place(x=125, y=235)
 
 def ABA_CAD_Propri():
     aba1 = Frame(ABA)
@@ -1303,7 +1323,7 @@ barraMenu = Menu(appVCU)
 # Menu Gerenciar
 menuGerenciar = Menu(barraMenu, tearoff=0)
 barraMenu.add_cascade(label="Gerenciar", menu=menuGerenciar)
-menuGerenciar.add_command(label="Configurações de Vendedores", command=semComando)
+menuGerenciar.add_command(label="Configurações de Vendedores", command=Config_Vendedores)
 menuGerenciar.add_separator()
 menuGerenciar.add_command(label="Relatórios de Venda", command=semComando)
 menuGerenciar.add_separator()
@@ -1338,6 +1358,7 @@ menuVCU.add_command(label="Ajuda", command=semComando)
 menuVCU.add_separator()
 menuVCU.add_command(label="Redes Sociais do Software", command=semComando)
 
+# Menu Fechar App
 CloseApp = Menu(barraMenu, tearoff=0)
 barraMenu.add_cascade(label="Fechar App", menu=CloseApp)
 CloseApp.add_command(label="Sair", command=quit)
