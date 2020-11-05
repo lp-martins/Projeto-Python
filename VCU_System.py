@@ -62,7 +62,7 @@ def ABA_CAD_Propri():
 
     # Criação da Tabela para dados cadastrais do proprietario
 
-    FrameLab1 = LabelFrame(aba1, text="Dados Pessoais do Proprietário", font="Arial 12 italic bold", borderwidth='1', relief="solid")
+    FrameLab1 = LabelFrame(aba1, text="Dados Pessoais do Proprietário", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab1.configure(background="#e6e6e6", foreground="#000")
     FrameLab1.pack(pady=20, ipadx=300, ipady=300)
 
@@ -175,7 +175,7 @@ def ABA_CAD_Veic():
             messagebox.showwarning(title=" Proprietário Não Cadastrado!",
                                    message="Código de proprietário não confere com nenhum proprietário Cadastrado! Verifique o código digitado e tente novamente!")
 
-    FrameLab2 = LabelFrame(aba2, text="Dados do Veículo", font="Arial 12 italic bold", borderwidth='1', relief="solid")
+    FrameLab2 = LabelFrame(aba2, text="Dados do Veículo", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab2.configure(background="#e6e6e6")
     FrameLab2.pack(pady=0, ipadx=380, ipady=320)
 
@@ -292,7 +292,7 @@ def ABA_Consu_Propri():
     ABA.add(aba3, text="Consultar Proprietário")
     aba3.configure(background="#06f")
 
-    FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic bold", borderwidth='1', relief="solid")
+    FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab3.configure(background="#e6e6e6")
     FrameLab3.pack(pady=10, ipadx=440, ipady=400)
 
@@ -413,7 +413,7 @@ def ABA_Consu_Propri():
             ABAattPro = ttk.Notebook(AppATTpro)
             ABAattPro.place(x=10, y=10, width=880, height=780)
 
-            FrameLabPro = LabelFrame(ABAattPro, text="Dados Pessoais do Proprietário", font="Arial 12 italic bold", borderwidth='1', relief="solid")
+            FrameLabPro = LabelFrame(ABAattPro, text="Dados Pessoais do Proprietário", font="Arial 12 italic bold", borderwidth='1', relief="flat")
             FrameLabPro.configure(background="#e6e6e6", foreground="#000")
             FrameLabPro.pack(pady=70, ipadx=300, ipady=300)
 
@@ -500,19 +500,19 @@ def ABA_Consu_Propri():
 
     ### FRAMES da ABA CONSULTAR PROPRIETARIOS ###
     # Frame de SELECT
-    FrameBusca1 = LabelFrame(quadroGrid1, text="Opções de busca", font="Arial 12 bold", foreground="#055", borderwidth='3')
+    FrameBusca1 = LabelFrame(quadroGrid1, text="Opções de busca", font="Arial 12 bold", foreground="#055", relief='raised', borderwidth='2')
     FrameBusca1.configure(background="#e6e6e6")
     FrameBusca1.place(x=2, y=510, width=850, height=108)
 
     # _____Frame de Atualizar_____
-    FrameAtualizar = LabelFrame(quadroGrid1, text="Atualizar Registro Selecionado", foreground="#055", font="Arial 12 bold", borderwidth='3')
+    FrameAtualizar = LabelFrame(quadroGrid1, text="Atualizar Registro Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameAtualizar.configure(background="#e6e6e6")
-    FrameAtualizar.place(x=2, y=630, width=420, height=108)
+    FrameAtualizar.place(x=2, y=625, width=420, height=108)
 
     # _____Frame de Excluir_____
-    FrameExcluir = LabelFrame(quadroGrid1, text="Excluir Registro Selecionado", foreground="#055", font="Arial 12 bold", borderwidth='3')
+    FrameExcluir = LabelFrame(quadroGrid1, text="Excluir Registro Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameExcluir.configure(background="#e6e6e6")
-    FrameExcluir.place(x=430, y=630, width=420, height=108)
+    FrameExcluir.place(x=430, y=625, width=420, height=108)
 
     # Elementos para quadro de pesquisa da ABA Consultar PROPRIETARIOS
     # ____Busca por NOME____
@@ -575,12 +575,9 @@ def ABA_Consu_Veic():
     ABA.add(aba4, text="Consultar Veículo")
     aba4.configure(background="#06f")
 
-    FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 bold", foreground="#000", borderwidth='1', relief="solid")
+    FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 bold", foreground="#000", borderwidth='1', relief="flat")
     FrameLab4.configure(background="#e6e6e6")
     FrameLab4.pack(pady=15, ipadx=635, ipady=390)
-
-    def AtuaListPRO():
-        pass
 
     # ABA Consultar Veículo
     def ListarVeiculos():
@@ -739,7 +736,7 @@ def ABA_Consu_Veic():
             ABAattVE = ttk.Notebook(AppATTve)
             ABAattVE.place(x=10, y=10, width=880, height=780)
 
-            FrameLab2 = LabelFrame(ABAattVE, text="Dados do Veículo", font="Arial 12 italic bold", foreground="#000", borderwidth='1', relief="solid")
+            FrameLab2 = LabelFrame(ABAattVE, text="Dados do Veículo", font="Arial 12 italic bold", foreground="#000", borderwidth='4', relief="flat")
             FrameLab2.configure(background="#e6e6e6")
             FrameLab2.pack(pady=55, ipadx=380, ipady=320)
 
@@ -932,14 +929,13 @@ def ABA_Consu_Veic():
 
             # __________________________Frame Operações de venda___________________________#
 
-            FrameVENDA = LabelFrame(ABAvenda, text="Informações da VENDA", font="Arial 12 italic bold", foreground="#000",
-                                    borderwidth='1', relief="solid")
+            FrameVENDA = LabelFrame(ABAvenda, text="Informações da VENDA", font="Arial 12 italic bold", foreground="#000", borderwidth='1', relief="flat")
             FrameVENDA.configure(background="#e6e6e6")
             FrameVENDA.place(x=0, y=0, width=880, height=780)
 
             # __________________________Frame dados do Veículo___________________________#
 
-            FrameDadosVE = LabelFrame(FrameVENDA, text="Dados do Veículo", font="Arial 11 bold", foreground="#099", borderwidth='3')
+            FrameDadosVE = LabelFrame(FrameVENDA, text="Dados do Veículo", font="Arial 11 bold", foreground="#099", relief='raised', borderwidth='2')
             FrameDadosVE.configure(background="#e6e6e6")
             FrameDadosVE.place(x=20, y=5, width=840, height=195)
 
@@ -1059,7 +1055,7 @@ def ABA_Consu_Veic():
 
             # ________________________Frame dados do Proprietário_________________________#
 
-            FrameDadosPRO = LabelFrame(FrameVENDA, text="Dados do Proprietário", font="Arial 11 bold", foreground="#099", borderwidth='3')
+            FrameDadosPRO = LabelFrame(FrameVENDA, text="Dados do Proprietário", font="Arial 11 bold", foreground="#099", relief='raised', borderwidth='2')
             FrameDadosPRO.configure(background="#e6e6e6")
             FrameDadosPRO.place(x=20, y=205, width=840, height=160)
 
@@ -1101,7 +1097,7 @@ def ABA_Consu_Veic():
 
             # ________________________Frame dados do Cliente/Comprador_________________________#
 
-            FrameDadosCLI = LabelFrame(FrameVENDA, text="Dados do Cliente/Comprador", font="Arial 11 bold", foreground="#099", borderwidth='3')
+            FrameDadosCLI = LabelFrame(FrameVENDA, text="Dados do Cliente/Comprador", font="Arial 11 bold", foreground="#099", relief='raised', borderwidth='2')
             FrameDadosCLI.configure(background="#e6e6e6")
             FrameDadosCLI.place(x=20, y=370, width=840, height=130)
 
@@ -1137,7 +1133,7 @@ def ABA_Consu_Veic():
 
             # ________________________Frame dados Monetários_________________________#
 
-            FrameDadosFIN = LabelFrame(FrameVENDA, text="Dados Financeiros", font="Arial 11 bold", foreground="#099", borderwidth='3')
+            FrameDadosFIN = LabelFrame(FrameVENDA, text="Dados Financeiros", font="Arial 11 bold", foreground="#099", relief='raised', borderwidth='2')
             FrameDadosFIN.configure(background="#e6e6e6")
             FrameDadosFIN.place(x=20, y=510, width=840, height=240)
 
@@ -1212,21 +1208,21 @@ def ABA_Consu_Veic():
 
     ### FRAMES da ABA CONSULTAR VEÍCULOS ###
     # Frame de SELECT
-    FrameBusca = LabelFrame(quadroGrid, text="Opções de busca", foreground="#055", font="Arial 12 bold", borderwidth='3')
+    FrameBusca = LabelFrame(quadroGrid, text="Opções de busca", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameBusca.configure(background="#e6e6e6")
-    FrameBusca.place(x=2, y=500, width=1250, height=108)
+    FrameBusca.place(x=2, y=495, width=1250, height=108)
 
-    FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", borderwidth='3')
+    FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameAttVE.configure(background="#e6e6e6")
-    FrameAttVE.place(x=30, y=616, width=330, height=108)
+    FrameAttVE.place(x=30, y=611, width=330, height=108)
 
-    FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", borderwidth='3')
+    FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameDelVE.configure(background="#e6e6e6")
-    FrameDelVE.place(x=450, y=616, width=330, height=108)
+    FrameDelVE.place(x=450, y=611, width=330, height=108)
 
-    FrameVendaVE = LabelFrame(quadroGrid, text="Realizar Venda do Veículo Selecionado", foreground="#055", font="Arial 12 bold", borderwidth='3')
+    FrameVendaVE = LabelFrame(quadroGrid, text="Realizar Venda do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameVendaVE.configure(background="#e6e6e6")
-    FrameVendaVE.place(x=880, y=616, width=330, height=108)
+    FrameVendaVE.place(x=880, y=611, width=330, height=108)
 
     ### elementos para quadro de pesquisa na ABA Consultar VEÍCULO ###
     # Busca por MODELO
