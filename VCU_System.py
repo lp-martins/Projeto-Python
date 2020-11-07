@@ -6,7 +6,7 @@ import VCU_QUERY
 #   propriedades da janela  #
 appVCU = Tk()
 appVCU.title(" Venda de Carros Usados®")
-appVCU.geometry("1280x790")
+appVCU.geometry("1280x700")
 appVCU.configure(background="#f2f2f2")
 appVCU.wm_iconbitmap('icon_VCU.ico')
 
@@ -308,7 +308,7 @@ def ABA_Consu_Propri():
 
     FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab3.configure(background="#e6e6e6")
-    FrameLab3.pack(pady=2, ipadx=440, ipady=285)
+    FrameLab3.pack(pady=32, ipadx=440, ipady=285)
 
     # ABA Consultar Proprietário
     def PesquisarCPF():
@@ -418,18 +418,19 @@ def ABA_Consu_Propri():
 
             AppATTpro = Toplevel()
             AppATTpro.title(" Atualizando dados do Proprietário")
-            AppATTpro.geometry("900x800")
+            AppATTpro.geometry("900x760")
             AppATTpro.resizable(False, False)
             AppATTpro.configure(background="#fd0")
+            AppATTpro.wm_iconbitmap('icon_VCU.ico')
             AppATTpro.focus_force()
             AppATTpro.grab_set()
 
             ABAattPro = ttk.Notebook(AppATTpro)
-            ABAattPro.place(x=10, y=10, width=880, height=780)
+            ABAattPro.place(x=10, y=10, width=880, height=740)
 
             FrameLabPro = LabelFrame(ABAattPro, text="Dados Pessoais do Proprietário", font="Arial 12 italic bold", borderwidth='1', relief="flat")
             FrameLabPro.configure(background="#e6e6e6", foreground="#000")
-            FrameLabPro.pack(pady=70, ipadx=300, ipady=300)
+            FrameLabPro.pack(pady=50, ipadx=300, ipady=300)
 
             Label(FrameLabPro, text="Cód. Proprietário(5): ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=28)
             AttCodPRO = Entry(FrameLabPro)
@@ -591,7 +592,7 @@ def ABA_Consu_Veic():
 
     FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 bold", foreground="#000", borderwidth='1', relief="flat")
     FrameLab4.configure(background="#e6e6e6")
-    FrameLab4.pack(pady=2, ipadx=635, ipady=295)
+    FrameLab4.pack(pady=29, ipadx=635, ipady=295)
 
     # ABA Consultar Veículo
     def ListarVeiculos():
@@ -740,7 +741,7 @@ def ABA_Consu_Veic():
 
             AppATTve = Toplevel()
             AppATTve.title(" Atualizando dados do Veículo")
-            AppATTve.geometry("900x800")
+            AppATTve.geometry("900x760")
             AppATTve.resizable(False, False)
             AppATTve.configure(background="#fd0")
             AppATTve.wm_iconbitmap('icon_VCU.ico')
@@ -748,7 +749,7 @@ def ABA_Consu_Veic():
             AppATTve.grab_set()
 
             ABAattVE = ttk.Notebook(AppATTve)
-            ABAattVE.place(x=10, y=10, width=880, height=780)
+            ABAattVE.place(x=10, y=10, width=880, height=740)
 
             FrameLab2 = LabelFrame(ABAattVE, text="Dados do Veículo", font="Arial 12 italic bold", foreground="#000", borderwidth='4', relief="flat")
             FrameLab2.configure(background="#e6e6e6")
@@ -758,9 +759,9 @@ def ABA_Consu_Veic():
 
             Label(FrameLab2, text="Código Veículo(5): ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=28)
             vCodVE = Entry(FrameLab2)
-            vCodVE.configure(font="Arial 12")
             vCodVE.place(x=30, y=50, width=130, height=25)
             vCodVE.insert(0, nCodVE)
+            vCodVE.configure(font="Arial 12", state='readonly')
 
             Label(FrameLab2, text="Código Proprietário(5): ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=180, y=28)
             vCodProV = Entry(FrameLab2)
