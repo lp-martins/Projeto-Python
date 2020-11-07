@@ -6,7 +6,7 @@ import VCU_QUERY
 #   propriedades da janela  #
 appVCU = Tk()
 appVCU.title(" Venda de Carros Usados®")
-appVCU.geometry("1280x860")
+appVCU.geometry("1280x820")
 appVCU.configure(background="#f2f2f2")
 appVCU.wm_iconbitmap('icon_VCU.ico')
 
@@ -84,7 +84,7 @@ def ABA_CAD_Propri():
 
     FrameLab1 = LabelFrame(aba1, text="Dados Pessoais do Proprietário", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab1.configure(background="#e6e6e6", foreground="#000")
-    FrameLab1.pack(pady=20, ipadx=300, ipady=300)
+    FrameLab1.pack(pady=20, ipadx=300, ipady=180)
 
     Label(FrameLab1, text="Cód. Proprietário(5): ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=28)
     vCodPRO = Entry(FrameLab1)
@@ -121,9 +121,6 @@ def ABA_CAD_Propri():
 
     btnNovo = Button(FrameLab1, text="Novo Cadastro", background="#090", foreground="#fff", font="ArialBlk 12 bold", command=novocadastro)
     btnNovo.place(x=300, y=290, width=150, height=30)
-
-    Label(FrameLab1, text="V.C.U", background="#e6e6e6", foreground="#009", font="ArialBlk 140 bold").place(x=50, y=340, height=180)
-    Label(FrameLab1, text="Sistema de Venda de Carros Usados®", background="#e6e6e6", foreground="#009", font="ArialBlk 22 bold").place(x=35, y=510, height=40)
 
 
 def ABA_CAD_Veic():
@@ -197,7 +194,7 @@ def ABA_CAD_Veic():
 
     FrameLab2 = LabelFrame(aba2, text="Dados do Veículo", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab2.configure(background="#e6e6e6")
-    FrameLab2.pack(pady=0, ipadx=380, ipady=320)
+    FrameLab2.pack(pady=0, ipadx=380, ipady=210)
 
     # tabela para dados cadastrais do veículo
 
@@ -300,9 +297,6 @@ def ABA_CAD_Veic():
     vValorPro = Entry(FrameLab2)
     vValorPro.configure(font="Arial 12")
     vValorPro.place(x=500, y=300, width=150, height=25)
-
-    Label(FrameLab2, text="V.C.U", background="#e6e6e6", foreground="#009", font="ArialBlk 140 bold").place(x=130, y=380, height=180)
-    Label(FrameLab2, text="Sistema de Venda de Carros Usados®", background="#e6e6e6", foreground="#009", font="ArialBlk 22 bold").place(x=115, y=550, height=40)
 
     btnSalvar = Button(FrameLab2, text="Salvar", background="#009", foreground="#fff", font="ArialBlk 12 bold", command=salvardadosVE)
     btnSalvar.place(x=300, y=340, width=150, height=30)
@@ -597,7 +591,7 @@ def ABA_Consu_Veic():
 
     FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 bold", foreground="#000", borderwidth='1', relief="flat")
     FrameLab4.configure(background="#e6e6e6")
-    FrameLab4.pack(pady=15, ipadx=635, ipady=390)
+    FrameLab4.pack(pady=2, ipadx=635, ipady=390)
 
     # ABA Consultar Veículo
     def ListarVeiculos():
@@ -1230,19 +1224,19 @@ def ABA_Consu_Veic():
     # Frame de SELECT
     FrameBusca = LabelFrame(quadroGrid, text="Opções de busca", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameBusca.configure(background="#e6e6e6")
-    FrameBusca.place(x=2, y=495, width=1250, height=108)
+    FrameBusca.place(x=2, y=490, width=1250, height=108)
 
     FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameAttVE.configure(background="#e6e6e6")
-    FrameAttVE.place(x=30, y=611, width=330, height=108)
+    FrameAttVE.place(x=30, y=606, width=330, height=108)
 
     FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameDelVE.configure(background="#e6e6e6")
-    FrameDelVE.place(x=450, y=611, width=330, height=108)
+    FrameDelVE.place(x=450, y=606, width=330, height=108)
 
     FrameVendaVE = LabelFrame(quadroGrid, text="Realizar Venda do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameVendaVE.configure(background="#e6e6e6")
-    FrameVendaVE.place(x=880, y=611, width=330, height=108)
+    FrameVendaVE.place(x=880, y=606, width=330, height=108)
 
     ### elementos para quadro de pesquisa na ABA Consultar VEÍCULO ###
     # Busca por MODELO
