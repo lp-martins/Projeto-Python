@@ -6,7 +6,7 @@ import VCU_QUERY
 #   propriedades da janela  #
 appVCU = Tk()
 appVCU.title(" Venda de Carros Usados®")
-appVCU.geometry("1280x820")
+appVCU.geometry("1280x790")
 appVCU.configure(background="#f2f2f2")
 appVCU.wm_iconbitmap('icon_VCU.ico')
 
@@ -591,7 +591,7 @@ def ABA_Consu_Veic():
 
     FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 bold", foreground="#000", borderwidth='1', relief="flat")
     FrameLab4.configure(background="#e6e6e6")
-    FrameLab4.pack(pady=2, ipadx=635, ipady=390)
+    FrameLab4.pack(pady=2, ipadx=635, ipady=370)
 
     # ABA Consultar Veículo
     def ListarVeiculos():
@@ -1228,15 +1228,15 @@ def ABA_Consu_Veic():
 
     FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameAttVE.configure(background="#e6e6e6")
-    FrameAttVE.place(x=30, y=606, width=330, height=108)
+    FrameAttVE.place(x=30, y=606, width=330, height=75)
 
     FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameDelVE.configure(background="#e6e6e6")
-    FrameDelVE.place(x=450, y=606, width=330, height=108)
+    FrameDelVE.place(x=450, y=606, width=330, height=75)
 
     FrameVendaVE = LabelFrame(quadroGrid, text="Realizar Venda do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameVendaVE.configure(background="#e6e6e6")
-    FrameVendaVE.place(x=880, y=606, width=330, height=108)
+    FrameVendaVE.place(x=880, y=606, width=330, height=75)
 
     ### elementos para quadro de pesquisa na ABA Consultar VEÍCULO ###
     # Busca por MODELO
@@ -1299,17 +1299,17 @@ def ABA_Consu_Veic():
     # botao Atualizar na ABA Consultar VEICULOS
     btnAttVE = Button(FrameAttVE, text="Atualizar dados do Veículo", command=AtualizarVE)
     btnAttVE.configure(font="arial 12 bold", background="#fd0", foreground="#000")
-    btnAttVE.place(x=50, y=20, width=220, height=40)
+    btnAttVE.place(x=50, y=5, width=220, height=40)
 
     # botao Excluir na ABA Consultar VEICULOS
     btnExcVE = Button(FrameDelVE, text="Excluir dados do Veículo", command=DeletarVE)
     btnExcVE.configure(font="arial 12 bold", background="#f00", foreground="#fff")
-    btnExcVE.place(x=50, y=20, width=220, height=40)
+    btnExcVE.place(x=50, y=5, width=220, height=40)
 
     # botao Vender na ABA Consultar VEICULOS
     btnVendVE = Button(FrameVendaVE, text="Vender Veículo", command=VenderVE)
     btnVendVE.configure(font="arial 12 bold", background="#0f3", foreground="#000")
-    btnVendVE.place(x=50, y=20, width=220, height=40)
+    btnVendVE.place(x=50, y=5, width=220, height=40)
 
 #  Criando os menús da tela principal #
 barraMenu = Menu(appVCU)
