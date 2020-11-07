@@ -24,19 +24,19 @@ def Config_Vendedores():
 
     # Labal Frame
     lblFramVend = LabelFrame(abaConf_Vend, text="Opções dos Vendedores", font="arialBlack 12 bold italic", bg="yellow", fg="black", relief="ridge", borderwidth="10" )
-    lblFramVend.pack(ipadx=200, ipady=200, pady= 180)
+    lblFramVend.pack(ipadx=200, ipady=200, pady=100)
 
     # Botão cadastrar Vendedor
     btnCadVend = Button(lblFramVend, text="Cadastrar Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7')
-    btnCadVend.place(x=112, y=85)
+    btnCadVend.place(x=108, y=85)
 
     #Botão Consultar Vendedor
     btnConsulVend = Button(lblFramVend, text="Consultar Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7')
-    btnConsulVend.place(x=112, y=160)
+    btnConsulVend.place(x=108, y=160)
 
     #Botão Excluir Vendedor
     btnDeletVend = Button(lblFramVend, text="Excluir Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7')
-    btnDeletVend.place(x=125, y=235)
+    btnDeletVend.place(x=120, y=235)
 
 def ABA_CAD_Propri():
     aba1 = Frame(ABA)
@@ -308,7 +308,7 @@ def ABA_Consu_Propri():
 
     FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab3.configure(background="#e6e6e6")
-    FrameLab3.pack(pady=2, ipadx=440, ipady=369)
+    FrameLab3.pack(pady=2, ipadx=440, ipady=285)
 
     # ABA Consultar Proprietário
     def PesquisarCPF():
@@ -499,15 +499,15 @@ def ABA_Consu_Propri():
     tv1.heading('Telefone', text='Telefone')
     tv1.heading('Responsável', text='Responsável')
     tv1.pack(side=LEFT)
-    tv1.place(x=0, y=0)
+    tv1.place(x=0, y=0, height=320)
 
     # Scrollbar Vertical ABA Consultar PROPRIETARIO
     VScroll2 = ttk.Scrollbar(quadroGrid1, orient="vertical", command=tv1.yview)
-    VScroll2.place(x=835, y=2, height=490)
+    VScroll2.place(x=835, y=2, height=320)
 
     # Scrollbar Vertical ABA Consultar PROPRIETARIO
     OScroll2 = ttk.Scrollbar(quadroGrid1, orient="horizontal", command=tv1.xview)
-    OScroll2.place(x=0, y=489, width=835)
+    OScroll2.place(x=0, y=322, width=835)
 
     # configurar as Scrolls ABA Consultar PROPRIETARIO
     tv1.configure(yscrollcommand=VScroll2.set, xscrollcommand=OScroll2.set)
@@ -516,17 +516,17 @@ def ABA_Consu_Propri():
     # Frame de SELECT
     FrameBusca1 = LabelFrame(quadroGrid1, text="Opções de busca", font="Arial 12 bold", foreground="#055", relief='raised', borderwidth='2')
     FrameBusca1.configure(background="#e6e6e6")
-    FrameBusca1.place(x=2, y=510, width=850, height=108)
+    FrameBusca1.place(x=2, y=340, width=850, height=108)
 
     # _____Frame de Atualizar_____
     FrameAtualizar = LabelFrame(quadroGrid1, text="Atualizar Registro Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameAtualizar.configure(background="#e6e6e6")
-    FrameAtualizar.place(x=2, y=620, width=420, height=65)
+    FrameAtualizar.place(x=2, y=455, width=420, height=65)
 
     # _____Frame de Excluir_____
     FrameExcluir = LabelFrame(quadroGrid1, text="Excluir Registro Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameExcluir.configure(background="#e6e6e6")
-    FrameExcluir.place(x=430, y=620, width=420, height=65)
+    FrameExcluir.place(x=430, y=455, width=420, height=65)
 
     # Elementos para quadro de pesquisa da ABA Consultar PROPRIETARIOS
     # ____Busca por NOME____
@@ -591,7 +591,7 @@ def ABA_Consu_Veic():
 
     FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 bold", foreground="#000", borderwidth='1', relief="flat")
     FrameLab4.configure(background="#e6e6e6")
-    FrameLab4.pack(pady=2, ipadx=635, ipady=370)
+    FrameLab4.pack(pady=2, ipadx=635, ipady=295)
 
     # ABA Consultar Veículo
     def ListarVeiculos():
@@ -1207,15 +1207,15 @@ def ABA_Consu_Veic():
     tv.heading('Valor FIPE', text='Valor/FIPE')
     tv.heading('Valor de Venda', text='Valor/Venda')
     tv.pack(side=LEFT)
-    tv.place(x=0, y=0)
+    tv.place(x=0, y=0, height=320)
 
     # Scrollbar Vertical ABA CONSULTAR VEÍCULO
     VScroll = ttk.Scrollbar(quadroGrid, orient="vertical", command=tv.yview)
-    VScroll.place(x=1235, y=2, height=465)
+    VScroll.place(x=1235, y=2, height=320)
 
     # Scrollbar Vertical ABA CONSULTAR VEÍCULO
     OScroll = ttk.Scrollbar(quadroGrid, orient="horizontal", command=tv.xview)
-    OScroll.place(x=0, y=469, width=1235)
+    OScroll.place(x=0, y=322, width=1235)
 
     # configurar as Scrolls da ABA CONSULTAR VEÍCULO
     tv.configure(yscrollcommand=VScroll.set, xscrollcommand=OScroll.set)
@@ -1224,19 +1224,19 @@ def ABA_Consu_Veic():
     # Frame de SELECT
     FrameBusca = LabelFrame(quadroGrid, text="Opções de busca", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameBusca.configure(background="#e6e6e6")
-    FrameBusca.place(x=2, y=490, width=1250, height=108)
+    FrameBusca.place(x=2, y=340, width=1250, height=108)
 
     FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameAttVE.configure(background="#e6e6e6")
-    FrameAttVE.place(x=30, y=606, width=330, height=75)
+    FrameAttVE.place(x=30, y=455, width=330, height=75)
 
     FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameDelVE.configure(background="#e6e6e6")
-    FrameDelVE.place(x=450, y=606, width=330, height=75)
+    FrameDelVE.place(x=450, y=455, width=330, height=75)
 
     FrameVendaVE = LabelFrame(quadroGrid, text="Realizar Venda do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameVendaVE.configure(background="#e6e6e6")
-    FrameVendaVE.place(x=880, y=606, width=330, height=75)
+    FrameVendaVE.place(x=880, y=455, width=330, height=75)
 
     ### elementos para quadro de pesquisa na ABA Consultar VEÍCULO ###
     # Busca por MODELO
@@ -1311,6 +1311,35 @@ def ABA_Consu_Veic():
     btnVendVE.configure(font="arial 12 bold", background="#0f3", foreground="#000")
     btnVendVE.place(x=50, y=5, width=220, height=40)
 
+def Versao():
+    AppVersao = Toplevel()
+    AppVersao.title(" Detalhes da Versão")
+    AppVersao.geometry("400x180")
+    AppVersao.resizable(False, False)
+    AppVersao.configure(background="#2b2b2b")
+    AppVersao.wm_iconbitmap('icon_VCU.ico')
+    AppVersao.focus_force()
+    AppVersao.grab_set()
+
+    lblVersao = Label(AppVersao, text="Versão: 1.2.4", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao.place(x=153, y=20)
+
+    lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lvlDatInic.place(x=110, y=50)
+
+    lvlDesenv = Label(AppVersao, text="Desenvolvedores: Célio Santos Cardoso,", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lvlDesenv.place(x=60, y=80)
+
+    lvlDesenv2 = Label(AppVersao, text="Luiz de Paula Martins Filho e", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lvlDesenv2.place(x=100, y=110)
+
+    lvlDesenv3 = Label(AppVersao, text="Talita Landim Paes do Nascimento", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lvlDesenv3.place(x=80, y=140)
+
+    AppVersao.transient(appVCU)
+    AppVersao.mainloop()
+
+
 #  Criando os menús da tela principal #
 barraMenu = Menu(appVCU)
 
@@ -1342,9 +1371,7 @@ menuVeic.add_command(label="Buscar Veículo", command=ABA_Consu_Veic)
 # Menu Informações do Software
 menuVCU = Menu(barraMenu, tearoff=0)
 barraMenu.add_cascade(label="Opções do software", menu=menuVCU)
-menuVCU.add_command(label="Informações da Versão", command=semComando)
-menuVCU.add_separator()
-menuVCU.add_command(label="Desenvolvedores", command=semComando)
+menuVCU.add_command(label="Informações da Versão", command=Versao)
 menuVCU.add_separator()
 menuVCU.add_command(label="Support", command=semComando)
 menuVCU.add_separator()
