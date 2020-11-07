@@ -308,7 +308,7 @@ def ABA_Consu_Propri():
 
     FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab3.configure(background="#e6e6e6")
-    FrameLab3.pack(pady=10, ipadx=440, ipady=400)
+    FrameLab3.pack(pady=2, ipadx=440, ipady=369)
 
     # ABA Consultar Proprietário
     def PesquisarCPF():
@@ -481,7 +481,7 @@ def ABA_Consu_Propri():
 
     # Gridview da ABA CONSULTAR PROPRIETARIO
     quadroGrid1 = LabelFrame(FrameLab3, text="Dados dos Proprietários", foreground="#055", font="Arial 12 bold", relief="flat", background="#e6e6e6")
-    quadroGrid1.place(x=10, y=10, width=860, height=760)
+    quadroGrid1.place(x=10, y=5, width=860, height=760)
 
     tv1 = ttk.Treeview(quadroGrid1, columns=('Código', 'Nome', 'CPF/CNPJ', 'Endereço', 'Telefone', 'Responsável'), show='headings')
     tv1.configure(height=23)
@@ -521,12 +521,12 @@ def ABA_Consu_Propri():
     # _____Frame de Atualizar_____
     FrameAtualizar = LabelFrame(quadroGrid1, text="Atualizar Registro Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameAtualizar.configure(background="#e6e6e6")
-    FrameAtualizar.place(x=2, y=625, width=420, height=108)
+    FrameAtualizar.place(x=2, y=620, width=420, height=65)
 
     # _____Frame de Excluir_____
     FrameExcluir = LabelFrame(quadroGrid1, text="Excluir Registro Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
     FrameExcluir.configure(background="#e6e6e6")
-    FrameExcluir.place(x=430, y=625, width=420, height=108)
+    FrameExcluir.place(x=430, y=620, width=420, height=65)
 
     # Elementos para quadro de pesquisa da ABA Consultar PROPRIETARIOS
     # ____Busca por NOME____
@@ -576,12 +576,12 @@ def ABA_Consu_Propri():
     # botão Atualizar dados do Proprietário
     btnAttPRO = Button(FrameAtualizar, text="Atualizar Registro", command=AtualizarPRO)
     btnAttPRO.configure(font="arial 12 bold", background="#fd0", foreground="#000")
-    btnAttPRO.place(x=120, y=18, width=200, height=50)
+    btnAttPRO.place(x=120, y=5, width=200, height=30)
 
     # Botão Excluir dados do Proprietário
     btnDelPRO = Button(FrameExcluir, text="Excluir Registro", command=DeletarPRO)
     btnDelPRO.configure(font="arial 12 bold", background="#f00", foreground="#fff")
-    btnDelPRO.place(x=120, y=18, width=200, height=50)
+    btnDelPRO.place(x=120, y=5, width=200, height=30)
 
 
 def ABA_Consu_Veic():
