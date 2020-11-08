@@ -23,7 +23,6 @@ img = PhotoImage(file="Car_VCU.png")
 lblImagem = Label(abaBemVindo, image=img).place(x=320, y=150)
 abaBemVindo.configure(background="white")
 
-
 def semComando():
     pass
 
@@ -119,21 +118,264 @@ def Config_Vendedores():
         btnNovoVendedor = Button(FramCadVend, text="Novo Cadastro", font="ArialBlack 12 bold", bg="green", fg="white", relief="raised", borderwidth='7', command=NovoCadVendedor)
         btnNovoVendedor.place(x=320, y=310, width=140, height=40)
 
-
         appCadVend.transient(appVCU)
         appCadVend.mainloop()
 
+    def BuscarVendedor():
+        appBuscVend = Toplevel()
+        appBuscVend.title(" Buscar Vendedores")
+        appBuscVend.geometry("900x700")
+        appBuscVend.resizable(False, False)
+        appBuscVend.configure(background="#ddd")
+        appBuscVend.wm_iconbitmap('icon_VCU.ico')
+        appBuscVend.focus_force()
+        appBuscVend.grab_set()
+
+        # Frames da Tela de Vendedores
+        lblFramBuscVend = LabelFrame(appBuscVend, text="Consulta dos Vendedores", font="arialBlack 12 bold italic", bg="#ddd", fg="black", relief="flat")
+        lblFramBuscVend.pack(ipadx=420, ipady=500, pady=10)
+
+        FramOpcBuscVendedor = LabelFrame(lblFramBuscVend, text="Opções de Busca", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
+        FramOpcBuscVendedor.configure(background="#ddd")
+        FramOpcBuscVendedor.place(x=2, y=340, width=832, height=170)
+
+        FramAttVendedor = LabelFrame(lblFramBuscVend, text="Atualizar Vendedor Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
+        FramAttVendedor.configure(background="#ddd")
+        FramAttVendedor.place(x=2, y=516, width=400, height=140)
+
+        FramDeletVendedor = LabelFrame(lblFramBuscVend, text="Excluir Vendedor Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
+        FramDeletVendedor.configure(background="#ddd")
+        FramDeletVendedor.place(x=434, y=516, width=400, height=140)
+
+        # Visualizador dos dados, TreeView na tela de Consultar Vendedor
+        tv3 = ttk.Treeview(lblFramBuscVend, columns=('Código', 'Nome', 'RG', 'CPF', 'Endereço', 'Telefone'), show='headings')
+        tv3.configure(height=23)
+        tv3.column('Código', minwidth=62, width=62)
+        tv3.column('Nome', minwidth=200, width=200)
+        tv3.column('RG', minwidth=90, width=90)
+        tv3.column('CPF', minwidth=90, width=90)
+        tv3.column('Endereço', minwidth=268, width=268)
+        tv3.column('Telefone', minwidth=100, width=100)
+
+        tv3.heading('Código', text="Cód. Vendedor")
+        tv3.heading('Nome', text='Nome')
+        tv3.heading('RG', text='RG')
+        tv3.heading('CPF', text='CPF')
+        tv3.heading('Endereço', text='Endereço')
+        tv3.heading('Telefone', text='Telefone')
+        tv3.pack(side=LEFT)
+        tv3.place(x=0, y=0, height=320)
+
+        # Scrollbar Vertical e Horizontal da tela de Consulta de Vendedores
+        VScrollV = ttk.Scrollbar(lblFramBuscVend, orient="vertical", command=tv3.yview)
+        VScrollV.place(x=815, y=2, height=317)
+        OScrollO = ttk.Scrollbar(lblFramBuscVend, orient="horizontal", command=tv3.xview)
+        OScrollO.place(x=0, y=322, width=812)
+        tv3.configure(yscrollcommand=VScrollV.set, xscrollcommand=OScrollO.set)
+
+        def PesqCodVendedor():
+            tv3.delete(*tv3.get_children())
+            if txtBuscCod.get() != "":
+                CodVendd = txtBuscCod.get()
+                vquery = "SELECT CodVendr, NomeVendr, RGVendr, CPFVendr, EndVendr, FoneVendr FROM Vendedores WHERE CodVendr = '" + CodVendd + "'"
+                linhas = VCU_QUERY.DQL(vquery)
+                if linhas != []:
+                    txtBuscCod.delete(0, END)
+                    for x in linhas:
+                        tv3.insert("", "end", values=x)
+                else:
+                    messagebox.showinfo(title=" Atenção!", message="Não encontramos Vendedores com esse Código!")
+            else:
+                messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
+
+        def PesqNomeVendedor():
+            tv3.delete(*tv3.get_children())
+            if txtBuscNome.get() != "":
+                NomeVendd = txtBuscNome.get()
+                vquery = "SELECT CodVendr, NomeVendr, RGVendr, CPFVendr, EndVendr, FoneVendr FROM Vendedores WHERE NomeVendr LIKE '%" + NomeVendd + "%'"
+                linhas = VCU_QUERY.DQL(vquery)
+                if linhas != []:
+                    txtBuscNome.delete(0, END)
+                    for x in linhas:
+                        tv3.insert("", "end", values=x)
+                else:
+                    messagebox.showinfo(title=" Atenção!", message="Não encontramos Vendedores com esse Nome!")
+            else:
+                messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
+
+        def PesqRGVendedor():
+            tv3.delete(*tv3.get_children())
+            if txtBuscRg.get() != "":
+                RgVendd = txtBuscRg.get()
+                vquery = "SELECT CodVendr, NomeVendr, RGVendr, CPFVendr, EndVendr, FoneVendr FROM Vendedores WHERE RGVendr = '" + RgVendd + "'"
+                linhas = VCU_QUERY.DQL(vquery)
+                if linhas != []:
+                    txtBuscRg.delete(0, END)
+                    for x in linhas:
+                        tv3.insert("", "end", values=x)
+                else:
+                    messagebox.showinfo(title=" Atenção!", message="Não encontramos Vendedores com esse RG!")
+            else:
+                messagebox.showinfo(title=" Atenção!", message="Nenhuma informação digitada!")
+
+        def ListarVendedores():
+            tv3.delete(*tv3.get_children())
+            vquery = "SELECT CodVendr, NomeVendr, RGVendr, CPFVendr, EndVendr, FoneVendr FROM Vendedores"
+            linhas = VCU_QUERY.DQL(vquery)
+            for x in linhas:
+                tv3.insert("", "end", values=x)
+
+        def AttVendedor():
+            def UpdateVendedor():
+                if (txtATTNomeVendr.get() != "") and (txtATTRgVendr.get() != "") and (txtATTCpfVendr.get() != "") and (txtATTEndVendr.get() != "") and (txtATTFoneVendr.get() != ""):
+                    UpCod = txtATTCodVendr.get()
+                    UpNome = txtATTNomeVendr.get()
+                    UpRG = txtATTRgVendr.get()
+                    UpCPF = txtATTCpfVendr.get()
+                    UpEndereco = txtATTEndVendr.get()
+                    UpFone = txtATTFoneVendr.get()
+
+                    AttProquery = "UPDATE Vendedores SET NomeVendr='" + UpNome + "', RGVendr='" + UpRG + "', CPFVendr='" + UpCPF + "', EndVendr='" + UpEndereco + "', FoneVendr='" + UpFone + "' WHERE CodVendr = '" + UpCod + "'"
+                    VCU_QUERY.DML(AttProquery)
+                    messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados Atualizados com sucesso!")
+                else:
+                    messagebox.showwarning(title=" Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
+
+            try:
+                ItemSelectVendr = tv3.selection()[0]
+                valoresVendr = tv3.item(ItemSelectVendr, "values")
+
+                CodVendrAtt = valoresVendr[0]
+                NomeVendrAtt = valoresVendr[1]
+                RgVendrAtt = valoresVendr[2]
+                CpfVendrAtt = valoresVendr[3]
+                EndVendrAtt = valoresVendr[4]
+                FoneVendrAtt = valoresVendr[5]
+
+                appAttVendedor = Toplevel()
+                appAttVendedor.title(" Atualizando dados do Vendedor")
+                appAttVendedor.geometry("900x700")
+                appAttVendedor.resizable(False, False)
+                appAttVendedor.configure(background="#ddd")
+                appAttVendedor.wm_iconbitmap('icon_VCU.ico')
+                appAttVendedor.focus_force()
+                appAttVendedor.grab_set()
+
+                FramCadVend = LabelFrame(appAttVendedor, text="Novo Vendedor", font="arial 11", foreground="#f00", relief='flat')
+                FramCadVend.pack(padx=10, pady=120, ipadx=300, ipady=200)
+
+                Label(FramCadVend, text="Cód. Vendedor(5):", font="arial 11", foreground="#000").place(x=10, y=20)
+                txtATTCodVendr = Entry(FramCadVend)
+                txtATTCodVendr.place(x=10, y=45, width=110, height=25)
+                txtATTCodVendr.insert(0, CodVendrAtt)
+                txtATTCodVendr.configure(font="arial 12", state='readonly')
+
+                Label(FramCadVend, text="Nome: ", font="arial 11", foreground="#000").place(x=10, y=75)
+                txtATTNomeVendr = Entry(FramCadVend)
+                txtATTNomeVendr.place(x=10, y=100, width=430, height=25)
+                txtATTNomeVendr.insert(0, NomeVendrAtt)
+                txtATTNomeVendr.configure(font="arial 11")
+
+                Label(FramCadVend, text="RG: ", font="arial 11", foreground="#000").place(x=10, y=130)
+                txtATTRgVendr = Entry(FramCadVend)
+                txtATTRgVendr.place(x=10, y=155, width=170, height=25)
+                txtATTRgVendr.insert(0, RgVendrAtt)
+                txtATTRgVendr.configure(font="arial 11")
+
+                Label(FramCadVend, text="CPF: ", font="arial 11", foreground="#000").place(x=200, y=130)
+                txtATTCpfVendr = Entry(FramCadVend)
+                txtATTCpfVendr.place(x=200, y=155, width=240, height=25)
+                txtATTCpfVendr.insert(0, CpfVendrAtt)
+                txtATTCpfVendr.configure(font="arial 11")
+
+                Label(FramCadVend, text="Endereço: ", font="arial 11", foreground="#000").place(x=10, y=185)
+                txtATTEndVendr = Entry(FramCadVend)
+                txtATTEndVendr.place(x=10, y=208, width=570, height=25)
+                txtATTEndVendr.insert(0, EndVendrAtt)
+                txtATTEndVendr.configure(font="arial 11")
+
+                Label(FramCadVend, text="Fone/WhatsApp: ", font="arial 11", foreground="#000").place(x=10, y=240)
+                txtATTFoneVendr = Entry(FramCadVend)
+                txtATTFoneVendr.place(x=10, y=265, width=170, height=25)
+                txtATTFoneVendr.insert(0, FoneVendrAtt)
+                txtATTFoneVendr.configure(font="arial 11")
+
+                btnATTSalvarVendr = Button(FramCadVend, text="Atualizar", font="ArialBlack 12 bold", bg="yellow", fg="black", relief="raised", borderwidth='7', command=UpdateVendedor)
+                btnATTSalvarVendr.place(x=240, y=310, width=130, height=40)
+
+                appAttVendedor.transient(appBuscVend)
+                appAttVendedor.mainloop()
+            except:
+                messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
+
+        def DeletarVendedor():
+            try:
+                ItemSelect = tv3.selection()[0]
+                Valores = tv3.item(ItemSelect, "values")
+                CodVendrDEL = Valores[0]
+
+                Message.bell(FramDeletVendedor)
+                MsgResult = messagebox.askyesno(title=" Atenção!!!", message="Deseja mesmo exluir o Vendedor selecionado?")
+                if MsgResult == True:
+                    dquery = "DELETE FROM Vendedores WHERE CodVendr ='" + CodVendrDEL + "'"
+                    tv3.delete(ItemSelect)
+                    VCU_QUERY.DML(dquery)
+                else:
+                    messagebox.showwarning(title=" Atenção!!!", message="Não é possivel excluir um proprietário que tenha veículos Cadastrado!")
+            except:
+                messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
+
+        # Campos do Frame Opções de Busca da tela consultar Vendedores
+        #Busca por Código
+        Label(FramOpcBuscVendedor, text="Busca/Código: ", background="#ddd", foreground="#000", font="Arial 12").place(x=20, y=10)
+        txtBuscCod = Entry(FramOpcBuscVendedor)
+        txtBuscCod.configure(font="arial 12")
+        txtBuscCod.place(x=130, y=10, width=60, height=25)
+
+        btnBuscCod = Button(FramOpcBuscVendedor, text="Pesquisar", font="arial 11 bold", bg="#00f", fg="#fff", command=PesqCodVendedor)
+        btnBuscCod.place(x=192, y=10, height=25)
+
+        # Busca por Nome
+        Label(FramOpcBuscVendedor, text="Busca/Nome: ", background="#ddd", foreground="#000", font="Arial 12").place(x=20, y=55)
+        txtBuscNome = Entry(FramOpcBuscVendedor)
+        txtBuscNome.configure(font="arial 12")
+        txtBuscNome.place(x=120, y=55, width=310, height=25)
+
+        btnBuscNome = Button(FramOpcBuscVendedor, text="Pesquisar", font="arial 11 bold", bg="#00f", fg="#fff", command=PesqNomeVendedor)
+        btnBuscNome.place(x=432, y=55, height=25)
+
+        # Busca por RG
+        Label(FramOpcBuscVendedor, text="Busca/RG: ", background="#ddd", foreground="#000", font="Arial 12").place(x=20, y=100)
+        txtBuscRg = Entry(FramOpcBuscVendedor)
+        txtBuscRg.configure(font="arial 12")
+        txtBuscRg.place(x=100, y=100, width=160, height=25)
+
+        btnBuscRg = Button(FramOpcBuscVendedor, text="Pesquisar", font="arial 11 bold", bg="#00f", fg="#fff", command=PesqRGVendedor)
+        btnBuscRg.place(x=262, y=100, height=25)
+
+        #Botão que Busta todos os Vendedores
+        btnBuscTudo = Button(FramOpcBuscVendedor, text="Buscar Tudo", font="arial 12 bold", bg="#00f", fg="#fff", relief="raised", borderwidth='7', command=ListarVendedores)
+        btnBuscTudo.place(x=630, y=40, width=140, height=55)
+
+        # Botão atualizar dados do Vendedor
+        btnAttVendedor = Button(FramAttVendedor, text="Atualizar Vendedor", font="ArialBlack 12 bold", bg="yellow", fg="black", relief="raised", borderwidth='7', command=AttVendedor)
+        btnAttVendedor.place(x=115, y=40, width=180, height=40)
+
+        # Botão Excluir dados do Vendedor
+        btnDeletVendedor = Button(FramDeletVendedor, text="Excluir Vendedor", font="ArialBlack 12 bold", bg="red", fg="white", relief="raised", borderwidth='7', command=DeletarVendedor)
+        btnDeletVendedor.place(x=120, y=40, width=180, height=40)
+
+        appBuscVend.transient(appVCU)
+        appBuscVend.mainloop()
+
     # Botão cadastrar Vendedor
     btnCadVend = Button(lblFramVend, text="Cadastrar Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=CadVendedor)
-    btnCadVend.place(x=108, y=85)
+    btnCadVend.place(x=108, y=130)
 
     #Botão Consultar Vendedor
-    btnConsulVend = Button(lblFramVend, text="Consultar Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7')
-    btnConsulVend.place(x=108, y=160)
+    btnConsulVend = Button(lblFramVend, text="Buscar Vendedores", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=BuscarVendedor)
+    btnConsulVend.place(x=108, y=195)
 
-    #Botão Excluir Vendedor
-    btnDeletVend = Button(lblFramVend, text="Excluir Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7')
-    btnDeletVend.place(x=120, y=235)
 
 def ABA_CAD_Propri():
     aba1 = Frame(ABA)
