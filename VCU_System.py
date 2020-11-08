@@ -30,15 +30,101 @@ def semComando():
 def Config_Vendedores():
     abaConf_Vend = Frame(ABA)
     ABA.add(abaConf_Vend, text="Propriedades dos Vendedores")
-    abaConf_Vend.configure(background="yellow")
+    abaConf_Vend.configure(background="#ddd")
     ABA.forget(0)
 
     # Labal Frame
-    lblFramVend = LabelFrame(abaConf_Vend, text="Opções dos Vendedores", font="arialBlack 12 bold italic", bg="yellow", fg="black", relief="ridge", borderwidth="10" )
+    lblFramVend = LabelFrame(abaConf_Vend, text="Opções dos Vendedores", font="arialBlack 12 bold italic", bg="#ddd", fg="black", relief="ridge", borderwidth="10" )
     lblFramVend.pack(ipadx=200, ipady=200, pady=100)
 
+    def CadVendedor():
+        appCadVend = Toplevel()
+        appCadVend.title(" Cadastro de Vendedores")
+        appCadVend.geometry("900x700")
+        appCadVend.resizable(False, False)
+        appCadVend.configure(background="#ddd")
+        appCadVend.wm_iconbitmap('icon_VCU.ico')
+        appCadVend.focus_force()
+        appCadVend.grab_set()
+
+        def NovoCadVendedor():
+            txtCodVendedor.delete(0, END)
+            txtNomeVendedor.delete(0, END)
+            txtRgVendedor.delete(0, END)
+            txtCpfVendedor.delete(0, END)
+            txtEndVendedor.delete(0, END)
+            txtFoneVendedor.delete(0, END)
+
+            txtCodVendedor.focus_set()
+
+        def SalvarVendedor():
+            CodVddrSQL = "SELECT CodVendr FROM Vendedores"
+            CodVendedor = str(VCU_QUERY.DQL(CodVddrSQL))
+
+            if txtCodVendedor.get() != "" and txtCodVendedor.get() in CodVendedor:
+                messagebox.showwarning(title=" Código já Cadastrado!",
+                                       message="Este Código já está Existe em nossa base de dados! Por favor, escolha outro")
+            elif (txtCodVendedor.get() != "" and txtNomeVendedor.get() != "") and (txtRgVendedor.get() != "") and (txtCpfVendedor.get() != "") and (txtEndVendedor != "") and (txtFoneVendedor.get() != ""):
+                sCodvddr = txtCodVendedor.get()
+                sNomevddr = txtNomeVendedor.get()
+                sRGvddr = txtRgVendedor.get()
+                sCPFvddr = txtCpfVendedor.get()
+                sEnderecovddr = txtEndVendedor.get()
+                sTelefonevddr = txtFoneVendedor.get()
+
+                SalvarVDDRquery = "INSERT INTO Vendedores(CodVendr, NomeVendr, RGVendr, CPFVendr, EndVendr, FoneVendr) VALUES ('" + sCodvddr + "', '" + sNomevddr + "', '" + sRGvddr + "', '" + sCPFvddr + "', '" + sEnderecovddr + "', '" + sTelefonevddr + "')"
+                VCU_QUERY.DML(SalvarVDDRquery)
+                messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados cadastrados com sucesso!")
+            else:
+                messagebox.showwarning(title=" Campos Vazios!",
+                                       message="Por favor, preencha todos os campos para realizar o cadastro!")
+
+        #Frame na ABA cadastro de Vendedores#
+        FramCadVend = LabelFrame(appCadVend, text="Novo Vendedor", font="arial 11", foreground="#f00", relief='flat')
+        FramCadVend.pack(padx=10, pady=120, ipadx=300, ipady=200)
+
+        Label(FramCadVend, text="Cód. Vendedor(5):", font="arial 11", foreground="#000").place(x=10, y=20)
+        txtCodVendedor = Entry(FramCadVend)
+        txtCodVendedor.configure(font="arial 12")
+        txtCodVendedor.place(x=10, y=45, width=110, height=25)
+
+        Label(FramCadVend, text="Nome: ", font="arial 11", foreground="#000").place(x=10, y=75)
+        txtNomeVendedor = Entry(FramCadVend)
+        txtNomeVendedor.configure(font="arial 11")
+        txtNomeVendedor.place(x=10, y=100, width=430, height=25)
+
+        Label(FramCadVend, text="RG: ", font="arial 11", foreground="#000").place(x=10, y=130)
+        txtRgVendedor = Entry(FramCadVend)
+        txtRgVendedor.configure(font="arial 11")
+        txtRgVendedor.place(x=10, y=155, width=170, height=25)
+
+        Label(FramCadVend, text="CPF: ", font="arial 11", foreground="#000").place(x=200, y=130)
+        txtCpfVendedor = Entry(FramCadVend)
+        txtCpfVendedor.configure(font="arial 11")
+        txtCpfVendedor.place(x=200, y=155, width=240, height=25)
+
+        Label(FramCadVend, text="Endereço: ", font="arial 11", foreground="#000").place(x=10, y=185)
+        txtEndVendedor = Entry(FramCadVend)
+        txtEndVendedor.configure(font="arial 11")
+        txtEndVendedor.place(x=10, y=208, width=570, height=25)
+
+        Label(FramCadVend, text="Fone/WhatsApp: ", font="arial 11", foreground="#000").place(x=10, y=240)
+        txtFoneVendedor = Entry(FramCadVend)
+        txtFoneVendedor.configure(font="arial 11")
+        txtFoneVendedor.place(x=10, y=265, width=170, height=25)
+
+        btnSalvarVendedor = Button(FramCadVend, text="Cadastrar", font="ArialBlack 12 bold", bg="darkblue", fg="white", relief="raised", borderwidth='7', command=SalvarVendedor)
+        btnSalvarVendedor.place(x=170, y=310, width=130, height=40)
+
+        btnNovoVendedor = Button(FramCadVend, text="Novo Cadastro", font="ArialBlack 12 bold", bg="green", fg="white", relief="raised", borderwidth='7', command=NovoCadVendedor)
+        btnNovoVendedor.place(x=320, y=310, width=140, height=40)
+
+
+        appCadVend.transient(appVCU)
+        appCadVend.mainloop()
+
     # Botão cadastrar Vendedor
-    btnCadVend = Button(lblFramVend, text="Cadastrar Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7')
+    btnCadVend = Button(lblFramVend, text="Cadastrar Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=CadVendedor)
     btnCadVend.place(x=108, y=85)
 
     #Botão Consultar Vendedor
@@ -63,6 +149,8 @@ def ABA_CAD_Propri():
         vEnderPRO.delete(0, END)
         vFonePRO.delete(0, END)
         vResponPRO.delete(0, END)
+
+        vCodPRO.focus_set()
 
     def salvardadosPRO():
         CpfCnpjSQL = "SELECT CpfCnpjProp FROM Proprietarios"
@@ -89,8 +177,7 @@ def ABA_CAD_Propri():
             VCU_QUERY.DML(SalvarPROquery)
             messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados cadastrados com sucesso!")
         else:
-            messagebox.showwarning(title=" Campos Vazios!",
-                                   message="Por favor, preencha todos os campos para realizar o cadastro!")
+            messagebox.showwarning(title=" Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
 
     # Criação da Tabela para dados cadastrais do proprietario
 
@@ -128,10 +215,10 @@ def ABA_CAD_Propri():
     vResponPRO.configure(font="Arial 12")
     vResponPRO.place(x=30, y=250, width=530, height=25)
 
-    btnSalvar = Button(FrameLab1, text="Cadastrar", background="#009", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosPRO)
+    btnSalvar = Button(FrameLab1, text="Cadastrar", background="darkblue", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosPRO)
     btnSalvar.place(x=140, y=290, width=150, height=40)
 
-    btnNovo = Button(FrameLab1, text="Novo Cadastro", background="#090", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=novocadastro)
+    btnNovo = Button(FrameLab1, text="Novo Cadastro", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=novocadastro)
     btnNovo.place(x=310, y=290, width=150, height=40)
 
 
@@ -204,6 +291,30 @@ def ABA_CAD_Veic():
         else:
             messagebox.showwarning(title=" Proprietário Não Cadastrado!",
                                    message="Código de proprietário não confere com nenhum proprietário Cadastrado! Verifique o código digitado e tente novamente!")
+
+    def NovoCadVeiculo():
+        vCodVE.delete(0, END)
+        vCodProV.delete(0, END)
+        vMarca.delete(0, END)
+        vModelo.delete(0, END)
+        vAnoFabric.delete(0, END)
+        vCor.delete(0, END)
+        vCombust.set("")
+        vPlaca.delete(0, END)
+        vRenav.delete(0, END)
+        vPortas.set("")
+        vVidroElet.set("")
+        vTravaElet.set("")
+        vAlarme.set("")
+        vArCondic.set("")
+        vSom.set("")
+        vOutroAces.delete(0, END)
+        vVencIPVA.delete(0, END)
+        vValorMultas.delete(0, END)
+        vValorFipe.delete(0, END)
+        vValorPro.delete(0, END)
+
+        vCodVE.focus_set()
 
     FrameLab2 = LabelFrame(aba2, text="Dados do Veículo", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab2.configure(background="#e6e6e6")
@@ -311,13 +422,16 @@ def ABA_CAD_Veic():
     vValorPro.configure(font="Arial 12")
     vValorPro.place(x=500, y=300, width=150, height=25)
 
-    btnSalvar = Button(FrameLab2, text="Salvar", background="#009", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosVE)
-    btnSalvar.place(x=300, y=340, width=150, height=40)
+    btnSalvar = Button(FrameLab2, text="Cadastrar", background="darkblue", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosVE)
+    btnSalvar.place(x=230, y=340, width=130, height=40)
+
+    btnNovoCadVE = Button(FrameLab2, text="Novo Cadastro", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=NovoCadVeiculo)
+    btnNovoCadVE.place(x=380, y=340, width=150, height=40)
 
 def ABA_Consu_Propri():
     aba3 = Frame(ABA)
     ABA.add(aba3, text="Consultar Proprietário")
-    aba3.configure(background="#06f")
+    aba3.configure(background="#2a261d")
     ABA.forget(0)
 
     FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic bold", borderwidth='1', relief="flat")
@@ -496,7 +610,7 @@ def ABA_Consu_Propri():
 
 
     # Gridview da ABA CONSULTAR PROPRIETARIO
-    quadroGrid1 = LabelFrame(FrameLab3, text="Dados dos Proprietários", foreground="#055", font="Arial 12 bold", relief="flat", background="#e6e6e6")
+    quadroGrid1 = LabelFrame(FrameLab3, text="Dados dos Proprietários", foreground="#f00", font="Arial 11", relief="flat", background="#e6e6e6")
     quadroGrid1.place(x=10, y=5, width=860, height=760)
 
     tv1 = ttk.Treeview(quadroGrid1, columns=('Código', 'Nome', 'CPF/CNPJ', 'Endereço', 'Telefone', 'Responsável'), show='headings')
@@ -530,17 +644,17 @@ def ABA_Consu_Propri():
 
     ### FRAMES da ABA CONSULTAR PROPRIETARIOS ###
     # Frame de SELECT
-    FrameBusca1 = LabelFrame(quadroGrid1, text="Opções de busca", font="Arial 12 bold", foreground="#055", relief='raised', borderwidth='2')
+    FrameBusca1 = LabelFrame(quadroGrid1, text="Opções de busca", font="Arial 11", foreground="#f00", relief='raised', borderwidth='2')
     FrameBusca1.configure(background="#e6e6e6")
     FrameBusca1.place(x=2, y=340, width=850, height=108)
 
     # _____Frame de Atualizar_____
-    FrameAtualizar = LabelFrame(quadroGrid1, text="Atualizar Registro Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
+    FrameAtualizar = LabelFrame(quadroGrid1, text="Atualizar Registro Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
     FrameAtualizar.configure(background="#e6e6e6")
     FrameAtualizar.place(x=2, y=455, width=420, height=65)
 
     # _____Frame de Excluir_____
-    FrameExcluir = LabelFrame(quadroGrid1, text="Excluir Registro Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
+    FrameExcluir = LabelFrame(quadroGrid1, text="Excluir Registro Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
     FrameExcluir.configure(background="#e6e6e6")
     FrameExcluir.place(x=430, y=455, width=420, height=65)
 
@@ -556,20 +670,20 @@ def ABA_Consu_Propri():
 
     btnPesq4 = Button(FrameBusca1, text="Pesquisar", command=PesquisarNOME)
     btnPesq4.configure(font="arial 10 bold", background="#009", foreground="#fff")
-    btnPesq4.place(x=285, y=10)
+    btnPesq4.place(x=280, y=10)
 
     # ____Busca por CPF____
-    LabelPesq6 = Label(FrameBusca1, text="Busca/CPF:")
+    LabelPesq6 = Label(FrameBusca1, text="Busca/CPF/CNPJ:")
     LabelPesq6.configure(font="Arial 12", background="#e6e6e6")
     LabelPesq6.place(x=10, y=50)
 
     nomePesq6 = Entry(FrameBusca1)
     nomePesq6.configure(width=15, font="arial 14")
-    nomePesq6.place(x=100, y=50)
+    nomePesq6.place(x=145, y=50)
 
     btnPesq6 = Button(FrameBusca1, text="Pesquisar", command=PesquisarCPF)
     btnPesq6.configure(font="arial 10 bold", background="#009", foreground="#fff")
-    btnPesq6.place(x=275, y=50)
+    btnPesq6.place(x=315, y=50)
 
     # ____Busca por Código____
     LabelPesq7 = Label(FrameBusca1, text="Busca/Código:")
@@ -582,7 +696,7 @@ def ABA_Consu_Propri():
 
     btnPesq7 = Button(FrameBusca1, text="Pesquisar", command=PesqCodPRO)
     btnPesq7.configure(font="arial 10 bold", background="#009", foreground="#fff")
-    btnPesq7.place(x=575, y=10)
+    btnPesq7.place(x=572, y=10)
 
     # ____botao q busca TODOS os registros na ABA Consultar PROPRIETÁRIOS____
     btnBuscaTudo5 = Button(FrameBusca1, text="Buscar Tudo", command=ListarProprietarios)
@@ -603,7 +717,7 @@ def ABA_Consu_Propri():
 def ABA_Consu_Veic():
     aba4 = Frame(ABA)
     ABA.add(aba4, text="Consultar Veículo")
-    aba4.configure(background="#06f")
+    aba4.configure(background="#2a261d")
     ABA.forget(0)
 
     FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 bold", foreground="#000", borderwidth='1', relief="flat")
@@ -948,7 +1062,7 @@ def ABA_Consu_Veic():
 
             AppVENDA = Toplevel()
             AppVENDA.title(" Operação de Venda do Veículo")
-            AppVENDA.geometry("900x800")
+            AppVENDA.geometry("900x700")
             AppVENDA.resizable(False, False)
             AppVENDA.configure(background="#0f3")
             AppVENDA.wm_iconbitmap('icon_VCU.ico')
@@ -956,19 +1070,19 @@ def ABA_Consu_Veic():
             AppVENDA.grab_set()
 
             ABAvenda = ttk.Notebook(AppVENDA)
-            ABAvenda.place(x=10, y=10, width=880, height=780)
+            ABAvenda.place(x=10, y=10, width=880, height=680)
 
             # __________________________Frame Operações de venda___________________________#
 
             FrameVENDA = LabelFrame(ABAvenda, text="Informações da VENDA", font="Arial 12 italic bold", foreground="#000", borderwidth='1', relief="flat")
             FrameVENDA.configure(background="#e6e6e6")
-            FrameVENDA.place(x=0, y=0, width=880, height=780)
+            FrameVENDA.place(x=0, y=0, width=878, height=680)
 
             # __________________________Frame dados do Veículo___________________________#
 
-            FrameDadosVE = LabelFrame(FrameVENDA, text="Dados do Veículo", font="Arial 11 bold", foreground="#099", relief='raised', borderwidth='2')
+            FrameDadosVE = LabelFrame(FrameVENDA, text="Dados do Veículo", font="Arial 11", foreground="#f00", relief='raised', borderwidth='2')
             FrameDadosVE.configure(background="#e6e6e6")
-            FrameDadosVE.place(x=20, y=5, width=840, height=195)
+            FrameDadosVE.place(x=20, y=5, width=840, height=185)
 
             Label(FrameDadosVE, text="Cód. Veículo: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=10)
             CodVeVEND = Entry(FrameDadosVE)
@@ -1086,9 +1200,9 @@ def ABA_Consu_Veic():
 
             # ________________________Frame dados do Proprietário_________________________#
 
-            FrameDadosPRO = LabelFrame(FrameVENDA, text="Dados do Proprietário", font="Arial 11 bold", foreground="#099", relief='raised', borderwidth='2')
+            FrameDadosPRO = LabelFrame(FrameVENDA, text="Dados do Proprietário", font="Arial 11", foreground="#f00", relief='raised', borderwidth='2')
             FrameDadosPRO.configure(background="#e6e6e6")
-            FrameDadosPRO.place(x=20, y=205, width=840, height=160)
+            FrameDadosPRO.place(x=20, y=195, width=840, height=160)
 
             Label(FrameDadosPRO, text="Cód. Proprietário: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=10)
             CodProVEND = Entry(FrameDadosPRO)
@@ -1128,9 +1242,9 @@ def ABA_Consu_Veic():
 
             # ________________________Frame dados do Cliente/Comprador_________________________#
 
-            FrameDadosCLI = LabelFrame(FrameVENDA, text="Dados do Cliente/Comprador", font="Arial 11 bold", foreground="#099", relief='raised', borderwidth='2')
+            FrameDadosCLI = LabelFrame(FrameVENDA, text="Dados do Cliente/Comprador", font="Arial 11", foreground="#f00", relief='raised', borderwidth='2')
             FrameDadosCLI.configure(background="#e6e6e6")
-            FrameDadosCLI.place(x=20, y=370, width=840, height=130)
+            FrameDadosCLI.place(x=20, y=360, width=840, height=130)
 
             Label(FrameDadosCLI, text="Cód. Cliente: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=10)
             CodClienteVEND = Entry(FrameDadosCLI)
@@ -1164,9 +1278,9 @@ def ABA_Consu_Veic():
 
             # ________________________Frame dados Monetários_________________________#
 
-            FrameDadosFIN = LabelFrame(FrameVENDA, text="Dados Financeiros", font="Arial 11 bold", foreground="#099", relief='raised', borderwidth='2')
+            FrameDadosFIN = LabelFrame(FrameVENDA, text="Dados Financeiros", font="Arial 11", foreground="#f00", relief='raised', borderwidth='2')
             FrameDadosFIN.configure(background="#e6e6e6")
-            FrameDadosFIN.place(x=20, y=510, width=840, height=240)
+            FrameDadosFIN.place(x=20, y=495, width=840, height=160)
 
             AppVENDA.transient(appVCU)
             AppVENDA.mainloop()
@@ -1174,7 +1288,7 @@ def ABA_Consu_Veic():
             messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
 
     ### Gridview da ABA CONSULTAR VEÍCULO ###
-    quadroGrid = LabelFrame(FrameLab4, text="Dados dos Veículos", font="Arial 12 bold", foreground="#055", relief="flat", background="#e6e6e6")
+    quadroGrid = LabelFrame(FrameLab4, text="Dados dos Veículos", font="Arial 11", foreground="#f00", relief="flat", background="#e6e6e6")
     quadroGrid.place(x=5, y=10, width=1260, height=760)
 
     tv = ttk.Treeview(quadroGrid, columns=(
@@ -1239,19 +1353,19 @@ def ABA_Consu_Veic():
 
     ### FRAMES da ABA CONSULTAR VEÍCULOS ###
     # Frame de SELECT
-    FrameBusca = LabelFrame(quadroGrid, text="Opções de busca", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
+    FrameBusca = LabelFrame(quadroGrid, text="Opções de busca", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
     FrameBusca.configure(background="#e6e6e6")
     FrameBusca.place(x=2, y=340, width=1250, height=108)
 
-    FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
+    FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
     FrameAttVE.configure(background="#e6e6e6")
     FrameAttVE.place(x=30, y=455, width=330, height=75)
 
-    FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
+    FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
     FrameDelVE.configure(background="#e6e6e6")
     FrameDelVE.place(x=450, y=455, width=330, height=75)
 
-    FrameVendaVE = LabelFrame(quadroGrid, text="Realizar Venda do Veículo Selecionado", foreground="#055", font="Arial 12 bold", relief='raised', borderwidth='2')
+    FrameVendaVE = LabelFrame(quadroGrid, text="Realizar Venda do Veículo Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
     FrameVendaVE.configure(background="#e6e6e6")
     FrameVendaVE.place(x=880, y=455, width=330, height=75)
 
