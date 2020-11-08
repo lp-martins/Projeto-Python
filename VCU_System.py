@@ -14,6 +14,16 @@ appVCU.wm_iconbitmap('icon_VCU.ico')
 ABA = ttk.Notebook(appVCU)
 ABA.pack(fill='both', expand=1)
 
+abaBemVindo = Frame(ABA)
+ABA.add(abaBemVindo, text="Tela de Boas Vindas")
+
+legenda = Label(abaBemVindo, text="Sistema de Venda de Carros Usados", font="Centaur 50 bold", background="white").place(x=160, y=50)
+
+img = PhotoImage(file="Car_VCU.png")
+lblImagem = Label(abaBemVindo, image=img).place(x=320, y=150)
+abaBemVindo.configure(background="white")
+
+
 def semComando():
     pass
 
@@ -21,6 +31,7 @@ def Config_Vendedores():
     abaConf_Vend = Frame(ABA)
     ABA.add(abaConf_Vend, text="Propriedades dos Vendedores")
     abaConf_Vend.configure(background="yellow")
+    ABA.forget(0)
 
     # Labal Frame
     lblFramVend = LabelFrame(abaConf_Vend, text="Opções dos Vendedores", font="arialBlack 12 bold italic", bg="yellow", fg="black", relief="ridge", borderwidth="10" )
@@ -42,6 +53,7 @@ def ABA_CAD_Propri():
     aba1 = Frame(ABA)
     ABA.add(aba1, text="Cadastrar Proprietário")
     aba1.configure(background="#2a261d")
+    ABA.forget(0)
     Label(aba1, text="Cadastro de Proprietário de Veículo(s)", background="#2a261d", font="Georgia 30 bold", foreground="#fff").pack(pady=30, ipadx=30, ipady=15)
 
     def novocadastro():
@@ -116,17 +128,18 @@ def ABA_CAD_Propri():
     vResponPRO.configure(font="Arial 12")
     vResponPRO.place(x=30, y=250, width=530, height=25)
 
-    btnSalvar = Button(FrameLab1, text="Cadastrar", background="#009", foreground="#fff", font="ArialBlk 12 bold", command=salvardadosPRO)
-    btnSalvar.place(x=130, y=290, width=150, height=30)
+    btnSalvar = Button(FrameLab1, text="Cadastrar", background="#009", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosPRO)
+    btnSalvar.place(x=140, y=290, width=150, height=40)
 
-    btnNovo = Button(FrameLab1, text="Novo Cadastro", background="#090", foreground="#fff", font="ArialBlk 12 bold", command=novocadastro)
-    btnNovo.place(x=300, y=290, width=150, height=30)
+    btnNovo = Button(FrameLab1, text="Novo Cadastro", background="#090", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=novocadastro)
+    btnNovo.place(x=310, y=290, width=150, height=40)
 
 
 def ABA_CAD_Veic():
     aba2 = Frame(ABA)
     ABA.add(aba2, text="Cadastrar Veículo")
     aba2.configure(background="#2a261d")
+    ABA.forget(0)
     Label(aba2, text="Cadastro de Informações do Veículo", background="#2a261d", font="Georgia 30 bold", foreground="#fff").pack(pady=20, ipadx=120, ipady=15)
 
     def salvardadosVE():
@@ -298,13 +311,14 @@ def ABA_CAD_Veic():
     vValorPro.configure(font="Arial 12")
     vValorPro.place(x=500, y=300, width=150, height=25)
 
-    btnSalvar = Button(FrameLab2, text="Salvar", background="#009", foreground="#fff", font="ArialBlk 12 bold", command=salvardadosVE)
-    btnSalvar.place(x=300, y=340, width=150, height=30)
+    btnSalvar = Button(FrameLab2, text="Salvar", background="#009", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosVE)
+    btnSalvar.place(x=300, y=340, width=150, height=40)
 
 def ABA_Consu_Propri():
     aba3 = Frame(ABA)
     ABA.add(aba3, text="Consultar Proprietário")
     aba3.configure(background="#06f")
+    ABA.forget(0)
 
     FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab3.configure(background="#e6e6e6")
@@ -372,6 +386,7 @@ def ABA_Consu_Propri():
             ValorSelect = Valores[1]
             codProDeletar = Valores[0]
             if ValorSelect not in str(PropricomVE):
+                Message.bell(aba3)
                 MsgResult = messagebox.askyesno(title=" Atenção!!!",
                                                 message="Deseja mesmo exluir o Proprietário selecionado?")
                 if MsgResult == True:
@@ -418,7 +433,7 @@ def ABA_Consu_Propri():
 
             AppATTpro = Toplevel()
             AppATTpro.title(" Atualizando dados do Proprietário")
-            AppATTpro.geometry("900x760")
+            AppATTpro.geometry("900x700")
             AppATTpro.resizable(False, False)
             AppATTpro.configure(background="#fd0")
             AppATTpro.wm_iconbitmap('icon_VCU.ico')
@@ -426,17 +441,17 @@ def ABA_Consu_Propri():
             AppATTpro.grab_set()
 
             ABAattPro = ttk.Notebook(AppATTpro)
-            ABAattPro.place(x=10, y=10, width=880, height=740)
+            ABAattPro.place(x=10, y=10, width=880, height=680)
 
             FrameLabPro = LabelFrame(ABAattPro, text="Dados Pessoais do Proprietário", font="Arial 12 italic bold", borderwidth='1', relief="flat")
             FrameLabPro.configure(background="#e6e6e6", foreground="#000")
-            FrameLabPro.pack(pady=50, ipadx=300, ipady=300)
+            FrameLabPro.pack(pady=48, ipadx=300, ipady=300)
 
             Label(FrameLabPro, text="Cód. Proprietário(5): ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=28)
             AttCodPRO = Entry(FrameLabPro)
-            AttCodPRO.configure(font="Arial 12")
             AttCodPRO.place(x=30, y=50, width=150, height=25)
             AttCodPRO.insert(0, CodProAtt)
+            AttCodPRO.configure(font="Arial 12", state='readonly')
 
             Label(FrameLabPro, text="Nome Completo/Razão Social: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=78)
             AttNomePRO = Entry(FrameLabPro)
@@ -468,8 +483,8 @@ def ABA_Consu_Propri():
             AttResponPRO.place(x=30, y=250, width=530, height=25)
             AttResponPRO.insert(0, ResponProAtt)
 
-            btnSalvAttPro = Button(FrameLabPro, text="Atualizar", background="#009", foreground="#fff", font="ArialBlk 12 bold", command=UpdatePRO)
-            btnSalvAttPro.place(x=225, y=290, width=150, height=30)
+            btnSalvAttPro = Button(FrameLabPro, text="Atualizar", background="#009", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=UpdatePRO)
+            btnSalvAttPro.place(x=225, y=290, width=150, height=40)
 
             Label(FrameLabPro, text="V.C.U", background="#e6e6e6", foreground="#009", font="ArialBlk 140 bold").place(x=50, y=340, height=180)
             Label(FrameLabPro, text="Sistema de Venda de Carros Usados®", background="#e6e6e6", foreground="#009", font="ArialBlk 22 bold").place(x=35, y=510, height=40)
@@ -571,24 +586,25 @@ def ABA_Consu_Propri():
 
     # ____botao q busca TODOS os registros na ABA Consultar PROPRIETÁRIOS____
     btnBuscaTudo5 = Button(FrameBusca1, text="Buscar Tudo", command=ListarProprietarios)
-    btnBuscaTudo5.configure(width=10, height=2, font="arial 11 bold", background="#0f3", foreground="#000")
+    btnBuscaTudo5.configure(width=10, height=2, font="arial 11 bold", background="#0f3", foreground="#000", relief="raised", borderwidth='6')
     btnBuscaTudo5.place(x=680, y=15, width=150, height=50)
 
     # botão Atualizar dados do Proprietário
     btnAttPRO = Button(FrameAtualizar, text="Atualizar Registro", command=AtualizarPRO)
-    btnAttPRO.configure(font="arial 12 bold", background="#fd0", foreground="#000")
-    btnAttPRO.place(x=120, y=5, width=200, height=30)
+    btnAttPRO.configure(font="arial 12 bold", background="#fd0", foreground="#000", relief="raised", borderwidth='6')
+    btnAttPRO.place(x=120, y=3, width=200, height=35)
 
     # Botão Excluir dados do Proprietário
     btnDelPRO = Button(FrameExcluir, text="Excluir Registro", command=DeletarPRO)
-    btnDelPRO.configure(font="arial 12 bold", background="#f00", foreground="#fff")
-    btnDelPRO.place(x=120, y=5, width=200, height=30)
+    btnDelPRO.configure(font="arial 12 bold", background="#f00", foreground="#fff", relief="raised", borderwidth='6')
+    btnDelPRO.place(x=120, y=3, width=200, height=35)
 
 
 def ABA_Consu_Veic():
     aba4 = Frame(ABA)
     ABA.add(aba4, text="Consultar Veículo")
     aba4.configure(background="#06f")
+    ABA.forget(0)
 
     FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 bold", foreground="#000", borderwidth='1', relief="flat")
     FrameLab4.configure(background="#e6e6e6")
@@ -668,6 +684,7 @@ def ABA_Consu_Veic():
             ItemSelect = tv.selection()[0]
             Valores = tv.item(ItemSelect, "values")
             ValorSelect = Valores[0]
+            Message.bell(aba4)
             MsgResult = messagebox.askyesno(title=" Atenção!!!", message="Deseja mesmo exluir o Veículo selecionado?")
             if MsgResult == True:
                 dquery = "DELETE FROM Veiculos WHERE CodVeicV ='" + ValorSelect + "'"
@@ -741,7 +758,7 @@ def ABA_Consu_Veic():
 
             AppATTve = Toplevel()
             AppATTve.title(" Atualizando dados do Veículo")
-            AppATTve.geometry("900x760")
+            AppATTve.geometry("900x700")
             AppATTve.resizable(False, False)
             AppATTve.configure(background="#fd0")
             AppATTve.wm_iconbitmap('icon_VCU.ico')
@@ -753,7 +770,7 @@ def ABA_Consu_Veic():
 
             FrameLab2 = LabelFrame(ABAattVE, text="Dados do Veículo", font="Arial 12 italic bold", foreground="#000", borderwidth='4', relief="flat")
             FrameLab2.configure(background="#e6e6e6")
-            FrameLab2.pack(pady=55, ipadx=380, ipady=320)
+            FrameLab2.pack(pady=27, ipadx=380, ipady=320)
 
             # tabela para dados cadastrais do veículo
 
@@ -877,12 +894,11 @@ def ABA_Consu_Veic():
             vValorPro.place(x=500, y=300, width=150, height=25)
             vValorPro.insert(0, nValorPRO)
 
-            btnUpdate = Button(FrameLab2, text="Salvar", background="#009", foreground="#fff", font="ArialBlk 12 bold", command=UpdateVE)
-            btnUpdate.place(x=300, y=340, width=150, height=30)
+            btnUpdate = Button(FrameLab2, text="Salvar Alterações", background="#009", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=UpdateVE)
+            btnUpdate.place(x=300, y=340, width=160, height=40)
 
             Label(FrameLab2, text="V.C.U", background="#e6e6e6", foreground="#009", font="ArialBlk 140 bold").place(x=130, y=380, height=180)
             Label(FrameLab2, text="Sistema de Venda de Carros Usados®", background="#e6e6e6", foreground="#009", font="ArialBlk 22 bold").place(x=115, y=550, height=40)
-
 
             AppATTve.transient(appVCU)
             AppATTve.mainloop()
@@ -1294,22 +1310,22 @@ def ABA_Consu_Veic():
 
     # botao q busca TODOS os registros na ABA Consultar VEÍCULOS
     btnBuscaTudo = Button(FrameBusca, text="Buscar Tudo", command=ListarVeiculos)
-    btnBuscaTudo.configure(width=14, height=2, font="arial 11 bold", background="#009", foreground="#fff")
+    btnBuscaTudo.configure(width=14, height=2, font="arial 11 bold", background="#009", foreground="#fff", relief="raised", borderwidth='6')
     btnBuscaTudo.place(x=1050, y=15)
 
     # botao Atualizar na ABA Consultar VEICULOS
     btnAttVE = Button(FrameAttVE, text="Atualizar dados do Veículo", command=AtualizarVE)
-    btnAttVE.configure(font="arial 12 bold", background="#fd0", foreground="#000")
+    btnAttVE.configure(font="arial 12 bold", background="#fd0", foreground="#000", relief="raised", borderwidth='6')
     btnAttVE.place(x=50, y=5, width=220, height=40)
 
     # botao Excluir na ABA Consultar VEICULOS
     btnExcVE = Button(FrameDelVE, text="Excluir dados do Veículo", command=DeletarVE)
-    btnExcVE.configure(font="arial 12 bold", background="#f00", foreground="#fff")
+    btnExcVE.configure(font="arial 12 bold", background="#f00", foreground="#fff", relief="raised", borderwidth='6')
     btnExcVE.place(x=50, y=5, width=220, height=40)
 
     # botao Vender na ABA Consultar VEICULOS
     btnVendVE = Button(FrameVendaVE, text="Vender Veículo", command=VenderVE)
-    btnVendVE.configure(font="arial 12 bold", background="#0f3", foreground="#000")
+    btnVendVE.configure(font="arial 12 bold", background="#0f3", foreground="#000", relief="raised", borderwidth='6')
     btnVendVE.place(x=50, y=5, width=220, height=40)
 
 def Versao():
@@ -1322,7 +1338,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.2.4", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.2.6", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
