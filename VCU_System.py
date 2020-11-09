@@ -738,8 +738,7 @@ def ABA_Consu_Propri():
             codProDeletar = Valores[0]
             if ValorSelect not in str(PropricomVE):
                 Message.bell(aba3)
-                MsgResult = messagebox.askyesno(title=" Atenção!!!",
-                                                message="Deseja mesmo exluir o Proprietário selecionado?")
+                MsgResult = messagebox.askyesno(title=" Atenção!!!", message="Deseja mesmo exluir o Proprietário selecionado?")
                 if MsgResult == True:
                     dquery = "DELETE FROM Proprietarios WHERE CodProp ='" + codProDeletar + "'"
                     tv1.delete(ItemSelect)
@@ -1297,6 +1296,55 @@ def ABA_Consu_Veic():
                 FonePROvenda = x[4]
                 ResponPROvenda = x[5]
 
+            def FinalizarVenda():
+                # Buscar todos os códigos de Clientes Cadastrados
+                SelecCli = "SELECT CodCli FROM Clientes"
+                ClientesCAD = VCU_QUERY.DQL(SelecCli)
+
+                # Buscar todos os códigos das Notas de venda
+                SelecVenda = "SELECT CodNota FROM Nota_de_Venda"
+                VendasCAD = VCU_QUERY.DQL(SelecVenda)
+
+                # Buscar todos os códigos dos Vendedores
+                SelecVenddor = "SELECT CodVendr FROM Vendedores"
+                VenddoresCAD = VCU_QUERY.DQL(SelecVenddor)
+
+                if vCodVendaFin.get() in str(VendasCAD):
+                    messagebox.showwarning(title="Atenção!!!", message="Este código de Nota já existe! Por favor, escolha outro.")
+                    vCodVendaFin.focus_set()
+                elif vCodVendrVendaFIN.get() not in str(VenddoresCAD):
+                    messagebox.showwarning(title="Atenção!!!", message="Código de Vendedor inválido!")
+                    vCodVendrVendaFIN.focus_set()
+                else:
+                    if CodClienteVEND.get() not in str(ClientesCAD):
+                        codCliv = CodClienteVEND.get()
+                        nomeCliv = NomeCliVEND.get()
+                        rgCliv = RgCliVEND.get()
+                        cpfCliv = CpfCliVEND.get()
+                        endeCliv = EndCliVEND.get()
+                        foneCliv = FoneCliVEND.get()
+
+                        SalvarCLI = "INSERT INTO Clientes(CodCli, NomeCli, RgCli, CpfCli, EndCli, FoneCli) VALUES ('" + codCliv + "', '" + nomeCliv + "','" + rgCliv + "', '" + cpfCliv + "', '" + endeCliv + "', '" + foneCliv + "')"
+                        VCU_QUERY.DML(SalvarCLI)
+                    if vCodVendaFin.get() != "" and vCodVendrVendaFIN.get() != "" and vValBrutVenFIN.get() != "" and vValDescVenFIN.get() != "" and vValorTotaVendFIN.get() != "" and vDataVendaFIN.get() != "" and vFormaPGVendaFIN.get() != "":
+                        codigoVend = vCodVendaFin.get()
+                        codigoClient = CodClienteVEND.get()
+                        codigoVenddor = vCodVendrVendaFIN.get()
+                        codigoVeiculo = CodVeVEND.get()
+                        data_Venda = vDataVendaFIN.get()
+                        valBRUTO = vValBrutVenFIN.get()
+                        valDESC = vValDescVenFIN.get()
+                        valTOTAL = vValorTotaVendFIN.get()
+                        FormPagamento = vFormaPGVendaFIN.get()
+
+                        SalvarNOTA = "INSERT INTO Nota_de_Venda(CodNota, fk_CodCli, fk_CodVendr, fk_CodVeicV, DataVenda, ValorBruto, ValorDesc, ValorVenda, FormaPgto) VALUES ('" + codigoVend + "', '" + codigoClient + "', '" + codigoVenddor + "', '" + codigoVeiculo + "', '" + data_Venda + "', '" + valBRUTO + "', '" + valDESC + "', '" + valTOTAL + "', '" + FormPagamento + "')"
+                        VCU_QUERY.DML(SalvarNOTA)
+                        messagebox.showinfo(title="Venda de Veiculo", message="Venda Realizada Com Sucesso!!")
+                        #AppVENDA.destroy()
+                    else:
+                        messagebox.showinfo(title="Atenção!!!", message="Verifique os Campos Vazios em Considerações finais!")
+
+
             AppVENDA = Toplevel()
             AppVENDA.title(" Operação de Venda do Veículo")
             AppVENDA.geometry("900x700")
@@ -1549,11 +1597,17 @@ def ABA_Consu_Veic():
             vDataVendaFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
             vDataVendaFIN.place(x=125, y=100, width=90, height=22.4)
 
+            Label(FrameDadosFIN, text="Forma de Pagamento: ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=225, y=100)
+            vFormaPGVendaFIN = Entry(FrameDadosFIN)
+            vFormaPGVendaFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
+            vFormaPGVendaFIN.place(x=375, y=100, width=180, height=22.4)
+
+            # Botões IMPRIMIR ORÇAMENTO, FINALIZAR VENDA e CANCELAR/SAIR
             btnOrcament = Button(FrameDadosFIN, text="Imprimir Orçamento", background="green", foreground="white", relief="raised", borderwidth='6')
             btnOrcament.configure(font="Arial 12 bold")
             btnOrcament.place(x=620, y=1, height=35)
 
-            btnFinalVenda = Button(FrameDadosFIN, text="Finalizar Venda", background="blue", foreground="white", relief="raised", borderwidth='6')
+            btnFinalVenda = Button(FrameDadosFIN, text="Finalizar Venda", background="blue", foreground="white", relief="raised", borderwidth='6', command=FinalizarVenda)
             btnFinalVenda.configure(font="Arial 12 bold")
             btnFinalVenda.place(x=620, y=48, width=175, height=35)
 
