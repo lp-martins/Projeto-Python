@@ -238,6 +238,7 @@ def Config_Vendedores():
                     AttProquery = "UPDATE Vendedores SET NomeVendr='" + UpNome + "', RGVendr='" + UpRG + "', CPFVendr='" + UpCPF + "', EndVendr='" + UpEndereco + "', FoneVendr='" + UpFone + "' WHERE CodVendr = '" + UpCod + "'"
                     VCU_QUERY.DML(AttProquery)
                     messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados Atualizados com sucesso!")
+                    appAttVendedor.destroy()
                 else:
                     messagebox.showwarning(title=" Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
 
@@ -765,9 +766,9 @@ def ABA_Consu_Propri():
                 VCU_QUERY.DML(AttProquery)
                 VCU_QUERY.DML(AttVEproquery)
                 messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados Atualizados com sucesso!")
+                AppATTpro.destroy()
             else:
-                messagebox.showwarning(title=" Campos Vazios!",
-                                       message="Por favor, preencha todos os campos para realizar o cadastro!")
+                messagebox.showwarning(title=" Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
 
         try:
             ItemSelectPRO = tv1.selection()[0]
@@ -1076,9 +1077,9 @@ def ABA_Consu_Veic():
                 Upquery = "UPDATE Veiculos SET CodVeicV='" + sCodV + "', fk_CodProp='" + sCodProV + "', MarcaV='" + sMarca + "', ModeloV='" + sModel + "', AnoFabV='" + sAnoFabri + "', CorV='" + sCor + "', CombV='" + sCombust + "', PlacaV='" + sPlaca + "', RenavanV='" + sRenavan + "', PortasV='" + sPortas + "', AcessVEV='" + sVidroEl + "', AcessTEV='" + sTravaEl + "', AcessAlV='" + sAlarm + "', AcessArV='" + sArCond + "', AcessSomV='" + sSom + "', AcessOutV='" + sOutros + "', VencIPVA='" + sVencIPVA + "', DocMultasV='" + sValorMulta + "', ValFipeV='" + sValorFIPE + "', ValVendaMinV='" + sValorPRO + "' WHERE CodVeicV = '" + CodAntigoAtt + "'"
                 VCU_QUERY.DML(Upquery)
                 messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados Atualizados com sucesso!")
+                AppATTve.destroy()
             else:
-                messagebox.showwarning(title=" Campos Vazios!",
-                                       message="Por favor, preencha todos os campos para realizar o cadastro!")
+                messagebox.showwarning(title=" Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
 
         try:
             ItemSelectVE = tv.selection()[0]
@@ -1485,38 +1486,81 @@ def ABA_Consu_Veic():
             Label(FrameDadosCLI, text="Cód. Cliente: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=10)
             CodClienteVEND = Entry(FrameDadosCLI)
             CodClienteVEND.place(x=110, y=10, width=60, height=22.499)
-            CodClienteVEND.configure(font="Arial 12", background="#f2f2f2", foreground="#009")
+            CodClienteVEND.configure(font="Arial 11 bold", background="#f2f2f2", foreground="#000")
 
             Label(FrameDadosCLI, text="Nome: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=190, y=10)
             NomeCliVEND = Entry(FrameDadosCLI)
             NomeCliVEND.place(x=240, y=10, width=400, height=22.4)
-            NomeCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
+            NomeCliVEND.configure(font="Arial 11 bold", foreground="#000", background="#f2f2f2")
 
             Label(FrameDadosCLI, text="CPF: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=40)
             CpfCliVEND = Entry(FrameDadosCLI)
             CpfCliVEND.place(x=60, y=40, width=150, height=22.4)
-            CpfCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
+            CpfCliVEND.configure(font="Arial 11 bold", foreground="#000", background="#f2f2f2")
 
             Label(FrameDadosCLI, text="RG: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=230, y=40)
             RgCliVEND = Entry(FrameDadosCLI)
             RgCliVEND.place(x=260, y=40, width=155, height=22.4)
-            RgCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
+            RgCliVEND.configure(font="Arial 11 bold", foreground="#000", background="#f2f2f2")
 
             Label(FrameDadosCLI, text="Fone/Whats: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=435, y=40)
             FoneCliVEND = Entry(FrameDadosCLI)
             FoneCliVEND.place(x=520, y=40, width=150, height=22.4)
-            FoneCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
+            FoneCliVEND.configure(font="Arial 11 bold", foreground="#000", background="#f2f2f2")
 
             Label(FrameDadosCLI, text="Endereço: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=70)
             EndCliVEND = Entry(FrameDadosCLI)
             EndCliVEND.place(x=90, y=70, width=725, height=22.4)
-            EndCliVEND.configure(font="Arial 12", foreground="#009", background="#f2f2f2")
+            EndCliVEND.configure(font="Arial 11 bold", foreground="#000", background="#f2f2f2")
 
-            # ________________________Frame dados Monetários_________________________#
+            # ________________________Frame Considerações Finais_________________________#
 
-            FrameDadosFIN = LabelFrame(FrameVENDA, text="Dados Financeiros", font="Arial 11", foreground="#f00", relief='raised', borderwidth='2')
+            FrameDadosFIN = LabelFrame(FrameVENDA, text="Considerações Finais", font="Arial 11", foreground="#f00", relief='raised', borderwidth='2')
             FrameDadosFIN.configure(background="#e6e6e6")
             FrameDadosFIN.place(x=20, y=495, width=840, height=160)
+
+            Label(FrameDadosFIN, text="Cód. Venda(8): ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=20, y=10)
+            vCodVendaFin = Entry(FrameDadosFIN)
+            vCodVendaFin.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
+            vCodVendaFin.place(x=120, y=10, width=80, height=22.4)
+
+            Label(FrameDadosFIN, text="Cód. VENDEDOR: ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=220, y=10)
+            vCodVendrVendaFIN = Entry(FrameDadosFIN)
+            vCodVendrVendaFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
+            vCodVendrVendaFIN.place(x=335, y=10, width=90, height=22.4)
+
+            Label(FrameDadosFIN, text="Valor Bruto: ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=20, y=40)
+            vValBrutVenFIN = Entry(FrameDadosFIN)
+            vValBrutVenFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
+            vValBrutVenFIN.place(x=105, y=40, width=110, height=22.4)
+
+            Label(FrameDadosFIN, text="Valor do Desconto: ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=235, y=40)
+            vValDescVenFIN = Entry(FrameDadosFIN)
+            vValDescVenFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
+            vValDescVenFIN.place(x=360, y=40, width=110, height=22.4)
+
+            Label(FrameDadosFIN, text="Valor Total com Desconto: ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=20, y=70)
+            vValorTotaVendFIN = Entry(FrameDadosFIN)
+            vValorTotaVendFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
+            vValorTotaVendFIN.place(x=195, y=70, width=110, height=22.4)
+
+            Label(FrameDadosFIN, text="Data da Venda: ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=20, y=100)
+            vDataVendaFIN = Entry(FrameDadosFIN)
+            vDataVendaFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
+            vDataVendaFIN.place(x=125, y=100, width=90, height=22.4)
+
+            btnOrcament = Button(FrameDadosFIN, text="Imprimir Orçamento", background="green", foreground="white", relief="raised", borderwidth='6')
+            btnOrcament.configure(font="Arial 12 bold")
+            btnOrcament.place(x=620, y=1, height=35)
+
+            btnFinalVenda = Button(FrameDadosFIN, text="Finalizar Venda", background="blue", foreground="white", relief="raised", borderwidth='6')
+            btnFinalVenda.configure(font="Arial 12 bold")
+            btnFinalVenda.place(x=620, y=48, width=175, height=35)
+
+            btnCancelVenda = Button(FrameDadosFIN, text="Cancelar/Sair", background="red", foreground="white", relief="raised", borderwidth='6', command=AppVENDA.destroy)
+            btnCancelVenda.configure(font="Arial 12 bold")
+            btnCancelVenda.place(x=620, y=95, width=175, height=35)
+
 
             AppVENDA.transient(appVCU)
             AppVENDA.mainloop()
