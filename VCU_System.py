@@ -15,16 +15,13 @@ ABA = ttk.Notebook(appVCU)
 ABA.pack(fill='both', expand=1)
 
 abaBemVindo = Frame(ABA)
-ABA.add(abaBemVindo, text="Tela de Boas Vindas")
-
-legenda = Label(abaBemVindo, text="Sistema de Venda de Carros Usados", font="Centaur 50 bold", background="white").place(x=160, y=50)
+ABA.add(abaBemVindo, text="Tela Inicial")
 
 img = PhotoImage(file="Car_VCU.png")
-lblImagem = Label(abaBemVindo, image=img).place(x=320, y=150)
-abaBemVindo.configure(background="white")
+Label(abaBemVindo, text="Sistema de Venda de Carros Usados", font="Centaur 50 bold", background="white").pack(fill='both', expand=1)
 
-def semComando():
-    pass
+lblImagem = Label(abaBemVindo, image=img).pack(fill='y', expand=0)
+abaBemVindo.configure(background="white")
 
 def Config_Vendedores():
     abaConf_Vend = Frame(ABA)
@@ -46,16 +43,6 @@ def Config_Vendedores():
         appCadVend.focus_force()
         appCadVend.grab_set()
 
-        def NovoCadVendedor():
-            txtCodVendedor.delete(0, END)
-            txtNomeVendedor.delete(0, END)
-            txtRgVendedor.delete(0, END)
-            txtCpfVendedor.delete(0, END)
-            txtEndVendedor.delete(0, END)
-            txtFoneVendedor.delete(0, END)
-
-            txtCodVendedor.focus_set()
-
         def SalvarVendedor():
             CodVddrSQL = "SELECT CodVendr FROM Vendedores"
             CodVendedor = str(VCU_QUERY.DQL(CodVddrSQL))
@@ -74,9 +61,22 @@ def Config_Vendedores():
                 SalvarVDDRquery = "INSERT INTO Vendedores(CodVendr, NomeVendr, RGVendr, CPFVendr, EndVendr, FoneVendr) VALUES ('" + sCodvddr + "', '" + sNomevddr + "', '" + sRGvddr + "', '" + sCPFvddr + "', '" + sEnderecovddr + "', '" + sTelefonevddr + "')"
                 VCU_QUERY.DML(SalvarVDDRquery)
                 messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados cadastrados com sucesso!")
+                txtCodVendedor.delete(0, END)
+                txtNomeVendedor.delete(0, END)
+                txtRgVendedor.delete(0, END)
+                txtCpfVendedor.delete(0, END)
+                txtEndVendedor.delete(0, END)
+                txtFoneVendedor.delete(0, END)
+
+                txtCodVendedor.focus_set()
             else:
-                messagebox.showwarning(title=" Campos Vazios!",
-                                       message="Por favor, preencha todos os campos para realizar o cadastro!")
+                messagebox.showwarning(title=" Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
+
+        def TelaInicial():
+            appCadVend.destroy()
+            ABA.forget(0)
+            ABA.add(abaBemVindo, text="Tela Inicial")
+            abaBemVindo.configure(background="white")
 
         #Frame na ABA cadastro de Vendedores#
         FramCadVend = LabelFrame(appCadVend, text="Novo Vendedor", font="arial 11", foreground="#f00", relief='flat')
@@ -112,11 +112,11 @@ def Config_Vendedores():
         txtFoneVendedor.configure(font="arial 11")
         txtFoneVendedor.place(x=10, y=265, width=170, height=25)
 
-        btnSalvarVendedor = Button(FramCadVend, text="Cadastrar", font="ArialBlack 12 bold", bg="darkblue", fg="white", relief="raised", borderwidth='7', command=SalvarVendedor)
+        btnSalvarVendedor = Button(FramCadVend, text="Salvar", font="ArialBlack 12 bold", bg="darkblue", fg="white", relief="raised", borderwidth='7', command=SalvarVendedor)
         btnSalvarVendedor.place(x=170, y=310, width=130, height=40)
 
-        btnNovoVendedor = Button(FramCadVend, text="Novo Cadastro", font="ArialBlack 12 bold", bg="green", fg="white", relief="raised", borderwidth='7', command=NovoCadVendedor)
-        btnNovoVendedor.place(x=320, y=310, width=140, height=40)
+        btnSairVendedor = Button(FramCadVend, text="Sair", font="ArialBlack 12 bold", bg="green", fg="white", relief="raised", borderwidth='7', command=TelaInicial)
+        btnSairVendedor.place(x=320, y=310, width=140, height=40)
 
         appCadVend.transient(appVCU)
         appCadVend.mainloop()
@@ -384,16 +384,6 @@ def ABA_CAD_Propri():
     ABA.forget(0)
     Label(aba1, text="Cadastro de Proprietário de Veículo(s)", background="#2a261d", font="Georgia 30 bold", foreground="#fff").pack(pady=30, ipadx=30, ipady=15)
 
-    def novocadastro():
-        vCodPRO.delete(0, END)
-        vNomePRO.delete(0, END)
-        vCpfPRO.delete(0, END)
-        vEnderPRO.delete(0, END)
-        vFonePRO.delete(0, END)
-        vResponPRO.delete(0, END)
-
-        vCodPRO.focus_set()
-
     def salvardadosPRO():
         CpfCnpjSQL = "SELECT CpfCnpjProp FROM Proprietarios"
         CPFs = str(VCU_QUERY.DQL(CpfCnpjSQL))
@@ -418,8 +408,22 @@ def ABA_CAD_Propri():
             SalvarPROquery = "INSERT INTO Proprietarios(CodProp, NomeRazaoProp, CpfCnpjProp, EndeProp, FoneProp, RespProp) VALUES ('" + sCod + "', '" + sNome + "', '" + sCPF + "', '" + sEndereco + "', '" + sTelefone + "', '" + sResponsa + "')"
             VCU_QUERY.DML(SalvarPROquery)
             messagebox.showinfo(title=" Vendas de Carros Usados", message="Dados cadastrados com sucesso!")
+
+            vCodPRO.delete(0, END)
+            vNomePRO.delete(0, END)
+            vCpfPRO.delete(0, END)
+            vEnderPRO.delete(0, END)
+            vFonePRO.delete(0, END)
+            vResponPRO.delete(0, END)
+
+            vCodPRO.focus_set()
         else:
             messagebox.showwarning(title=" Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
+
+    def TelaInicial():
+        ABA.forget(0)
+        ABA.add(abaBemVindo, text="Tela Inicial")
+        abaBemVindo.configure(background="white")
 
     # Criação da Tabela para dados cadastrais do proprietario
 
@@ -460,7 +464,7 @@ def ABA_CAD_Propri():
     btnSalvar = Button(FrameLab1, text="Cadastrar", background="darkblue", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosPRO)
     btnSalvar.place(x=140, y=290, width=150, height=40)
 
-    btnNovo = Button(FrameLab1, text="Novo Cadastro", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=novocadastro)
+    btnNovo = Button(FrameLab1, text="Sair", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=TelaInicial)
     btnNovo.place(x=310, y=290, width=150, height=40)
 
 
@@ -530,33 +534,16 @@ def ABA_CAD_Veic():
             vValorMultas.delete(0, END)
             vValorFipe.delete(0, END)
             vValorPro.delete(0, END)
+
+            vCodVE.focus_set()
         else:
             messagebox.showwarning(title=" Proprietário Não Cadastrado!",
                                    message="Código de proprietário não confere com nenhum proprietário Cadastrado! Verifique o código digitado e tente novamente!")
 
-    def NovoCadVeiculo():
-        vCodVE.delete(0, END)
-        vCodProV.delete(0, END)
-        vMarca.delete(0, END)
-        vModelo.delete(0, END)
-        vAnoFabric.delete(0, END)
-        vCor.delete(0, END)
-        vCombust.set("")
-        vPlaca.delete(0, END)
-        vRenav.delete(0, END)
-        vPortas.set("")
-        vVidroElet.set("")
-        vTravaElet.set("")
-        vAlarme.set("")
-        vArCondic.set("")
-        vSom.set("")
-        vOutroAces.delete(0, END)
-        vVencIPVA.delete(0, END)
-        vValorMultas.delete(0, END)
-        vValorFipe.delete(0, END)
-        vValorPro.delete(0, END)
-
-        vCodVE.focus_set()
+    def TelaInicial():
+        ABA.forget(0)
+        ABA.add(abaBemVindo, text="Tela Inicial")
+        abaBemVindo.configure(background="white")
 
     FrameLab2 = LabelFrame(aba2, text="Dados do Veículo", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab2.configure(background="#e6e6e6")
@@ -667,7 +654,7 @@ def ABA_CAD_Veic():
     btnSalvar = Button(FrameLab2, text="Cadastrar", background="darkblue", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosVE)
     btnSalvar.place(x=230, y=340, width=130, height=40)
 
-    btnNovoCadVE = Button(FrameLab2, text="Novo Cadastro", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=NovoCadVeiculo)
+    btnNovoCadVE = Button(FrameLab2, text="Sair", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=TelaInicial)
     btnNovoCadVE.place(x=380, y=340, width=150, height=40)
 
 def ABA_Consu_Propri():
@@ -1694,7 +1681,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.2.6", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.3.0", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
@@ -1713,6 +1700,9 @@ def Versao():
     AppVersao.mainloop()
 
 
+def semComando():
+    pass
+
 #  Criando os menús da tela principal #
 barraMenu = Menu(appVCU)
 
@@ -1722,35 +1712,25 @@ barraMenu.add_cascade(label="Gerenciar", menu=menuGerenciar)
 menuGerenciar.add_command(label="Configurações de Vendedores", command=Config_Vendedores)
 menuGerenciar.add_separator()
 menuGerenciar.add_command(label="Relatórios de Venda", command=semComando)
-menuGerenciar.add_separator()
-menuGerenciar.add_command(label="Relatório de veículos", command=semComando)
-menuGerenciar.add_separator()
-menuGerenciar.add_command(label="Relatório de Proprietários", command=semComando)
 
 # Menu do Proprietario
 menuPro = Menu(barraMenu, tearoff=0)
-barraMenu.add_cascade(label=" Opções do Proprietário", menu=menuPro)
+barraMenu.add_cascade(label="Proprietários", menu=menuPro)
 menuPro.add_command(label="Cadastrar Proprietário", command=ABA_CAD_Propri)
 menuPro.add_separator()
 menuPro.add_command(label="Buscar Proprietário", command=ABA_Consu_Propri)
 
 # Menu do Veículo
 menuVeic = Menu(barraMenu, tearoff=0)
-barraMenu.add_cascade(label="Opções do Veículo", menu=menuVeic)
+barraMenu.add_cascade(label="Veículos", menu=menuVeic)
 menuVeic.add_command(label="Cadastrar Veículo", command=ABA_CAD_Veic)
 menuVeic.add_separator()
 menuVeic.add_command(label="Buscar Veículo", command=ABA_Consu_Veic)
 
 # Menu Informações do Software
 menuVCU = Menu(barraMenu, tearoff=0)
-barraMenu.add_cascade(label="Opções do software", menu=menuVCU)
+barraMenu.add_cascade(label="Software", menu=menuVCU)
 menuVCU.add_command(label="Informações da Versão", command=Versao)
-menuVCU.add_separator()
-menuVCU.add_command(label="Support", command=semComando)
-menuVCU.add_separator()
-menuVCU.add_command(label="Ajuda", command=semComando)
-menuVCU.add_separator()
-menuVCU.add_command(label="Redes Sociais do Software", command=semComando)
 
 # Menu Fechar App
 CloseApp = Menu(barraMenu, tearoff=0)
