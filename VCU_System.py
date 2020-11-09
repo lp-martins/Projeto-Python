@@ -320,8 +320,6 @@ def Config_Vendedores():
                     dquery = "DELETE FROM Vendedores WHERE CodVendr ='" + CodVendrDEL + "'"
                     tv3.delete(ItemSelect)
                     VCU_QUERY.DML(dquery)
-                else:
-                    messagebox.showwarning(title=" Atenção!!!", message="Não é possivel excluir um proprietário que tenha veículos Cadastrado!")
             except:
                 messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
 
@@ -368,13 +366,22 @@ def Config_Vendedores():
         appBuscVend.transient(appVCU)
         appBuscVend.mainloop()
 
+    def TelaInicial():
+        ABA.forget(0)
+        ABA.add(abaBemVindo, text="Tela Inicial")
+        abaBemVindo.configure(background="white")
+
     # Botão cadastrar Vendedor
     btnCadVend = Button(lblFramVend, text="Cadastrar Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=CadVendedor)
-    btnCadVend.place(x=108, y=130)
+    btnCadVend.place(x=108, y=110)
 
     #Botão Consultar Vendedor
     btnConsulVend = Button(lblFramVend, text="Buscar Vendedores", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=BuscarVendedor)
-    btnConsulVend.place(x=108, y=195)
+    btnConsulVend.place(x=108, y=175)
+
+    #Botão Sair da ABA e ir para Tela inicial
+    btnSairVend = Button(lblFramVend, text="Sair", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=TelaInicial)
+    btnSairVend.place(x=165, y=245)
 
 
 def ABA_CAD_Propri():
@@ -1586,11 +1593,11 @@ def ABA_Consu_Veic():
     FrameBusca.configure(background="#e6e6e6")
     FrameBusca.place(x=2, y=340, width=1250, height=108)
 
-    FrameAttVE = LabelFrame(quadroGrid, text="Atualizar dados do Veículo Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
+    FrameAttVE = LabelFrame(quadroGrid, text="Atualizar Registro Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
     FrameAttVE.configure(background="#e6e6e6")
     FrameAttVE.place(x=30, y=455, width=330, height=75)
 
-    FrameDelVE = LabelFrame(quadroGrid, text="Excluir dados do Veículo Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
+    FrameDelVE = LabelFrame(quadroGrid, text="Excluir Registro Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
     FrameDelVE.configure(background="#e6e6e6")
     FrameDelVE.place(x=450, y=455, width=330, height=75)
 
