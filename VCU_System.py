@@ -29,7 +29,7 @@ def Config_Vendedores():
     abaConf_Vend.configure(background="#ddd")
     ABA.forget(0)
 
-    # Labal Frame
+    # Label Frame
     lblFramVend = LabelFrame(abaConf_Vend, text="Opções dos Vendedores", font="arialBlack 12 bold italic", bg="#ddd", fg="black", relief="ridge", borderwidth="10" )
     lblFramVend.pack(ipadx=200, ipady=200, pady=100)
 
@@ -384,6 +384,75 @@ def Config_Vendedores():
     btnSairVend = Button(lblFramVend, text="Sair", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=TelaInicial)
     btnSairVend.place(x=165, y=245)
 
+
+
+def Relatorio_Venda():
+    appRelat = Toplevel()
+    appRelat.title(" Venda de Carros Usados®")
+    appRelat.geometry("800x600")
+    appRelat.configure(background="#c3c3c3")
+    appRelat.resizable(False, False)
+    appRelat.wm_iconbitmap('icon_VCU.ico')
+    appRelat.focus_force()
+    appRelat.grab_set()
+
+    FrameRelat = LabelFrame(appRelat, text="Relatório de Vendas", font="Arial 12 bold", bg="#c3c3c3", fg="black", relief='groove', borderwidth='3')
+    FrameRelat.place(x=20, y=20, width=760, height=550)
+
+    # Visualizador dos dados, TreeView na tela de Consultar Vendedor
+    tvRelat = ttk.Treeview(FrameRelat, columns=('Cód. Venda', 'Cód. Cliente', 'Cód. Vendedor', 'Cód. Veiculo', 'Data', 'Valor Bruto', 'Desconto', 'Valor Vendido', 'Pagamento'), show='headings')
+    tvRelat.configure(height=23)
+    tvRelat.column('Cód. Venda', minwidth=55, width=55)
+    tvRelat.column('Cód. Cliente', minwidth=55, width=55)
+    tvRelat.column('Cód. Vendedor', minwidth=55, width=55)
+    tvRelat.column('Cód. Veiculo', minwidth=55, width=55)
+    tvRelat.column('Data', minwidth=60, width=60)
+    tvRelat.column('Valor Bruto', minwidth=70, width=70)
+    tvRelat.column('Desconto', minwidth=60, width=60)
+    tvRelat.column('Valor Vendido', minwidth=80, width=80)
+    tvRelat.column('Pagamento', minwidth=90, width=90)
+
+    tvRelat.heading('Cód. Venda', text="cod.Venda")
+    tvRelat.heading('Cód. Cliente', text='cod.Cliente')
+    tvRelat.heading('Cód. Vendedor', text='cod.Vendedor')
+    tvRelat.heading('Cód. Veiculo', text='cod.Veiculo')
+    tvRelat.heading('Data', text='Data')
+    tvRelat.heading('Valor Bruto', text='Valor Bruto')
+    tvRelat.heading('Desconto', text='Desconto')
+    tvRelat.heading('Valor Vendido', text='Valor Vendido')
+    tvRelat.heading('Pagamento', text='Pagamento')
+
+    tvRelat.pack(side=LEFT)
+    tvRelat.place(x=0, y=0, width=734, height=320)
+
+    # Scrollbar Vertical e Horizontal da tela de Consulta de Vendedores
+    VScrollV = ttk.Scrollbar(FrameRelat, orient="vertical", command=tvRelat.yview)
+    VScrollV.place(x=736, y=2, height=317)
+    OScrollO = ttk.Scrollbar(FrameRelat, orient="horizontal", command=tvRelat.xview)
+    OScrollO.place(x=2, y=322, width=732)
+    tvRelat.configure(yscrollcommand=VScrollV.set, xscrollcommand=OScrollO.set)
+
+    qtdVendido = StringVar()
+    qtdVendido.set("0")
+
+    Label(FrameRelat, text="Total de Vendas", bg="#c3c3c3", fg="black", font="Arial 18 bold").place(x=50, y=370)
+
+    # Label que indica a quantidade de vendas
+    Label(FrameRelat, textvariable=qtdVendido, bg="#c3c3c3", fg="red", font="Arial 40 bold").place(x=50, y=420, width=180)
+
+    SelecVendas = "SELECT * FROM Nota_de_Venda"
+    Vendas = VCU_QUERY.DQL(SelecVendas)
+
+    if Vendas != []:
+        VendasTotal = len(Vendas)
+        qtdVendido.set(VendasTotal)
+        for x in Vendas:
+            tvRelat.insert("", "end", values=x)
+    else:
+        messagebox.showinfo(title=" Atenção!", message="Ainda não possuímos vendas!")
+
+    appRelat.transient(appVCU)
+    appRelat.mainloop()
 
 def ABA_CAD_Propri():
     aba1 = Frame(ABA)
@@ -1817,10 +1886,6 @@ def Versao():
     AppVersao.transient(appVCU)
     AppVersao.mainloop()
 
-
-def semComando():
-    pass
-
 #  Criando os menús da tela principal #
 barraMenu = Menu(appVCU)
 
@@ -1829,7 +1894,7 @@ menuGerenciar = Menu(barraMenu, tearoff=0)
 barraMenu.add_cascade(label="Gerenciar", menu=menuGerenciar)
 menuGerenciar.add_command(label="Configurações de Vendedores", command=Config_Vendedores)
 menuGerenciar.add_separator()
-menuGerenciar.add_command(label="Relatórios de Venda", command=semComando)
+menuGerenciar.add_command(label="Relatórios de Venda", command=Relatorio_Venda)
 
 # Menu do Proprietario
 menuPro = Menu(barraMenu, tearoff=0)
