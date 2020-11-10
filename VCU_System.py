@@ -1340,10 +1340,18 @@ def ABA_Consu_Veic():
                         SalvarNOTA = "INSERT INTO Nota_de_Venda(CodNota, fk_CodCli, fk_CodVendr, fk_CodVeicV, DataVenda, ValorBruto, ValorDesc, ValorVenda, FormaPgto) VALUES ('" + codigoVend + "', '" + codigoClient + "', '" + codigoVenddor + "', '" + codigoVeiculo + "', '" + data_Venda + "', '" + valBRUTO + "', '" + valDESC + "', '" + valTOTAL + "', '" + FormPagamento + "')"
                         VCU_QUERY.DML(SalvarNOTA)
                         messagebox.showinfo(title="Venda de Veiculo", message="Venda Realizada Com Sucesso!!")
-                        #AppVENDA.destroy()
+                        AppVENDA.destroy()
                     else:
                         messagebox.showinfo(title="Atenção!!!", message="Verifique os Campos Vazios em Considerações finais!")
 
+            def Valor_Final():
+                try:
+                    vBrutoD = vValBrutVenFIN.get()
+                    vDescoD = vValDescVenFIN.get()
+                    vFinal = int(vBrutoD) - int(vDescoD)
+                    vValorTotaVendFIN.insert(0, vFinal)
+                except:
+                    pass
 
             AppVENDA = Toplevel()
             AppVENDA.title(" Operação de Venda do Veículo")
@@ -1602,6 +1610,11 @@ def ABA_Consu_Veic():
             vFormaPGVendaFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
             vFormaPGVendaFIN.place(x=375, y=100, width=180, height=22.4)
 
+            # Botão calcular Desconto
+            btnCalcular = Button(FrameDadosFIN, text="Calcular", bg="yellow", fg="#000", relief="raised", borderwidth='4', command=Valor_Final)
+            btnCalcular.configure(font="Arial 10 bold")
+            btnCalcular.place(x=306, y=70, width=80, height=22.4)
+
             # Botões IMPRIMIR ORÇAMENTO, FINALIZAR VENDA e CANCELAR/SAIR
             btnOrcament = Button(FrameDadosFIN, text="Imprimir Orçamento", background="green", foreground="white", relief="raised", borderwidth='6')
             btnOrcament.configure(font="Arial 12 bold")
@@ -1786,7 +1799,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.3.0", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.3.4", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
