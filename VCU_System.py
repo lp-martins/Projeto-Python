@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
+from reportlab.pdfgen import canvas
+import webbrowser
 import VCU_QUERY
 
 #   propriedades da janela  #
@@ -1365,6 +1367,98 @@ def ABA_Consu_Veic():
                 FonePROvenda = x[4]
                 ResponPROvenda = x[5]
 
+            # Para Orçamento
+            def Gerar_PDF():
+
+                def Abrir_PDF():
+                    webbrowser.open("Orçamento.pdf")
+
+                Can = canvas.Canvas("Orçamento.pdf")
+
+                # Pegar os valores do campos a serem colocados no pdf
+
+                Can.setFont("Helvetica-Bold", 24)
+                Can.drawString(180, 790, 'Orçamento de veículo')
+
+                # Criar uma linha separadora
+                Can.rect(25, 765, 540, 1, fill=True, stroke=False)
+
+                Can.setFont("Helvetica-Bold", 13)
+                Can.drawString(250, 745, 'Dados do Veículo')
+
+                Can.setFont("Helvetica-Bold", 11)
+                Can.drawString(50, 715, 'Cód. do Veículo: ')
+                Can.drawString(50, 700, 'Marca: ')
+                Can.drawString(50, 685, 'Modelo: ')
+                Can.drawString(50, 670, 'Ano de Fabricação: ')
+                Can.drawString(50, 655, 'Cor: ')
+                Can.drawString(50, 640, 'Combustível: ')
+                Can.drawString(50, 625, 'Placa: ')
+                Can.drawString(50, 610, 'Renavan: ')
+                Can.drawString(50, 595, 'Vencimento IPVA: ')
+                Can.drawString(215, 595, 'Valor de FIPE: ')
+                Can.drawString(350, 595, 'Valor do Proprietário: ')
+
+                Can.drawString(330, 715, 'Portas: ')
+                Can.drawString(330, 700, 'Vidro Elétr.: ')
+                Can.drawString(330, 685, 'Trava Elétr.: ')
+                Can.drawString(330, 670, 'Alarme: ')
+                Can.drawString(330, 655, 'Ar Condic.: ')
+                Can.drawString(330, 640, 'Som: ')
+                Can.drawString(330, 625, 'Outros: ')
+
+                # Valores atribuidos dos campos preenchidos na tela de venda
+                Can.setFont("Helvetica", 12)
+                Can.drawString(137, 715, vVendcodVE)
+                Can.drawString(88, 700, vVendMarca)
+                Can.drawString(95, 685, vVendModel)
+                Can.drawString(154, 670, vVendAnoFabri)
+                Can.drawString(77, 655, vVendCor)
+                Can.drawString(123, 640, vVendCombust)
+                Can.drawString(86, 625, vVendPlaca)
+                Can.drawString(102, 610, vVendRenavan)
+                Can.drawString(147, 595, vVendVencIPVA)
+                Can.drawString(292, 595, vVendValorFIPE)
+                Can.drawString(467, 595, vVendValorPRO)
+                Can.drawString(372, 715, '4')
+                Can.drawString(397, 700, 'Sim')
+                Can.drawString(397, 685, 'Sim')
+                Can.drawString(375, 670, 'Sim')
+                Can.drawString(393, 655, 'Sim')
+                Can.drawString(361, 640, 'Sim')
+                Can.drawString(372, 625, 'Não')
+
+                # Criar uma linha separadora
+                Can.rect(25, 580, 540, 1, fill=True, stroke=False)
+
+                Can.setFont("Helvetica-Bold", 13)
+                Can.drawString(250, 560, 'Dados Financeiros')
+
+                Can.setFont("Helvetica-Bold", 11)
+                Can.drawString(50, 530, 'Cód. do Vendedor: ')
+                Can.drawString(50, 515, 'Valor Bruto: ')
+                Can.drawString(50, 500, 'Valor de Desconto: ')
+                Can.drawString(50, 485, 'Valor Final com Desconto: ')
+                Can.drawString(50, 470, 'Forma de pagamento: ')
+
+                # Valores atribuidos dos campos preenchidos na tela de venda
+                Can.setFont("Helvetica", 12)
+                Can.drawString(152, 530, '12345')
+                Can.drawString(115, 515, '150500')
+                Can.drawString(155, 500, '4000')
+                Can.drawString(192, 485, '146500')
+                Can.drawString(168, 470, 'Parcelado no cartao')
+
+                # Criar uma linha separadora
+                Can.rect(25, 440, 540, 1, fill=True, stroke=False)
+
+                Can.setFont("Helvetica-Bold", 13)
+                Can.drawString(148, 420, 'V.C.U - Sistema de Venda de Carros Usados®')
+
+                Can.showPage()
+                Can.save()
+                Abrir_PDF()
+
             def FinalizarVenda():
                 # Buscar todos os códigos de Clientes Cadastrados
                 SelecCli = "SELECT CodCli FROM Clientes"
@@ -1685,7 +1779,7 @@ def ABA_Consu_Veic():
             btnCalcular.place(x=306, y=70, width=80, height=22.4)
 
             # Botões IMPRIMIR ORÇAMENTO, FINALIZAR VENDA e CANCELAR/SAIR
-            btnOrcament = Button(FrameDadosFIN, text="Imprimir Orçamento", background="green", foreground="white", relief="raised", borderwidth='6')
+            btnOrcament = Button(FrameDadosFIN, text="Imprimir Orçamento", background="green", foreground="white", relief="raised", borderwidth='6', command=Gerar_PDF)
             btnOrcament.configure(font="Arial 12 bold")
             btnOrcament.place(x=620, y=1, height=35)
 
