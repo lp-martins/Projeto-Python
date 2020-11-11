@@ -1448,7 +1448,7 @@ def ABA_Consu_Veic():
                 valDESC = vValDescVenFIN.get()
                 valTOTAL = vValorTotaVendFIN.get()
                 formaPAGA = vFormaPGVendaFIN.get()
-                
+
                 Can.setFont("Helvetica", 12)
                 Can.drawString(152, 530, codVENDR)
                 Can.drawString(115, 515, valBRUTO)
@@ -1969,7 +1969,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.3.7", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.4.0", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
