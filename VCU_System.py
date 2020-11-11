@@ -381,8 +381,8 @@ def Config_Vendedores():
     btnConsulVend.place(x=108, y=175)
 
     #Botão Sair da ABA e ir para Tela inicial
-    btnSairVend = Button(lblFramVend, text="Sair", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=TelaInicial)
-    btnSairVend.place(x=165, y=245)
+    btnSairVend = Button(lblFramVend, text="Voltar", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=TelaInicial)
+    btnSairVend.place(x=160, y=245)
 
 
 
@@ -541,7 +541,7 @@ def ABA_CAD_Propri():
     btnSalvar = Button(FrameLab1, text="Cadastrar", background="darkblue", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosPRO)
     btnSalvar.place(x=140, y=290, width=150, height=40)
 
-    btnNovo = Button(FrameLab1, text="Sair", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=TelaInicial)
+    btnNovo = Button(FrameLab1, text="Voltar", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=TelaInicial)
     btnNovo.place(x=310, y=290, width=150, height=40)
 
 
@@ -731,7 +731,7 @@ def ABA_CAD_Veic():
     btnSalvar = Button(FrameLab2, text="Cadastrar", background="darkblue", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosVE)
     btnSalvar.place(x=230, y=340, width=130, height=40)
 
-    btnNovoCadVE = Button(FrameLab2, text="Sair", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=TelaInicial)
+    btnNovoCadVE = Button(FrameLab2, text="Voltar", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=TelaInicial)
     btnNovoCadVE.place(x=380, y=340, width=150, height=40)
 
 def ABA_Consu_Propri():
@@ -1880,7 +1880,7 @@ def Versao():
     lvlDesenv2 = Label(AppVersao, text="Luiz de Paula Martins Filho e", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lvlDesenv2.place(x=100, y=110)
 
-    lvlDesenv3 = Label(AppVersao, text="Talita Landim Paes do Nascimento", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lvlDesenv3 = Label(AppVersao, text="Talita Paes Landim do Nascimento", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lvlDesenv3.place(x=80, y=140)
 
     AppVersao.transient(appVCU)
@@ -1917,7 +1917,7 @@ menuVCU.add_command(label="Informações da Versão", command=Versao)
 
 # Menu Fechar App
 CloseApp = Menu(barraMenu, tearoff=0)
-barraMenu.add_cascade(label="Fechar App", menu=CloseApp)
+barraMenu.add_cascade(label="Sair do App", menu=CloseApp)
 CloseApp.add_command(label="Sair", command=quit)
 
 #  executa o programa em loop  #
