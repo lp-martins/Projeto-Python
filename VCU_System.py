@@ -404,10 +404,10 @@ def Relatorio_Venda():
     tvRelat.configure(height=23)
     tvRelat.column('Cód. Venda', minwidth=55, width=55)
     tvRelat.column('Cód. Cliente', minwidth=55, width=55)
-    tvRelat.column('Cód. Vendedor', minwidth=55, width=55)
+    tvRelat.column('Cód. Vendedor', minwidth=65, width=65)
     tvRelat.column('Cód. Veiculo', minwidth=55, width=55)
     tvRelat.column('Data', minwidth=60, width=60)
-    tvRelat.column('Valor Bruto', minwidth=70, width=70)
+    tvRelat.column('Valor Bruto', minwidth=60, width=60)
     tvRelat.column('Desconto', minwidth=60, width=60)
     tvRelat.column('Valor Vendido', minwidth=80, width=80)
     tvRelat.column('Pagamento', minwidth=90, width=90)
@@ -425,20 +425,20 @@ def Relatorio_Venda():
     tvRelat.pack(side=LEFT)
     tvRelat.place(x=0, y=0, width=734, height=320)
 
-    # Scrollbar Vertical e Horizontal da tela de Consulta de Vendedores
+    # Scrollbar Vertical e Horizontal da tela Relatório de Vendas
     VScrollV = ttk.Scrollbar(FrameRelat, orient="vertical", command=tvRelat.yview)
     VScrollV.place(x=736, y=2, height=317)
     OScrollO = ttk.Scrollbar(FrameRelat, orient="horizontal", command=tvRelat.xview)
     OScrollO.place(x=2, y=322, width=732)
     tvRelat.configure(yscrollcommand=VScrollV.set, xscrollcommand=OScrollO.set)
 
+    # valor atribuido para Label que mostra a quantidade de vendas
     qtdVendido = StringVar()
     qtdVendido.set("0")
 
-    Label(FrameRelat, text="Total de Vendas", bg="#c3c3c3", fg="black", font="Arial 18 bold").place(x=50, y=370)
-
     # Label que indica a quantidade de vendas
-    Label(FrameRelat, textvariable=qtdVendido, bg="#c3c3c3", fg="red", font="Arial 40 bold").place(x=50, y=420, width=180)
+    Label(FrameRelat, text="Total de Vendas", bg="#c3c3c3", fg="black", font="Arial 18 bold").place(x=290, y=370)
+    Label(FrameRelat, textvariable=qtdVendido, bg="#c3c3c3", fg="red", font="Arial 40 bold").place(x=290, y=420, width=180)
 
     SelecVendas = "SELECT * FROM Nota_de_Venda"
     Vendas = VCU_QUERY.DQL(SelecVendas)
@@ -1868,7 +1868,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.3.4", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.3.7", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
