@@ -1442,12 +1442,19 @@ def ABA_Consu_Veic():
                 Can.drawString(50, 470, 'Forma de pagamento: ')
 
                 # Valores atribuidos dos campos preenchidos na tela de venda
+
+                codVENDR = vCodVendrVendaFIN.get()
+                valBRUTO = vValBrutVenFIN.get()
+                valDESC = vValDescVenFIN.get()
+                valTOTAL = vValorTotaVendFIN.get()
+                formaPAGA = vFormaPGVendaFIN.get()
+                
                 Can.setFont("Helvetica", 12)
-                Can.drawString(152, 530, '12345')
-                Can.drawString(115, 515, '150500')
-                Can.drawString(155, 500, '4000')
-                Can.drawString(192, 485, '146500')
-                Can.drawString(168, 470, 'Parcelado no cartao')
+                Can.drawString(152, 530, codVENDR)
+                Can.drawString(115, 515, valBRUTO)
+                Can.drawString(155, 500, valDESC)
+                Can.drawString(192, 485, valTOTAL)
+                Can.drawString(168, 470, formaPAGA)
 
                 # Criar uma linha separadora
                 Can.rect(25, 440, 540, 1, fill=True, stroke=False)
