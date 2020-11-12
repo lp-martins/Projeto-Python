@@ -1770,12 +1770,14 @@ def ABA_Consu_Veic():
 
             Label(FrameDadosFIN, text="Valor Bruto: ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=20, y=40)
             vValBrutVenFIN = Entry(FrameDadosFIN)
-            vValBrutVenFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
+            vValBrutVenFIN.insert(0, vVendValorPRO)
+            vValBrutVenFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000", state='readonly')
             vValBrutVenFIN.place(x=105, y=40, width=110, height=22.4)
 
             Label(FrameDadosFIN, text="Valor do Desconto: ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=235, y=40)
             vValDescVenFIN = Entry(FrameDadosFIN)
             vValDescVenFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
+
             vValDescVenFIN.place(x=360, y=40, width=110, height=22.4)
 
             Label(FrameDadosFIN, text="Valor Total com Desconto: ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=20, y=70)
@@ -1991,7 +1993,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.4.5", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.4.6", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
@@ -2017,7 +2019,7 @@ menuGerenciar = Menu(barraMenu, tearoff=0)
 barraMenu.add_cascade(label="Gerenciar", menu=menuGerenciar)
 menuGerenciar.add_command(label="Configurações de Vendedores", command=Config_Vendedores)
 menuGerenciar.add_separator()
-menuGerenciar.add_command(label="Relatórios de Venda", command=Relatorio_Venda)
+menuGerenciar.add_command(label="Relatório de Vendas", command=Relatorio_Venda)
 
 # Menu do Proprietario
 menuPro = Menu(barraMenu, tearoff=0)
