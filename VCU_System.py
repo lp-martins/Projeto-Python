@@ -442,7 +442,7 @@ def Relatorio_Venda():
     Label(FrameRelat, text="Total de Vendas", bg="#c3c3c3", fg="black", font="Arial 18 bold").place(x=290, y=370)
     Label(FrameRelat, textvariable=qtdVendido, bg="#c3c3c3", fg="red", font="Arial 40 bold").place(x=290, y=420, width=180)
 
-    SelecVendas = "SELECT * FROM Nota_de_Venda"
+    SelecVendas = "SELECT CodNota, fk_CodCli, fk_CodVendr, fk_CodVeicV, DataVenda, ValorBruto, ValorDesc, ValorVenda, FormaPgto FROM Nota_de_Venda"
     Vendas = VCU_QUERY.DQL(SelecVendas)
 
     if Vendas != []:
@@ -1975,7 +1975,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.4.3", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.4.4", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
