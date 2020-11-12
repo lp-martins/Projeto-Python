@@ -676,7 +676,7 @@ def ABA_CAD_Veic():
     vRenav.place(x=360, y=200, width=370, height=25)
 
     Label(FrameLab2, text="Portas: ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=228)
-    vPortas = ttk.Combobox(FrameLab2, values="2 3 4 ", state="readonly")
+    vPortas = ttk.Combobox(FrameLab2, values="2 3 4 5 6", state="readonly")
     vPortas.configure(font="Arial 12")
     vPortas.place(x=30, y=250, width=50, height=25)
 
@@ -1020,7 +1020,6 @@ def ABA_Consu_Propri():
     btnDelPRO.configure(font="arial 12 bold", background="#f00", foreground="#fff", relief="raised", borderwidth='6')
     btnDelPRO.place(x=120, y=3, width=200, height=35)
 
-
 def ABA_Consu_Veic():
     aba4 = Frame(ABA)
     ABA.add(aba4, text="Consultar Veículo")
@@ -1034,7 +1033,7 @@ def ABA_Consu_Veic():
     # ABA Consultar Veículo
     def ListarVeiculos():
         tv.delete(*tv.get_children())
-        vquery = "SELECT * FROM Veiculos order by CodVeicV"
+        vquery = "SELECT CodVeicV, fk_CodProp, MarcaV, ModeloV, AnoFabV, CorV, CombV, PlacaV, RenavanV, PortasV, AcessVEV, AcessTEV, AcessAlV, AcessArV, AcessSomV, AcessOutV, VencIPVA, DocMultasV, ValFipeV, ValVendaMinV FROM Veiculos order by CodVeicV"
         linhas = VCU_QUERY.DQL(vquery)
         for x in linhas:
             tv.insert("", "end", values=x)
@@ -1449,8 +1448,15 @@ def ABA_Consu_Veic():
                 valTOTAL = vValorTotaVendFIN.get()
                 formaPAGA = vFormaPGVendaFIN.get()
 
+                if codVENDR != "":
+                    SelecQuery = "SELECT NomeVendr FROM Vendedores WHERE CodVendr = '"+codVENDR+"'"
+                    NomeVendedor = VCU_QUERY.DQL(SelecQuery)
+
+                    NAMEvendr = str(NomeVendedor)
+                    NAMEvendr = NAMEvendr.replace(']', "").replace('[', "").replace('(', "").replace(')', "").replace("'", "").replace(',', "")
+
                 Can.setFont("Helvetica", 12)
-                Can.drawString(108, 530, codVENDR)
+                Can.drawString(108, 530, NAMEvendr)
                 Can.drawString(115, 515, valBRUTO)
                 Can.drawString(155, 500, valDESC)
                 Can.drawString(192, 485, valTOTAL)
@@ -1969,7 +1975,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.4.2", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.4.3", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
