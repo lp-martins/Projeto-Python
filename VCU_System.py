@@ -386,8 +386,6 @@ def Config_Vendedores():
     btnSairVend = Button(lblFramVend, text="Voltar", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=TelaInicial)
     btnSairVend.place(x=160, y=245)
 
-
-
 def Relatorio_Venda():
     appRelat = Toplevel()
     appRelat.title(" Venda de Carros Usados®")
@@ -494,7 +492,6 @@ def ABA_CAD_Propri():
             vEnderPRO.delete(0, END)
             vFonePRO.delete(0, END)
             vResponPRO.delete(0, END)
-
             vCodPRO.focus_set()
         else:
             messagebox.showwarning(title=" Campos Vazios!", message="Por favor, preencha todos os campos para realizar o cadastro!")
@@ -742,9 +739,14 @@ def ABA_Consu_Propri():
     aba3.configure(background="#2a261d")
     ABA.forget(0)
 
+    def TelaInicial():
+        ABA.forget(0)
+        ABA.add(abaBemVindo, text="Tela Inicial")
+        abaBemVindo.configure(background="white")
+
     FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab3.configure(background="#e6e6e6")
-    FrameLab3.pack(pady=32, ipadx=440, ipady=285)
+    FrameLab3.pack(pady=32, ipadx=440, ipady=305)
 
     # ABA Consultar Proprietário
     def PesquisarCPF():
@@ -904,8 +906,8 @@ def ABA_Consu_Propri():
             AttResponPRO.place(x=30, y=250, width=530, height=25)
             AttResponPRO.insert(0, ResponProAtt)
 
-            btnSalvAttPro = Button(FrameLabPro, text="Atualizar", background="#009", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=UpdatePRO)
-            btnSalvAttPro.place(x=225, y=290, width=150, height=40)
+            btnSalvAttPro = Button(FrameLabPro, text="Salvar Alterações", background="blue", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=UpdatePRO)
+            btnSalvAttPro.place(x=225, y=290, height=40)
 
             Label(FrameLabPro, text="V.C.U", background="#e6e6e6", foreground="#009", font="ArialBlk 140 bold").place(x=50, y=340, height=180)
             Label(FrameLabPro, text="Sistema de Venda de Carros Usados®", background="#e6e6e6", foreground="#009", font="ArialBlk 22 bold").place(x=35, y=510, height=40)
@@ -918,7 +920,7 @@ def ABA_Consu_Propri():
 
     # Gridview da ABA CONSULTAR PROPRIETARIO
     quadroGrid1 = LabelFrame(FrameLab3, text="Dados dos Proprietários", foreground="#f00", font="Arial 11", relief="flat", background="#e6e6e6")
-    quadroGrid1.place(x=10, y=5, width=860, height=760)
+    quadroGrid1.place(x=10, y=25, width=860, height=760)
 
     tv1 = ttk.Treeview(quadroGrid1, columns=('Código', 'Nome', 'CPF/CNPJ', 'Endereço', 'Telefone', 'Responsável'), show='headings')
     tv1.configure(height=23)
@@ -976,7 +978,7 @@ def ABA_Consu_Propri():
     nomePesq4.place(x=110, y=10)
 
     btnPesq4 = Button(FrameBusca1, text="Pesquisar", command=PesquisarNOME)
-    btnPesq4.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesq4.configure(font="arial 10 bold", background="blue", foreground="#fff")
     btnPesq4.place(x=280, y=10)
 
     # ____Busca por CPF____
@@ -989,7 +991,7 @@ def ABA_Consu_Propri():
     nomePesq6.place(x=145, y=50)
 
     btnPesq6 = Button(FrameBusca1, text="Pesquisar", command=PesquisarCPF)
-    btnPesq6.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesq6.configure(font="arial 10 bold", background="blue", foreground="#fff")
     btnPesq6.place(x=315, y=50)
 
     # ____Busca por Código____
@@ -1002,23 +1004,28 @@ def ABA_Consu_Propri():
     nomePesq7.place(x=480, y=10)
 
     btnPesq7 = Button(FrameBusca1, text="Pesquisar", command=PesqCodPRO)
-    btnPesq7.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesq7.configure(font="arial 10 bold", background="blue", foreground="#fff")
     btnPesq7.place(x=572, y=10)
 
     # ____botao q busca TODOS os registros na ABA Consultar PROPRIETÁRIOS____
     btnBuscaTudo5 = Button(FrameBusca1, text="Buscar Tudo", command=ListarProprietarios)
-    btnBuscaTudo5.configure(width=10, height=2, font="arial 11 bold", background="#0f3", foreground="#000", relief="raised", borderwidth='6')
+    btnBuscaTudo5.configure(width=10, height=2, font="arial 11 bold", background="blue", foreground="#FFF", relief="raised", borderwidth='6')
     btnBuscaTudo5.place(x=680, y=15, width=150, height=50)
 
     # botão Atualizar dados do Proprietário
     btnAttPRO = Button(FrameAtualizar, text="Atualizar Registro", command=AtualizarPRO)
-    btnAttPRO.configure(font="arial 12 bold", background="#fd0", foreground="#000", relief="raised", borderwidth='6')
+    btnAttPRO.configure(font="arial 12 bold", background="yellow", foreground="#000", relief="raised", borderwidth='6')
     btnAttPRO.place(x=120, y=3, width=200, height=35)
 
     # Botão Excluir dados do Proprietário
     btnDelPRO = Button(FrameExcluir, text="Excluir Registro", command=DeletarPRO)
-    btnDelPRO.configure(font="arial 12 bold", background="#f00", foreground="#fff", relief="raised", borderwidth='6')
+    btnDelPRO.configure(font="arial 12 bold", background="red", foreground="#fff", relief="raised", borderwidth='6')
     btnDelPRO.place(x=120, y=3, width=200, height=35)
+
+    # Botão Voltar para tela inicial
+    btnVoltarPRO = Button(FrameLab3, text='Voltar', font="Arial 12 bold", relief='raised', borderwidth='4', command=TelaInicial)
+    btnVoltarPRO.configure(bg="blue", fg="white")
+    btnVoltarPRO.place(x=780, y=0, height=28)
 
 def ABA_Consu_Veic():
     aba4 = Frame(ABA)
@@ -1028,7 +1035,7 @@ def ABA_Consu_Veic():
 
     FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 bold", foreground="#000", borderwidth='1', relief="flat")
     FrameLab4.configure(background="#e6e6e6")
-    FrameLab4.pack(pady=29, ipadx=635, ipady=295)
+    FrameLab4.pack(pady=20, ipadx=635, ipady=300)
 
     # ABA Consultar Veículo
     def ListarVeiculos():
@@ -1314,7 +1321,7 @@ def ABA_Consu_Veic():
             vValorPro.place(x=500, y=300, width=150, height=25)
             vValorPro.insert(0, nValorPRO)
 
-            btnUpdate = Button(FrameLab2, text="Salvar Alterações", background="#009", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=UpdateVE)
+            btnUpdate = Button(FrameLab2, text="Salvar Alterações", background="blue", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=UpdateVE)
             btnUpdate.place(x=300, y=340, width=160, height=40)
 
             Label(FrameLab2, text="V.C.U", background="#e6e6e6", foreground="#009", font="ArialBlk 140 bold").place(x=130, y=380, height=180)
@@ -1787,8 +1794,7 @@ def ABA_Consu_Veic():
             vFormaPGVendaFIN.place(x=375, y=100, width=180, height=22.4)
 
             # Botão calcular Desconto
-            btnCalcular = Button(FrameDadosFIN, text="Calcular", bg="yellow", fg="#000", relief="raised", borderwidth='4', command=Valor_Final)
-            btnCalcular.configure(font="Arial 10 bold")
+            btnCalcular = Button(FrameDadosFIN, text="Calcular", font="Arial 11 bold", bg="yellow", fg="#000", relief="raised", borderwidth='4', command=Valor_Final)
             btnCalcular.place(x=306, y=70, width=80, height=22.4)
 
             # Botões IMPRIMIR ORÇAMENTO, FINALIZAR VENDA e CANCELAR/SAIR
@@ -1810,9 +1816,14 @@ def ABA_Consu_Veic():
         except:
             messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
 
+    def TelaInicial():
+        ABA.forget(0)
+        ABA.add(abaBemVindo, text="Tela Inicial")
+        abaBemVindo.configure(background="white")
+
     ### Gridview da ABA CONSULTAR VEÍCULO ###
     quadroGrid = LabelFrame(FrameLab4, text="Dados dos Veículos", font="Arial 11", foreground="#f00", relief="flat", background="#e6e6e6")
-    quadroGrid.place(x=5, y=10, width=1260, height=760)
+    quadroGrid.place(x=5, y=20, width=1260, height=760)
 
     tv = ttk.Treeview(quadroGrid, columns=(
     'Cód. Veículo', 'Cód. Proprietário', 'Marca', 'Modelo', 'Ano de Fabricação', 'Cor', 'Combustivel', 'Placa', 'Renavan', 'qtd Portas', 'Vidro Elétr.',
@@ -1903,7 +1914,7 @@ def ABA_Consu_Veic():
     txtPesqMod.place(x=145, y=10)
 
     btnPesqMod = Button(FrameBusca, text="Pesquisar", command=PesquisarMODE)
-    btnPesqMod.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesqMod.configure(font="arial 10 bold", background="blue", foreground="#fff")
     btnPesqMod.place(x=395, y=10)
 
     # Busca por Cód. do Proprietário
@@ -1916,7 +1927,7 @@ def ABA_Consu_Veic():
     txtPesqPro.place(x=190, y=50)
 
     btnPesqCodPro = Button(FrameBusca, text="Pesquisar", command=PesquisarCodPRO)
-    btnPesqCodPro.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesqCodPro.configure(font="arial 10 bold", background="blue", foreground="#fff")
     btnPesqCodPro.place(x=395, y=50)
 
     # Busca por PLACA
@@ -1929,7 +1940,7 @@ def ABA_Consu_Veic():
     txtPesqPlaca.place(x=625, y=10)
 
     btnPesqPlaca = Button(FrameBusca, text="Pesquisar", command=PesquisarPLAC)
-    btnPesqPlaca.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesqPlaca.configure(font="arial 10 bold", background="blue", foreground="#fff")
     btnPesqPlaca.place(x=853, y=10)
 
     # Busca por Cód. do Veículo
@@ -1942,17 +1953,22 @@ def ABA_Consu_Veic():
     txtPesqCodVE.place(x=645, y=50)
 
     btnPesqCodVE = Button(FrameBusca, text="Pesquisar", command=PesquisarCodVE)
-    btnPesqCodVE.configure(font="arial 10 bold", background="#009", foreground="#fff")
+    btnPesqCodVE.configure(font="arial 10 bold", background="blue", foreground="#fff")
     btnPesqCodVE.place(x=850, y=50)
+
+    # Botão voltar
+    btnVoltarVE = Button(FrameLab4, text='Voltar', font='Arial 12 bold', relief='raised', borderwidth='4', command=TelaInicial)
+    btnVoltarVE.configure(bg='blue', fg='white')
+    btnVoltarVE.place(x=1175, y=0, height=30)
 
     # botao q busca TODOS os registros na ABA Consultar VEÍCULOS
     btnBuscaTudo = Button(FrameBusca, text="Buscar Tudo", command=ListarVeiculos)
-    btnBuscaTudo.configure(width=14, height=2, font="arial 11 bold", background="#009", foreground="#fff", relief="raised", borderwidth='6')
+    btnBuscaTudo.configure(width=14, height=2, font="arial 11 bold", background="blue", foreground="#fff", relief="raised", borderwidth='6')
     btnBuscaTudo.place(x=1050, y=15)
 
     # botao Atualizar na ABA Consultar VEICULOS
     btnAttVE = Button(FrameAttVE, text="Atualizar dados do Veículo", command=AtualizarVE)
-    btnAttVE.configure(font="arial 12 bold", background="#fd0", foreground="#000", relief="raised", borderwidth='6')
+    btnAttVE.configure(font="arial 12 bold", background="yellow", foreground="#000", relief="raised", borderwidth='6')
     btnAttVE.place(x=50, y=5, width=220, height=40)
 
     # botao Excluir na ABA Consultar VEICULOS
@@ -1975,7 +1991,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.4.4", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.4.5", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
