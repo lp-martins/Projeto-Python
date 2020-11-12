@@ -1352,7 +1352,7 @@ def ABA_Consu_Veic():
             vVendValorFIPE = ValoresVE[18]
             vVendValorPRO = ValoresVE[19]
 
-            selectQuery = "SELECT * FROM Proprietarios WHERE CodProp ='" + vVendcodPRO + "'"
+            selectQuery = "SELECT CodProp, NomeRazaoProp, CpfCnpjProp, EndeProp, FoneProp, RespProp FROM Proprietarios WHERE CodProp ='" + vVendcodPRO + "'"
             PROvenda = VCU_QUERY.DQL(selectQuery)
 
             NomePROvenda = "nome"
@@ -1420,13 +1420,14 @@ def ABA_Consu_Veic():
                 Can.drawString(147, 595, vVendVencIPVA)
                 Can.drawString(292, 595, vVendValorFIPE)
                 Can.drawString(467, 595, vVendValorPRO)
-                Can.drawString(372, 715, '4')
-                Can.drawString(397, 700, 'Sim')
-                Can.drawString(397, 685, 'Sim')
-                Can.drawString(375, 670, 'Sim')
-                Can.drawString(393, 655, 'Sim')
-                Can.drawString(361, 640, 'Sim')
-                Can.drawString(372, 625, 'Não')
+
+                Can.drawString(372, 715, vVendPortas)
+                Can.drawString(397, 700, vVendVidroEl)
+                Can.drawString(397, 685, vVendTravaEl)
+                Can.drawString(375, 670, vVendAlarm)
+                Can.drawString(393, 655, vVendArCond)
+                Can.drawString(361, 640, vVendSom)
+                Can.drawString(372, 625, vVendOutros)
 
                 # Criar uma linha separadora
                 Can.rect(25, 580, 540, 1, fill=True, stroke=False)
@@ -1435,14 +1436,13 @@ def ABA_Consu_Veic():
                 Can.drawString(250, 560, 'Dados Financeiros')
 
                 Can.setFont("Helvetica-Bold", 11)
-                Can.drawString(50, 530, 'Cód. do Vendedor: ')
+                Can.drawString(50, 530, 'Vendedor: ')
                 Can.drawString(50, 515, 'Valor Bruto: ')
                 Can.drawString(50, 500, 'Valor de Desconto: ')
                 Can.drawString(50, 485, 'Valor Final com Desconto: ')
                 Can.drawString(50, 470, 'Forma de pagamento: ')
 
                 # Valores atribuidos dos campos preenchidos na tela de venda
-
                 codVENDR = vCodVendrVendaFIN.get()
                 valBRUTO = vValBrutVenFIN.get()
                 valDESC = vValDescVenFIN.get()
@@ -1450,7 +1450,7 @@ def ABA_Consu_Veic():
                 formaPAGA = vFormaPGVendaFIN.get()
 
                 Can.setFont("Helvetica", 12)
-                Can.drawString(152, 530, codVENDR)
+                Can.drawString(108, 530, codVENDR)
                 Can.drawString(115, 515, valBRUTO)
                 Can.drawString(155, 500, valDESC)
                 Can.drawString(192, 485, valTOTAL)
@@ -1670,7 +1670,7 @@ def ABA_Consu_Veic():
             Label(FrameDadosPRO, text="Cód. Proprietário: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=20, y=10)
             CodProVEND = Entry(FrameDadosPRO)
             CodProVEND.place(x=140, y=10, width=75, height=22.499)
-            CodProVEND.insert(0, vVendcodVE)
+            CodProVEND.insert(0, vVendcodPRO)
             CodProVEND.configure(font="Arial 10", background="#f2f2f2", foreground="#009", state="readonly")
 
             Label(FrameDadosPRO, text="Nome/Razão Social: ", background="#FFF", foreground="#000", font="Arial 10 bold").place(x=225, y=10)
@@ -1969,7 +1969,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.4.0", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.4.2", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
