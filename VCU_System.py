@@ -3,6 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 from reportlab.pdfgen import canvas
 import webbrowser
+from time import strftime
 import VCU_QUERY
 
 #   propriedades da janela  #
@@ -24,6 +25,16 @@ Label(abaBemVindo, text="Sistema de Venda de Carros Usados", font="Centaur 50 bo
 
 lblImagem = Label(abaBemVindo, image=img).pack(fill='y', expand=0)
 abaBemVindo.configure(background="white")
+
+def tic():
+    relogio['text'] = strftime('%H:%M:%S')
+def tac():
+    tic()
+    relogio.after(1000, tac)
+
+relogio = ttk.Label(abaBemVindo, background="#FFFFFF",foreground="black", font='Helvetica 25 bold')
+relogio.pack(fill='y', expand=True, side='top')
+tac()
 
 def Config_Vendedores():
     abaConf_Vend = Frame(ABA)
@@ -436,9 +447,15 @@ def Relatorio_Venda():
     qtdVendido = StringVar()
     qtdVendido.set("0")
 
+    ValorVendido = StringVar()
+    ValorVendido.set("0")
+
     # Label que indica a quantidade de vendas
-    Label(FrameRelat, text="Total de Vendas", bg="#c3c3c3", fg="black", font="Arial 18 bold").place(x=290, y=370)
-    Label(FrameRelat, textvariable=qtdVendido, bg="#c3c3c3", fg="red", font="Arial 40 bold").place(x=290, y=420, width=180)
+    Label(FrameRelat, text="Total de Vendas", bg="#c3c3c3", fg="black", font="Arial 18 bold").place(x=100, y=370)
+    Label(FrameRelat, textvariable=qtdVendido, bg="#c3c3c3", fg="red", font="Arial 40 bold").place(x=100, y=420, width=180)
+
+    Label(FrameRelat, text="Valor total em Vendas", bg="#c3c3c3", fg="black", font="Arial 18 bold").place(x=390, y=370)
+    Label(FrameRelat, textvariable=ValorVendido, bg="#c3c3c3", fg="red", font="Arial 40 bold").place(x=390, y=420, width=250)
 
     SelecVendas = "SELECT CodNota, fk_CodCli, fk_CodVendr, fk_CodVeicV, DataVenda, ValorBruto, ValorDesc, ValorVenda, FormaPgto FROM Nota_de_Venda"
     Vendas = VCU_QUERY.DQL(SelecVendas)
@@ -448,6 +465,9 @@ def Relatorio_Venda():
         qtdVendido.set(VendasTotal)
         for x in Vendas:
             tvRelat.insert("", "end", values=x)
+
+
+
     else:
         messagebox.showinfo(title=" Atenção!", message="Ainda não possuímos vendas!")
 
