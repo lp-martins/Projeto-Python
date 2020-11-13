@@ -455,7 +455,7 @@ def Relatorio_Venda():
     Label(FrameRelat, textvariable=qtdVendido, bg="#c3c3c3", fg="red", font="Arial 40 bold").place(x=100, y=420, width=180)
 
     Label(FrameRelat, text="Valor total em Vendas", bg="#c3c3c3", fg="black", font="Arial 18 bold").place(x=390, y=370)
-    Label(FrameRelat, textvariable=ValorVendido, bg="#c3c3c3", fg="red", font="Arial 40 bold").place(x=390, y=420, width=250)
+    Label(FrameRelat, textvariable=ValorVendido, bg="#c3c3c3", fg="red", font="Arial 40 bold").place(x=370, y=420, width=290)
 
     SelecVendas = "SELECT CodNota, fk_CodCli, fk_CodVendr, fk_CodVeicV, DataVenda, ValorBruto, ValorDesc, ValorVenda, FormaPgto FROM Nota_de_Venda"
     Vendas = VCU_QUERY.DQL(SelecVendas)
@@ -466,8 +466,10 @@ def Relatorio_Venda():
         for x in Vendas:
             tvRelat.insert("", "end", values=x)
 
+        SelecTQUERY = "SELECT SUM(ValorVenda) FROM Nota_de_Venda"
+        ValoresVenda = str(VCU_QUERY.DQL(SelecTQUERY)).replace('[', "").replace(']', "").replace('(', "").replace(')', "").replace(',', "")
 
-
+        ValorVendido.set("R$ "+ValoresVenda)
     else:
         messagebox.showinfo(title=" Atenção!", message="Ainda não possuímos vendas!")
 
