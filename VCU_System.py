@@ -314,8 +314,8 @@ def Config_Vendedores():
                 txtATTFoneVendr.insert(0, FoneVendrAtt)
                 txtATTFoneVendr.configure(font="arial 11")
 
-                btnATTSalvarVendr = Button(FramCadVend, text="Atualizar", font="ArialBlack 12 bold", bg="yellow", fg="black", relief="raised", borderwidth='7', command=UpdateVendedor)
-                btnATTSalvarVendr.place(x=240, y=310, width=130, height=40)
+                btnATTSalvarVendr = Button(FramCadVend, text="Salvar alterações", font="ArialBlack 12 bold", bg="yellow", fg="black", relief="raised", borderwidth='7', command=UpdateVendedor)
+                btnATTSalvarVendr.place(x=240, y=310, width=160, height=40)
 
                 appAttVendedor.transient(appBuscVend)
                 appAttVendedor.mainloop()
@@ -1393,13 +1393,14 @@ def ABA_Consu_Veic():
                 FonePROvenda = x[4]
                 ResponPROvenda = x[5]
 
+            # noinspection PyUnboundLocalVariable
             # Para Orçamento
             def Gerar_PDF():
 
                 def Abrir_PDF():
-                    webbrowser.open("Orçamento.pdf")
+                    webbrowser.open("Orcamento.pdf")
 
-                Can = canvas.Canvas("Orçamento.pdf")
+                Can = canvas.Canvas("Orcamento.pdf")
 
                 # Pegar os valores do campos a serem colocados no pdf
 
@@ -2013,7 +2014,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.4.6", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.4.7", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
