@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
+from sqlite3 import Error
 from reportlab.pdfgen import canvas
 import webbrowser
 from time import strftime
@@ -1071,7 +1072,7 @@ def ABA_Consu_Veic():
     def PesquisarMODE():
         tv.delete(*tv.get_children())
         if txtPesqMod.get() != "":
-            vquery = "SELECT * FROM Veiculos WHERE ModeloV LIKE '%" + txtPesqMod.get() + "%'"
+            vquery = "SELECT CodVeicV, fk_CodProp, MarcaV, ModeloV, AnoFabV, CorV, CombV, PlacaV, RenavanV, PortasV, AcessVEV, AcessTEV, AcessAlV, AcessArV, AcessSomV, AcessOutV, VencIPVA, DocMultasV, ValFipeV, ValVendaMinV FROM Veiculos WHERE ModeloV LIKE '%" + txtPesqMod.get() + "%'"
             linhas = VCU_QUERY.DQL(vquery)
             if linhas != []:
                 for x in linhas:
@@ -1086,7 +1087,7 @@ def ABA_Consu_Veic():
     def PesquisarCodPRO():
         tv.delete(*tv.get_children())
         if txtPesqPro.get() != "":
-            vquery = "SELECT * FROM Veiculos WHERE fk_CodProp LIKE '%" + txtPesqPro.get() + "%'"
+            vquery = "SELECT CodVeicV, fk_CodProp, MarcaV, ModeloV, AnoFabV, CorV, CombV, PlacaV, RenavanV, PortasV, AcessVEV, AcessTEV, AcessAlV, AcessArV, AcessSomV, AcessOutV, VencIPVA, DocMultasV, ValFipeV, ValVendaMinV FROM Veiculos WHERE fk_CodProp LIKE '%" + txtPesqPro.get() + "%'"
             linhas = VCU_QUERY.DQL(vquery)
             if linhas != []:
                 for x in linhas:
@@ -1101,7 +1102,7 @@ def ABA_Consu_Veic():
     def PesquisarPLAC():
         tv.delete(*tv.get_children())
         if txtPesqPlaca.get() != "":
-            vquery = "SELECT * FROM Veiculos WHERE PlacaV LIKE '%" + txtPesqPlaca.get() + "%'"
+            vquery = "SELECT CodVeicV, fk_CodProp, MarcaV, ModeloV, AnoFabV, CorV, CombV, PlacaV, RenavanV, PortasV, AcessVEV, AcessTEV, AcessAlV, AcessArV, AcessSomV, AcessOutV, VencIPVA, DocMultasV, ValFipeV, ValVendaMinV FROM Veiculos WHERE PlacaV LIKE '%" + txtPesqPlaca.get() + "%'"
             linhas = VCU_QUERY.DQL(vquery)
             if linhas != []:
                 for x in linhas:
@@ -1117,7 +1118,7 @@ def ABA_Consu_Veic():
         tv.delete(*tv.get_children())
         if txtPesqCodVE.get() != "":
             CodVE = txtPesqCodVE.get()
-            vquery = "SELECT * FROM Veiculos WHERE CodVeicV ='" + CodVE + "'"
+            vquery = "SELECT CodVeicV, fk_CodProp, MarcaV, ModeloV, AnoFabV, CorV, CombV, PlacaV, RenavanV, PortasV, AcessVEV, AcessTEV, AcessAlV, AcessArV, AcessSomV, AcessOutV, VencIPVA, DocMultasV, ValFipeV, ValVendaMinV FROM Veiculos WHERE CodVeicV ='" + CodVE + "'"
             linhas = VCU_QUERY.DQL(vquery)
             if linhas != []:
                 for x in linhas:
@@ -1399,113 +1400,121 @@ def ABA_Consu_Veic():
             # Para Orçamento
             def Gerar_PDF():
                 try:
-                    def Abrir_PDF():
-                        webbrowser.open("Orcamento.pdf")
+                    SelecCODvddr = "SELECT CodVendr FROM Vendedores"
+                    CodVendedor = VCU_QUERY.DQL(SelecCODvddr)
 
-                    Can = canvas.Canvas("Orcamento.pdf")
+                    cod_Venddr = vCodVendrVendaFIN.get()
+                    if vCodVendrVendaFIN.get == "" or vValBrutVenFIN.get() == "" or vValDescVenFIN.get() == "" or vValorTotaVendFIN.get() == "" or vDataVendaFIN.get() == "" or vFormaPGVendaFIN.get() == "":
+                        messagebox.showwarning(title="Campo Vazio!", message="Preencha todos os campos do quadro 'Considerações Finais' para poder emitir um Orçamento!")
+                    elif len(cod_Venddr) < 5 or cod_Venddr not in str(CodVendedor):
+                        messagebox.showwarning(title="Atenção!", message="Código de Vendedor não existe! Verifique o código digitado e tente novamente.")
+                        vCodVendrVendaFIN.delete(0, END)
+                        vCodVendrVendaFIN.focus_set()
+                    else:
+                        def Abrir_PDF():
+                            webbrowser.open("Orcamento.pdf")
 
-                    # Pegar os valores do campos a serem colocados no pdf
+                        Can = canvas.Canvas("Orcamento.pdf")
 
-                    Can.setFont("Helvetica-Bold", 24)
-                    Can.drawString(180, 790, 'Orçamento de veículo')
+                        Can.setFont("Helvetica-Bold", 24)
+                        Can.drawString(180, 790, 'Orçamento de veículo')
 
-                    # Criar uma linha separadora
-                    Can.rect(25, 765, 540, 1, fill=True, stroke=False)
+                        # Criar uma linha separadora
+                        Can.rect(25, 765, 540, 1, fill=True, stroke=False)
 
-                    Can.setFont("Helvetica-Bold", 13)
-                    Can.drawString(250, 745, 'Dados do Veículo')
+                        Can.setFont("Helvetica-Bold", 13)
+                        Can.drawString(250, 745, 'Dados do Veículo')
 
-                    Can.setFont("Helvetica-Bold", 11)
-                    Can.drawString(30, 715, 'Cód. do Veículo: ')
-                    Can.drawString(30, 700, 'Marca: ')
-                    Can.drawString(30, 685, 'Modelo: ')
-                    Can.drawString(30, 670, 'Ano de Fabricação: ')
-                    Can.drawString(30, 655, 'Cor: ')
-                    Can.drawString(30, 640, 'Combustível: ')
-                    Can.drawString(30, 625, 'Placa: ')
-                    Can.drawString(30, 610, 'Renavan: ')
-                    Can.drawString(30, 595, 'Vencimento IPVA: ')
-                    Can.drawString(190, 595, 'Valor de FIPE: ')
-                    Can.drawString(370, 595, 'Valor do Proprietário: ')
+                        Can.setFont("Helvetica-Bold", 11)
+                        Can.drawString(30, 715, 'Cód. do Veículo: ')
+                        Can.drawString(30, 700, 'Marca: ')
+                        Can.drawString(30, 685, 'Modelo: ')
+                        Can.drawString(30, 670, 'Ano de Fabricação: ')
+                        Can.drawString(30, 655, 'Cor: ')
+                        Can.drawString(30, 640, 'Combustível: ')
+                        Can.drawString(30, 625, 'Placa: ')
+                        Can.drawString(30, 610, 'Renavan: ')
+                        Can.drawString(30, 595, 'Vencimento IPVA: ')
+                        Can.drawString(190, 595, 'Valor de FIPE: ')
+                        Can.drawString(370, 595, 'Valor do Proprietário: ')
 
-                    Can.drawString(330, 715, 'Portas: ')
-                    Can.drawString(330, 700, 'Vidro Elétr.: ')
-                    Can.drawString(330, 685, 'Trava Elétr.: ')
-                    Can.drawString(330, 670, 'Alarme: ')
-                    Can.drawString(330, 655, 'Ar Condic.: ')
-                    Can.drawString(330, 640, 'Som: ')
-                    Can.drawString(330, 625, 'Outros: ')
+                        Can.drawString(330, 715, 'Portas: ')
+                        Can.drawString(330, 700, 'Vidro Elétr.: ')
+                        Can.drawString(330, 685, 'Trava Elétr.: ')
+                        Can.drawString(330, 670, 'Alarme: ')
+                        Can.drawString(330, 655, 'Ar Condic.: ')
+                        Can.drawString(330, 640, 'Som: ')
+                        Can.drawString(330, 625, 'Outros: ')
 
-                    # Valores atribuidos dos campos preenchidos na tela de venda
-                    Can.setFont("Helvetica", 12)
-                    Can.drawString(121, 715, vVendcodVE)
-                    Can.drawString(68, 700, vVendMarca)
-                    Can.drawString(75, 685, vVendModel)
-                    Can.drawString(136, 670, vVendAnoFabri)
-                    Can.drawString(57, 655, vVendCor)
-                    Can.drawString(103, 640, vVendCombust)
-                    Can.drawString(66, 625, vVendPlaca)
-                    Can.drawString(82, 610, vVendRenavan)
-                    Can.drawString(127, 595, vVendVencIPVA)
-                    Can.drawString(267, 595, 'R$ ' + vVendValorFIPE + ',00')
-                    Can.drawString(487, 595, 'R$ ' + vVendValorPRO + ',00')
+                        # Valores atribuidos dos campos preenchidos na tela de venda
+                        Can.setFont("Helvetica", 12)
+                        Can.drawString(121, 715, vVendcodVE)
+                        Can.drawString(68, 700, vVendMarca)
+                        Can.drawString(75, 685, vVendModel)
+                        Can.drawString(136, 670, vVendAnoFabri)
+                        Can.drawString(57, 655, vVendCor)
+                        Can.drawString(103, 640, vVendCombust)
+                        Can.drawString(66, 625, vVendPlaca)
+                        Can.drawString(82, 610, vVendRenavan)
+                        Can.drawString(127, 595, vVendVencIPVA)
+                        Can.drawString(267, 595, 'R$ ' + vVendValorFIPE + ',00')
+                        Can.drawString(487, 595, 'R$ ' + vVendValorPRO + ',00')
 
-                    Can.drawString(372, 715, vVendPortas)
-                    Can.drawString(397, 700, vVendVidroEl)
-                    Can.drawString(397, 685, vVendTravaEl)
-                    Can.drawString(375, 670, vVendAlarm)
-                    Can.drawString(393, 655, vVendArCond)
-                    Can.drawString(361, 640, vVendSom)
-                    Can.drawString(372, 625, vVendOutros)
+                        Can.drawString(372, 715, vVendPortas)
+                        Can.drawString(397, 700, vVendVidroEl)
+                        Can.drawString(397, 685, vVendTravaEl)
+                        Can.drawString(375, 670, vVendAlarm)
+                        Can.drawString(393, 655, vVendArCond)
+                        Can.drawString(361, 640, vVendSom)
+                        Can.drawString(372, 625, vVendOutros)
 
-                    # Criar uma linha separadora
-                    Can.rect(25, 580, 540, 1, fill=True, stroke=False)
+                        # Criar uma linha separadora
+                        Can.rect(25, 580, 540, 1, fill=True, stroke=False)
 
-                    Can.setFont("Helvetica-Bold", 13)
-                    Can.drawString(250, 560, 'Dados Financeiros')
+                        Can.setFont("Helvetica-Bold", 13)
+                        Can.drawString(250, 560, 'Dados Financeiros')
 
-                    Can.setFont("Helvetica-Bold", 11)
-                    Can.drawString(30, 530, 'Vendedor: ')
-                    Can.drawString(30, 515, 'Valor Bruto: ')
-                    Can.drawString(30, 500, 'Valor em Multas: ')
-                    Can.drawString(30, 485, 'Valor de Desconto: ')
-                    Can.drawString(30, 470, 'Valor Final com Desconto: ')
-                    Can.drawString(30, 455, 'Forma de pagamento: ')
+                        Can.setFont("Helvetica-Bold", 11)
+                        Can.drawString(30, 530, 'Vendedor: ')
+                        Can.drawString(30, 515, 'Valor Bruto: ')
+                        Can.drawString(30, 500, 'Valor em Multas: ')
+                        Can.drawString(30, 485, 'Valor de Desconto: ')
+                        Can.drawString(30, 470, 'Valor Final com Desconto: ')
+                        Can.drawString(30, 455, 'Forma de pagamento: ')
 
-                    # Valores atribuidos dos campos preenchidos na tela de venda
-                    codVENDR = vCodVendrVendaFIN.get()
-                    valBRUTO = vValBrutVenFIN.get()
-                    valMulta = ValMultaVEND.get()
-                    valDESC = vValDescVenFIN.get()
-                    valTOTAL = vValorTotaVendFIN.get()
-                    formaPAGA = vFormaPGVendaFIN.get()
+                        # Valores atribuidos dos campos preenchidos na tela de venda
+                        codVENDR = vCodVendrVendaFIN.get()
+                        valBRUTO = vValBrutVenFIN.get()
+                        valMulta = ValMultaVEND.get()
+                        valDESC = vValDescVenFIN.get()
+                        valTOTAL = vValorTotaVendFIN.get()
+                        formaPAGA = vFormaPGVendaFIN.get()
 
-                    if codVENDR != "":
                         SelecQuery = "SELECT NomeVendr FROM Vendedores WHERE CodVendr = '"+codVENDR+"'"
                         NomeVendedor = VCU_QUERY.DQL(SelecQuery)
 
                         NAMEvendr = str(NomeVendedor)
                         NAMEvendr = NAMEvendr.replace(']', "").replace('[', "").replace('(', "").replace(')', "").replace("'", "").replace(',', "")
 
-                    Can.setFont("Helvetica", 12)
-                    Can.drawString(88, 530, NAMEvendr)
-                    Can.drawString(98, 515, 'R$ ' + valBRUTO + ',00')
-                    Can.drawString(122, 500, 'R$ ' + valMulta + ',00')
-                    Can.drawString(135, 485, 'R$ ' + valDESC + ',00')
-                    Can.drawString(172, 470, 'R$ ' + valTOTAL + ',00')
-                    Can.drawString(148, 455, formaPAGA)
+                        Can.setFont("Helvetica", 12)
+                        Can.drawString(88, 530, NAMEvendr)
+                        Can.drawString(98, 515, 'R$ ' + valBRUTO + ',00')
+                        Can.drawString(122, 500, 'R$ ' + valMulta + ',00')
+                        Can.drawString(135, 485, 'R$ ' + valDESC + ',00')
+                        Can.drawString(172, 470, 'R$ ' + valTOTAL + ',00')
+                        Can.drawString(148, 455, formaPAGA)
 
-                    # Criar uma linha separadora
-                    Can.rect(25, 440, 540, 1, fill=True, stroke=False)
+                        # Criar uma linha separadora
+                        Can.rect(25, 440, 540, 1, fill=True, stroke=False)
 
-                    Can.setFont("Helvetica-Bold", 13)
-                    Can.drawString(148, 420, 'V.C.U - Sistema de Venda de Carros Usados®')
+                        Can.setFont("Helvetica-Bold", 13)
+                        Can.drawString(148, 420, 'V.C.U - Sistema de Venda de Carros Usados®')
 
-                    Can.showPage()
-                    Can.save()
-                    Abrir_PDF()
-                except:
-                    messagebox.showwarning(title='Atenção!!', message="Preencha todos os campos do quadro 'Considerações Finais'")
+                        Can.showPage()
+                        Can.save()
+                        Abrir_PDF()
+                except Error as ex:
+                    messagebox.showwarning(title="VCU - Ocorreu um Erro!", message=ex)
 
             def FinalizarVenda():
                 # Buscar todos os códigos de Clientes Cadastrados
@@ -1804,8 +1813,8 @@ def ABA_Consu_Veic():
 
             Label(FrameDadosFIN, text="Valor do Desconto: ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=235, y=40)
             vValDescVenFIN = Entry(FrameDadosFIN)
+            vValDescVenFIN.insert(0, '0')
             vValDescVenFIN.configure(font="arial 11 bold", background="#f2f2f2", foreground="#000")
-
             vValDescVenFIN.place(x=360, y=40, width=110, height=22.4)
 
             Label(FrameDadosFIN, text="Valor Total com Desconto: ", font="Arial 10 bold", bg="#FFF", fg="#000").place(x=20, y=70)

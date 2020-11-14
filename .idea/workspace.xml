@@ -23,7 +23,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Orcamento.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Orcamento.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VCU_System.py" beforeDir="false" afterPath="$PROJECT_DIR$/VCU_System.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/databaseVCU.db" beforeDir="false" afterPath="$PROJECT_DIR$/databaseVCU.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +40,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1hyRtkZOY0QKpIU8gji56u4Xtq0" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -138,22 +139,22 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1535" y="279" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1604038078691" />
-    <state width="1651" height="139" key="GridCell.Tab.0.bottom" timestamp="1605313629905">
+    <state width="1651" height="139" key="GridCell.Tab.0.bottom" timestamp="1605390449872">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1651" height="139" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1605313629905" />
-    <state width="1651" height="139" key="GridCell.Tab.0.center" timestamp="1605313629905">
+    <state width="1651" height="139" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1605390449872" />
+    <state width="1651" height="139" key="GridCell.Tab.0.center" timestamp="1605390449872">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1651" height="139" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1605313629905" />
-    <state width="1651" height="139" key="GridCell.Tab.0.left" timestamp="1605313629905">
+    <state width="1651" height="139" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1605390449872" />
+    <state width="1651" height="139" key="GridCell.Tab.0.left" timestamp="1605390449872">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1651" height="139" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1605313629905" />
-    <state width="1651" height="139" key="GridCell.Tab.0.right" timestamp="1605313629905">
+    <state width="1651" height="139" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1605390449872" />
+    <state width="1651" height="139" key="GridCell.Tab.0.right" timestamp="1605390449872">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1651" height="139" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1605313629905" />
+    <state width="1651" height="139" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1605390449872" />
     <state width="1621" height="324" key="GridCell.Tab.1.bottom" timestamp="1604786232796">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
