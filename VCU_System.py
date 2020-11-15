@@ -879,17 +879,14 @@ def ABA_Consu_Propri():
             AppATTpro.title(" Atualizando dados do Proprietário")
             AppATTpro.geometry("900x700")
             AppATTpro.resizable(False, False)
-            AppATTpro.configure(background="#fd0")
+            AppATTpro.configure(background="yellow")
             AppATTpro.wm_iconbitmap('icon_VCU.ico')
             AppATTpro.focus_force()
             AppATTpro.grab_set()
 
-            ABAattPro = ttk.Notebook(AppATTpro)
-            ABAattPro.place(x=10, y=10, width=880, height=680)
-
-            FrameLabPro = LabelFrame(ABAattPro, text="Dados Pessoais do Proprietário", font="Arial 12 italic bold", borderwidth='1', relief="flat")
+            FrameLabPro = LabelFrame(AppATTpro, text="Dados Pessoais do Proprietário", font="Arial 12 italic bold", borderwidth='1', relief="flat")
             FrameLabPro.configure(background="#e6e6e6", foreground="#000")
-            FrameLabPro.pack(pady=48, ipadx=300, ipady=300)
+            FrameLabPro.pack(fill='none', expand=True, ipadx=300, ipady=300, side='top')
 
             Label(FrameLabPro, text="Cód. Proprietário(5): ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=28)
             AttCodPRO = Entry(FrameLabPro)
@@ -1208,17 +1205,14 @@ def ABA_Consu_Veic():
             AppATTve.title(" Atualizando dados do Veículo")
             AppATTve.geometry("900x700")
             AppATTve.resizable(False, False)
-            AppATTve.configure(background="#fd0")
+            AppATTve.configure(background="yellow")
             AppATTve.wm_iconbitmap('icon_VCU.ico')
             AppATTve.focus_force()
             AppATTve.grab_set()
 
-            ABAattVE = ttk.Notebook(AppATTve)
-            ABAattVE.place(x=10, y=10, width=880, height=740)
-
-            FrameLab2 = LabelFrame(ABAattVE, text="Dados do Veículo", font="Arial 12 italic bold", foreground="#000", borderwidth='4', relief="flat")
+            FrameLab2 = LabelFrame(AppATTve, text="Dados do Veículo", font="Arial 12 italic bold", foreground="#000", borderwidth='4', relief="flat")
             FrameLab2.configure(background="#e6e6e6")
-            FrameLab2.pack(pady=27, ipadx=380, ipady=320)
+            FrameLab2.pack(fill='none', expand=True, ipadx=380, ipady=310, side='top')
 
             # tabela para dados cadastrais do veículo
 
@@ -2027,7 +2021,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.5.4", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.5.5", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
