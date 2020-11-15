@@ -40,19 +40,19 @@ tac()
 def Config_Vendedores():
     abaConf_Vend = Frame(ABA)
     ABA.add(abaConf_Vend, text="Propriedades dos Vendedores")
-    abaConf_Vend.configure(background="#ddd")
+    abaConf_Vend.configure(background="darkgray")
     ABA.forget(0)
 
     # Label Frame
-    lblFramVend = LabelFrame(abaConf_Vend, text="Opções dos Vendedores", font="arialBlack 12 bold italic", bg="#ddd", fg="black", relief="ridge", borderwidth="10" )
-    lblFramVend.pack(ipadx=200, ipady=200, pady=100)
+    lblFramVend = LabelFrame(abaConf_Vend, text="Opções dos Vendedores", font="arialBlack 12 bold italic", bg="darkgray", fg="black", relief="ridge", borderwidth="10" )
+    lblFramVend.pack(fill='none', expand=True, ipadx=200, ipady=200)
 
     def CadVendedor():
         appCadVend = Toplevel()
         appCadVend.title(" Cadastro de Vendedores")
         appCadVend.geometry("900x700")
         appCadVend.resizable(False, False)
-        appCadVend.configure(background="#ddd")
+        appCadVend.configure(background="black")
         appCadVend.wm_iconbitmap('icon_VCU.ico')
         appCadVend.focus_force()
         appCadVend.grab_set()
@@ -126,7 +126,7 @@ def Config_Vendedores():
         txtFoneVendedor.configure(font="arial 11")
         txtFoneVendedor.place(x=10, y=265, width=170, height=25)
 
-        btnSalvarVendedor = Button(FramCadVend, text="Salvar", font="ArialBlack 12 bold", bg="darkblue", fg="white", relief="raised", borderwidth='7', command=SalvarVendedor)
+        btnSalvarVendedor = Button(FramCadVend, text="Salvar", font="ArialBlack 12 bold", bg="blue", fg="white", relief="raised", borderwidth='7', command=SalvarVendedor)
         btnSalvarVendedor.place(x=170, y=310, width=130, height=40)
 
         btnSairVendedor = Button(FramCadVend, text="Sair", font="ArialBlack 12 bold", bg="green", fg="white", relief="raised", borderwidth='7', command=TelaInicial)
@@ -387,11 +387,11 @@ def Config_Vendedores():
         abaBemVindo.configure(background="white")
 
     # Botão cadastrar Vendedor
-    btnCadVend = Button(lblFramVend, text="Cadastrar Vendedor", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=CadVendedor)
+    btnCadVend = Button(lblFramVend, text="Cadastrar Vendedor", font="ArialBlack 12 bold", bg="#0f3", fg="black", relief="raised", borderwidth='7', command=CadVendedor)
     btnCadVend.place(x=108, y=110)
 
     #Botão Consultar Vendedor
-    btnConsulVend = Button(lblFramVend, text="Buscar Vendedores", font="ArialBlack 12 bold", bg="white", fg="black", relief="raised", borderwidth='7', command=BuscarVendedor)
+    btnConsulVend = Button(lblFramVend, text="Buscar Vendedores", font="ArialBlack 12 bold", bg="blue", fg="white", relief="raised", borderwidth='7', command=BuscarVendedor)
     btnConsulVend.place(x=108, y=175)
 
     #Botão Sair da ABA e ir para Tela inicial
@@ -480,9 +480,8 @@ def Relatorio_Venda():
 def ABA_CAD_Propri():
     aba1 = Frame(ABA)
     ABA.add(aba1, text="Cadastrar Proprietário")
-    aba1.configure(background="#2a261d")
+    aba1.configure(background="black")
     ABA.forget(0)
-    Label(aba1, text="Cadastro de Proprietário de Veículo(s)", background="#2a261d", font="Georgia 30 bold", foreground="#fff").pack(pady=30, ipadx=30, ipady=15)
 
     def salvardadosPRO():
         CpfCnpjSQL = "SELECT CpfCnpjProp FROM Proprietarios"
@@ -526,9 +525,9 @@ def ABA_CAD_Propri():
 
     # Criação da Tabela para dados cadastrais do proprietario
 
-    FrameLab1 = LabelFrame(aba1, text="Dados Pessoais do Proprietário", font="Arial 12 italic bold", borderwidth='1', relief="flat")
+    FrameLab1 = LabelFrame(aba1, text="Cadastro de informações do proprietário", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab1.configure(background="#e6e6e6", foreground="#000")
-    FrameLab1.pack(pady=20, ipadx=300, ipady=180)
+    FrameLab1.pack(fill='none', expand=True, ipadx=300, ipady=180, side='top')
 
     Label(FrameLab1, text="Cód. Proprietário(5): ", background="#e6e6e6", foreground="#000", font="Arial 11").place(x=30, y=28)
     vCodPRO = Entry(FrameLab1)
@@ -563,16 +562,15 @@ def ABA_CAD_Propri():
     btnSalvar = Button(FrameLab1, text="Cadastrar", background="blue", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosPRO)
     btnSalvar.place(x=140, y=290, width=150, height=40)
 
-    btnNovo = Button(FrameLab1, text="Voltar", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=TelaInicial)
+    btnNovo = Button(FrameLab1, text="Voltar", background="#0f3", foreground="black", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=TelaInicial)
     btnNovo.place(x=310, y=290, width=150, height=40)
 
 
 def ABA_CAD_Veic():
     aba2 = Frame(ABA)
     ABA.add(aba2, text="Cadastrar Veículo")
-    aba2.configure(background="#2a261d")
+    aba2.configure(background="black")
     ABA.forget(0)
-    Label(aba2, text="Cadastro de Informações do Veículo", background="#2a261d", font="Georgia 30 bold", foreground="#fff").pack(pady=20, ipadx=120, ipady=15)
 
     def salvardadosVE():
         sCodVE = vCodVE.get()
@@ -644,9 +642,9 @@ def ABA_CAD_Veic():
         ABA.add(abaBemVindo, text="Tela Inicial")
         abaBemVindo.configure(background="white")
 
-    FrameLab2 = LabelFrame(aba2, text="Dados do Veículo", font="Arial 12 italic bold", borderwidth='1', relief="flat")
+    FrameLab2 = LabelFrame(aba2, text="Cadastro de informações do veículo", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab2.configure(background="#e6e6e6")
-    FrameLab2.pack(pady=0, ipadx=380, ipady=210)
+    FrameLab2.pack(fill='none', expand=True, ipadx=380, ipady=210, side='top')
 
     # tabela para dados cadastrais do veículo
 
@@ -753,13 +751,13 @@ def ABA_CAD_Veic():
     btnSalvar = Button(FrameLab2, text="Cadastrar", background="blue", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=salvardadosVE)
     btnSalvar.place(x=230, y=340, width=130, height=40)
 
-    btnNovoCadVE = Button(FrameLab2, text="Voltar", background="green", foreground="#fff", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=TelaInicial)
+    btnNovoCadVE = Button(FrameLab2, text="Voltar", background="#0f3", foreground="black", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=TelaInicial)
     btnNovoCadVE.place(x=380, y=340, width=150, height=40)
 
 def ABA_Consu_Propri():
     aba3 = Frame(ABA)
     ABA.add(aba3, text="Consultar Proprietário")
-    aba3.configure(background="#2a261d")
+    aba3.configure(background="black")
     ABA.forget(0)
 
     def TelaInicial():
@@ -767,9 +765,9 @@ def ABA_Consu_Propri():
         ABA.add(abaBemVindo, text="Tela Inicial")
         abaBemVindo.configure(background="white")
 
-    FrameLab3 = LabelFrame(aba3, text="Buscar Proprietários", font="Arial 12 italic bold", borderwidth='1', relief="flat")
+    FrameLab3 = LabelFrame(aba3, text="Opções da busca dos Proprietários", font="Arial 12 italic bold", borderwidth='1', relief="flat")
     FrameLab3.configure(background="#e6e6e6")
-    FrameLab3.pack(pady=32, ipadx=440, ipady=305)
+    FrameLab3.pack(fill='none', expand=True, ipadx=440, ipady=305, side='top')
 
     # ABA Consultar Proprietário
     def PesquisarCPF():
@@ -983,12 +981,12 @@ def ABA_Consu_Propri():
     # _____Frame de Atualizar_____
     FrameAtualizar = LabelFrame(quadroGrid1, text="Atualizar Registro Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
     FrameAtualizar.configure(background="#e6e6e6")
-    FrameAtualizar.place(x=2, y=455, width=420, height=65)
+    FrameAtualizar.place(x=2, y=455, width=420, height=80)
 
     # _____Frame de Excluir_____
     FrameExcluir = LabelFrame(quadroGrid1, text="Excluir Registro Selecionado", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
     FrameExcluir.configure(background="#e6e6e6")
-    FrameExcluir.place(x=430, y=455, width=420, height=65)
+    FrameExcluir.place(x=430, y=455, width=420, height=80)
 
     # Elementos para quadro de pesquisa da ABA Consultar PROPRIETARIOS
     # ____Busca por NOME____
@@ -1038,27 +1036,27 @@ def ABA_Consu_Propri():
     # botão Atualizar dados do Proprietário
     btnAttPRO = Button(FrameAtualizar, text="Atualizar Registro", command=AtualizarPRO)
     btnAttPRO.configure(font="arial 12 bold", background="yellow", foreground="#000", relief="raised", borderwidth='6')
-    btnAttPRO.place(x=120, y=3, width=200, height=35)
+    btnAttPRO.place(x=120, y=10, width=200, height=35)
 
     # Botão Excluir dados do Proprietário
     btnDelPRO = Button(FrameExcluir, text="Excluir Registro", command=DeletarPRO)
     btnDelPRO.configure(font="arial 12 bold", background="red", foreground="#fff", relief="raised", borderwidth='6')
-    btnDelPRO.place(x=120, y=3, width=200, height=35)
+    btnDelPRO.place(x=120, y=10, width=200, height=35)
 
     # Botão Voltar para tela inicial
     btnVoltarPRO = Button(FrameLab3, text='Voltar', font="Arial 12 bold", relief='raised', borderwidth='4', command=TelaInicial)
-    btnVoltarPRO.configure(bg="blue", fg="white")
+    btnVoltarPRO.configure(bg="white", fg="black")
     btnVoltarPRO.place(x=780, y=0, height=28)
 
 def ABA_Consu_Veic():
     aba4 = Frame(ABA)
     ABA.add(aba4, text="Consultar Veículo")
-    aba4.configure(background="#2a261d")
+    aba4.configure(background="black")
     ABA.forget(0)
 
-    FrameLab4 = LabelFrame(aba4, text="Buscar Veículos", font="Arial 12 bold", foreground="#000", borderwidth='1', relief="flat")
+    FrameLab4 = LabelFrame(aba4, text="Opções da busca dos veículos", font="Arial 12 bold", foreground="#000", borderwidth='1', relief="flat")
     FrameLab4.configure(background="#e6e6e6")
-    FrameLab4.pack(pady=20, ipadx=635, ipady=300)
+    FrameLab4.pack(fill='none', expand=True, ipadx=635, ipady=300, side='top')
 
     # ABA Consultar Veículo
     def ListarVeiculos():
@@ -1849,7 +1847,6 @@ def ABA_Consu_Veic():
             btnCancelVenda.configure(font="Arial 12 bold")
             btnCancelVenda.place(x=620, y=95, width=175, height=35)
 
-
             AppVENDA.transient(appVCU)
             AppVENDA.mainloop()
         except:
@@ -1997,7 +1994,7 @@ def ABA_Consu_Veic():
 
     # Botão voltar
     btnVoltarVE = Button(FrameLab4, text='Voltar', font='Arial 12 bold', relief='raised', borderwidth='4', command=TelaInicial)
-    btnVoltarVE.configure(bg='blue', fg='white')
+    btnVoltarVE.configure(bg='white', fg='black')
     btnVoltarVE.place(x=1175, y=0, height=30)
 
     # botao q busca TODOS os registros na ABA Consultar VEÍCULOS
@@ -2030,7 +2027,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.5.3", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.5.4", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
