@@ -22,19 +22,19 @@ abaBemVindo = Frame(ABA)
 ABA.add(abaBemVindo, text="Tela Inicial")
 
 img = PhotoImage(file="Car_VCU.png")
-Label(abaBemVindo, text="Sistema de Venda de Carros Usados", font="Centaur 50 bold", background="white").pack(fill='both', expand=1)
+Label(abaBemVindo, text="Sistema de Venda de Carros Usados", font="Centaur 50 bold", background="white").pack(fill='both', expand=True)
 
-lblImagem = Label(abaBemVindo, image=img).pack(fill='y', expand=0)
+lblImagem = Label(abaBemVindo, image=img, background="white").pack(fill='y', expand=True)
 abaBemVindo.configure(background="white")
 
 def tic():
-    relogio['text'] = strftime('%H:%M:%S')
+    relogio['text'] = strftime('%d/%m/%Y  %H:%M:%S')
 def tac():
     tic()
     relogio.after(1000, tac)
 
-relogio = ttk.Label(abaBemVindo, background="#FFFFFF",foreground="black", font='Helvetica 25 bold')
-relogio.pack(fill='y', expand=True, side='top')
+relogio = ttk.Label(abaBemVindo, background="white",foreground="black", font='Helvetica 25 bold')
+relogio.pack(fill='none', expand=True, side='top')
 tac()
 
 def Config_Vendedores():
@@ -2030,7 +2030,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.5.2", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.5.3", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
