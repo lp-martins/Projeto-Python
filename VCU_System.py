@@ -28,12 +28,27 @@ lblImagem = Label(abaBemVindo, image=img, background="white").pack(fill='y', exp
 abaBemVindo.configure(background="white")
 
 def tic():
-    relogio['text'] = strftime('%d/%m/%Y  %H:%M:%S')
+    diaSemana = strftime('%A')
+    if diaSemana == "Monday":
+        diaSemana = 'Segunda-Feira'
+    elif diaSemana == "Tuesday":
+        diaSemana = "Terça-Feira"
+    elif diaSemana == "Wednesday":
+        diaSemana = "Quarta-Feira"
+    elif diaSemana == "Thursday":
+        diaSemana = "Quinta-Feira"
+    elif diaSemana == "Friday":
+        diaSemana = "Sexta-Feira"
+    elif diaSemana == "Saturday":
+        diaSemana = "Sábado"
+    else:
+        diaSemana = "Domingo"
+    relogio['text'] = strftime('  %H:%M:%S\n%d/%m/%Y\n'+diaSemana+'')
 def tac():
     tic()
     relogio.after(1000, tac)
 
-relogio = ttk.Label(abaBemVindo, background="white",foreground="black", font='Helvetica 25 bold')
+relogio = ttk.Label(abaBemVindo, background="white",foreground="black", font='Helvetica 20 bold')
 relogio.pack(fill='none', expand=True, side='top')
 tac()
 
@@ -2021,7 +2036,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.5.5", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.5.6", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
