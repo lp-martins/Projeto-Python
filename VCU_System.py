@@ -2030,7 +2030,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.4.8", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.5.0", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=153, y=20)
 
     lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
@@ -2075,7 +2075,7 @@ menuVeic.add_command(label="Buscar Veículo", command=ABA_Consu_Veic)
 # Menu Informações do Software
 menuVCU = Menu(barraMenu, tearoff=0)
 barraMenu.add_cascade(label="Software", menu=menuVCU)
-menuVCU.add_command(label="Informações da Versão", command=Versao)
+menuVCU.add_command(label="Detalhes da Versão", command=Versao)
 
 # Menu Fechar App
 CloseApp = Menu(barraMenu, tearoff=0)
