@@ -2036,20 +2036,11 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.5.6", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
-    lblVersao.place(x=153, y=20)
+    lblVersao = Label(AppVersao, text="Versão: 1.5.7 \n Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao.place(x=102, y=20)
 
-    lvlDatInic = Label(AppVersao, text="Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
-    lvlDatInic.place(x=110, y=50)
-
-    lvlDesenv = Label(AppVersao, text="Desenvolvedores: Célio Santos Cardoso,", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
-    lvlDesenv.place(x=60, y=80)
-
-    lvlDesenv2 = Label(AppVersao, text="Luiz de Paula Martins Filho e", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
-    lvlDesenv2.place(x=100, y=110)
-
-    lvlDesenv3 = Label(AppVersao, text="Talita Paes Landim do Nascimento", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
-    lvlDesenv3.place(x=80, y=140)
+    lvlDesenv = Label(AppVersao, text="Desenvolvedores:\n Célio Santos Cardoso,\n Luiz de Paula Martins Filho e \n Talita Paes Landim do Nascimento", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lvlDesenv.place(x=72, y=80)
 
     AppVersao.transient(appVCU)
     AppVersao.mainloop()
