@@ -27,7 +27,7 @@ abaBemVindo = Frame(ABA)
 ABA.add(abaBemVindo, text="Tela Inicial")
 
 img = PhotoImage(file="Car_VCU.png")
-Label(abaBemVindo, text="Sistema de Venda de Carros Usados", font="Centaur 50 bold", background="white").pack(fill='both', expand=True)
+Label(abaBemVindo, text="Sistema de Venda de Carros Usados", font="Helvetica 50 bold", background="white").pack(fill='both', expand=True)
 
 lblImagem = Label(abaBemVindo, image=img, background="white").pack(fill='y', expand=True)
 abaBemVindo.configure(background="white")
@@ -36,16 +36,16 @@ def tic():
     diaSemana = strftime('%A')
     if diaSemana == "Monday":
         diaSemana = 'Segunda-Feira'
-        LbDiaSemana['foreground'] = 'darkblue'
+        LbDiaSemana['foreground'] = 'purple'
     elif diaSemana == "Tuesday":
         diaSemana = "Terça-Feira"
-        LbDiaSemana['foreground'] = 'blue'
+        LbDiaSemana['foreground'] = 'darkblue'
     elif diaSemana == "Wednesday":
         diaSemana = "Quarta-Feira"
-        LbDiaSemana['foreground'] = 'green'
+        LbDiaSemana['foreground'] = 'blue'
     elif diaSemana == "Thursday":
         diaSemana = "Quinta-Feira"
-        LbDiaSemana['foreground'] = 'purple'
+        LbDiaSemana['foreground'] = 'green'
     elif diaSemana == "Friday":
         diaSemana = "Sexta-Feira"
         LbDiaSemana['foreground'] = 'yellow'
@@ -77,7 +77,7 @@ tac()
 
 def Config_Vendedores():
     abaConf_Vend = Frame(ABA)
-    ABA.add(abaConf_Vend, text="Propriedades dos Vendedores")
+    ABA.add(abaConf_Vend, text="Configurações de Vendedores")
     abaConf_Vend.configure(background="darkgray")
     ABA.forget(0)
 
@@ -184,7 +184,7 @@ def Config_Vendedores():
         appBuscVend.grab_set()
 
         # Frames da Tela de Vendedores
-        lblFramBuscVend = LabelFrame(appBuscVend, text="Consulta dos Vendedores", font="arialBlack 12 bold italic", bg="#ddd", fg="black", relief="flat")
+        lblFramBuscVend = LabelFrame(appBuscVend, text="Buscar Vendedores", font="arialBlack 12 bold italic", bg="#ddd", fg="black", relief="flat")
         lblFramBuscVend.pack(ipadx=420, ipady=500, pady=10)
 
         FramOpcBuscVendedor = LabelFrame(lblFramBuscVend, text="Opções de Busca", foreground="#f00", font="Arial 11", relief='raised', borderwidth='2')
@@ -794,7 +794,7 @@ def ABA_CAD_Veic():
 
 def ABA_Consu_Propri():
     aba3 = Frame(ABA)
-    ABA.add(aba3, text="Consultar Proprietário")
+    ABA.add(aba3, text="Buscar Proprietário")
     aba3.configure(background="black")
     ABA.forget(0)
 
@@ -1085,7 +1085,7 @@ def ABA_Consu_Propri():
 
 def ABA_Consu_Veic():
     aba4 = Frame(ABA)
-    ABA.add(aba4, text="Consultar Veículo")
+    ABA.add(aba4, text="Buscar Veículo")
     aba4.configure(background="black")
     ABA.forget(0)
 
@@ -2059,7 +2059,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.5.8 \n Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.5.9 \n Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=102, y=20)
 
     lvlDesenv = Label(AppVersao, text="Desenvolvedores:\n Célio Santos Cardoso,\n Luiz de Paula Martins Filho e \n Talita Paes Landim do Nascimento", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
