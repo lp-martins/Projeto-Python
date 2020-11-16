@@ -2100,7 +2100,7 @@ menuVCU.add_command(label="Detalhes da Versão", command=Versao)
 # Menu Fechar App
 CloseApp = Menu(barraMenu, tearoff=0)
 barraMenu.add_cascade(label="Sair do App", menu=CloseApp)
-CloseApp.add_command(label="Sair", command=quit)
+CloseApp.add_command(label="Sair", command=appVCU.quit)
 
 #  executa o programa em loop  #
 appVCU.config(menu=barraMenu)
