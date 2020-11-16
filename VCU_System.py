@@ -14,8 +14,13 @@ appVCU.geometry("1280x700")
 appVCU.configure(background="#f2f2f2")
 appVCU.wm_iconbitmap('icon_VCU.ico')
 
+#criação do estilo das ABAS
+meuStilo = ttk.Style()
+meuStilo.configure("TNotebook", background="blue", foreground="white", borderwidth=3)
+meuStilo.configure("TNotebook.Tab", foreground="black", font="Helvetica 10 bold", borderwidth=2)
+
 #  Criação das ABAS  #
-ABA = ttk.Notebook(appVCU)
+ABA = ttk.Notebook(appVCU, style='TNotebook')
 ABA.pack(fill='both', expand=1)
 
 abaBemVindo = Frame(ABA)
@@ -31,24 +36,42 @@ def tic():
     diaSemana = strftime('%A')
     if diaSemana == "Monday":
         diaSemana = 'Segunda-Feira'
+        LbDiaSemana['foreground'] = 'darkblue'
     elif diaSemana == "Tuesday":
         diaSemana = "Terça-Feira"
+        LbDiaSemana['foreground'] = 'blue'
     elif diaSemana == "Wednesday":
         diaSemana = "Quarta-Feira"
+        LbDiaSemana['foreground'] = 'green'
     elif diaSemana == "Thursday":
         diaSemana = "Quinta-Feira"
+        LbDiaSemana['foreground'] = 'purple'
     elif diaSemana == "Friday":
         diaSemana = "Sexta-Feira"
+        LbDiaSemana['foreground'] = 'yellow'
     elif diaSemana == "Saturday":
         diaSemana = "Sábado"
+        LbDiaSemana['foreground'] = 'orange'
     else:
         diaSemana = "Domingo"
-    relogio['text'] = strftime('  %H:%M:%S\n%d/%m/%Y\n'+diaSemana+'')
+        LbDiaSemana['foreground'] = 'red'
+
+    LbDiaSemana['text'] = diaSemana
+    relogio['text'] = strftime('  %H:%M:%S\n%d/%m/%Y')
 def tac():
     tic()
     relogio.after(1000, tac)
 
-relogio = ttk.Label(abaBemVindo, background="white",foreground="black", font='Helvetica 20 bold')
+# Frame para organizar a Data, Hora e dia da Semana na Tela inicial
+LbFramData = LabelFrame(abaBemVindo, text="Data/Hora", font="Helvetica 11 italic", bg="white", fg="black")
+LbFramData.pack(fill='none', expand=True, ipadx=30, side='top')
+
+# Label que recebe o nome do dia da Semana
+LbDiaSemana = ttk.Label(LbFramData, background="white", font='Helvetica 15 bold')
+LbDiaSemana.pack(fill='none', expand=True, side='bottom')
+
+#Label que recebe a data e a hora
+relogio = ttk.Label(LbFramData, background="white", foreground="black", font='Helvetica 16 bold')
 relogio.pack(fill='none', expand=True, side='top')
 tac()
 
@@ -2036,7 +2059,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.5.7 \n Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.5.8 \n Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=102, y=20)
 
     lvlDesenv = Label(AppVersao, text="Desenvolvedores:\n Célio Santos Cardoso,\n Luiz de Paula Martins Filho e \n Talita Paes Landim do Nascimento", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
