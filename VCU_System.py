@@ -100,8 +100,7 @@ def Config_Vendedores():
             CodVendedor = str(VCU_QUERY.DQL(CodVddrSQL))
 
             if txtCodVendedor.get() != "" and txtCodVendedor.get() in CodVendedor:
-                messagebox.showwarning(title=" Código já Cadastrado!",
-                                       message="Este Código já está Existe em nossa base de dados! Por favor, escolha outro")
+                messagebox.showwarning(title=" Código já Cadastrado!", message="Este Código já está Existe em nossa base de dados! Por favor, escolha outro")
             elif (txtCodVendedor.get() != "" and txtNomeVendedor.get() != "") and (txtRgVendedor.get() != "") and (txtCpfVendedor.get() != "") and (txtEndVendedor != "") and (txtFoneVendedor.get() != ""):
                 sCodvddr = txtCodVendedor.get()
                 sNomevddr = txtNomeVendedor.get()
@@ -529,11 +528,9 @@ def ABA_CAD_Propri():
         CodigosPro = str(VCU_QUERY.DQL(CodProSQL))
 
         if vCodPRO.get() != "" and vCodPRO.get() in CodigosPro:
-            messagebox.showwarning(title="VCU - Código já Cadastrado!",
-                                   message="Este Código já está Existe em nossa base de dados! Por favor, escolha outro")
+            messagebox.showwarning(title="VCU - Código já Cadastrado!", message="Este Código já está Existe em nossa base de dados! Por favor, escolha outro")
         elif vCpfPRO.get() in CPFs and vCpfPRO.get() != "":
-            messagebox.showwarning(title="VCU - CPF/CNPJ já Cadastrado!",
-                                   message="Este CPF/CNPJ já está cadastrado em nossa base de dados!")
+            messagebox.showwarning(title="VCU - CPF/CNPJ já Cadastrado!", message="Este CPF/CNPJ já está cadastrado em nossa base de dados!")
         elif (vCodPRO.get() != "" and vNomePRO.get() != "") and (vCpfPRO.get() != "") and (vEnderPRO.get() != "") and (vFonePRO != "") and (
                 vResponPRO.get() != ""):
             sCod = vCodPRO.get()
@@ -603,7 +600,6 @@ def ABA_CAD_Propri():
     btnNovo = Button(FrameLab1, text="Voltar", background="#0f3", foreground="black", font="ArialBlk 12 bold", relief="raised", borderwidth='6', command=TelaInicial)
     btnNovo.place(x=310, y=290, width=150, height=40)
 
-
 def ABA_CAD_Veic():
     aba2 = Frame(ABA)
     ABA.add(aba2, text="Cadastrar Veículo")
@@ -672,8 +668,7 @@ def ABA_CAD_Veic():
 
             vCodVE.focus_set()
         else:
-            messagebox.showwarning(title=" Proprietário Não Cadastrado!",
-                                   message="Código de proprietário não confere com nenhum proprietário Cadastrado! Verifique o código digitado e tente novamente!")
+            messagebox.showwarning(title=" Proprietário Não Cadastrado!", message="Código de proprietário não confere com nenhum proprietário Cadastrado! Verifique o código digitado e tente novamente!")
 
     def TelaInicial():
         ABA.forget(0)
@@ -876,8 +871,7 @@ def ABA_Consu_Propri():
                     tv1.delete(ItemSelect)
                     VCU_QUERY.DML(dquery)
             else:
-                messagebox.showwarning(title=" Atenção!!!",
-                                       message="Não é possivel excluir um proprietário que tenha veículos Cadastrado!")
+                messagebox.showwarning(title=" Atenção!!!", message="Não é possivel excluir um proprietário que tenha veículos Cadastrado!")
         except:
             messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
 
@@ -972,7 +966,6 @@ def ABA_Consu_Propri():
             AppATTpro.mainloop()
         except:
             messagebox.showinfo(title=" Atenção!", message="Nenhum item selecionado!")
-
 
     # Gridview da ABA CONSULTAR PROPRIETARIO
     quadroGrid1 = LabelFrame(FrameLab3, text="Dados dos Proprietários", foreground="#f00", font="Arial 11", relief="flat", background="#e6e6e6")
@@ -2096,11 +2089,6 @@ menuVeic.add_command(label="Buscar Veículo", command=ABA_Consu_Veic)
 menuVCU = Menu(barraMenu, tearoff=0)
 barraMenu.add_cascade(label="Software", menu=menuVCU)
 menuVCU.add_command(label="Detalhes da Versão", command=Versao)
-
-# Menu Fechar App
-CloseApp = Menu(barraMenu, tearoff=0)
-barraMenu.add_cascade(label="Sair do App", menu=CloseApp)
-CloseApp.add_command(label="Sair", command=appVCU.quit)
 
 #  executa o programa em loop  #
 appVCU.config(menu=barraMenu)
