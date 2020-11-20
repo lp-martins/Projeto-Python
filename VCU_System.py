@@ -48,13 +48,13 @@ def tic():
         LbDiaSemana['foreground'] = 'green'
     elif diaSemana == "Friday":
         diaSemana = "Sexta-Feira"
-        LbDiaSemana['foreground'] = 'yellow'
+        LbDiaSemana['foreground'] = 'orange'
     elif diaSemana == "Saturday":
         diaSemana = "Sábado"
-        LbDiaSemana['foreground'] = 'orange'
+        LbDiaSemana['foreground'] = 'red'
     else:
         diaSemana = "Domingo"
-        LbDiaSemana['foreground'] = 'red'
+        LbDiaSemana['foreground'] = 'darkred'
 
     LbDiaSemana['text'] = diaSemana
     relogio['text'] = strftime('  %H:%M:%S\n%d/%m/%Y')
@@ -308,7 +308,7 @@ def Config_Vendedores():
                 appAttVendedor.title(" Atualizando dados do Vendedor")
                 appAttVendedor.geometry("900x700")
                 appAttVendedor.resizable(False, False)
-                appAttVendedor.configure(background="#ddd")
+                appAttVendedor.configure(background="yellow")
                 appAttVendedor.wm_iconbitmap('icon_VCU.ico')
                 appAttVendedor.focus_force()
                 appAttVendedor.grab_set()
@@ -352,7 +352,7 @@ def Config_Vendedores():
                 txtATTFoneVendr.insert(0, FoneVendrAtt)
                 txtATTFoneVendr.configure(font="arial 11")
 
-                btnATTSalvarVendr = Button(FramCadVend, text="Salvar alterações", font="ArialBlack 12 bold", bg="yellow", fg="black", relief="raised", borderwidth='7', command=UpdateVendedor)
+                btnATTSalvarVendr = Button(FramCadVend, text="Salvar alterações", font="ArialBlack 12 bold", bg="blue", fg="white", relief="raised", borderwidth='7', command=UpdateVendedor)
                 btnATTSalvarVendr.place(x=240, y=310, width=160, height=40)
 
                 appAttVendedor.transient(appBuscVend)
@@ -1480,8 +1480,8 @@ def ABA_Consu_Veic():
                         Can.drawString(66, 625, vVendPlaca)
                         Can.drawString(82, 610, vVendRenavan)
                         Can.drawString(127, 595, vVendVencIPVA)
-                        Can.drawString(267, 595, 'R$ ' + vVendValorFIPE + ',00')
-                        Can.drawString(487, 595, 'R$ ' + vVendValorPRO + ',00')
+                        Can.drawString(267, 595, 'R$' + vVendValorFIPE + ',00')
+                        Can.drawString(487, 595, 'R$' + vVendValorPRO + ',00')
 
                         Can.drawString(372, 715, vVendPortas)
                         Can.drawString(397, 700, vVendVidroEl)
@@ -1521,10 +1521,10 @@ def ABA_Consu_Veic():
 
                         Can.setFont("Helvetica", 12)
                         Can.drawString(88, 530, NAMEvendr)
-                        Can.drawString(98, 515, 'R$ ' + valBRUTO + ',00')
-                        Can.drawString(122, 500, 'R$ ' + valMulta + ',00')
-                        Can.drawString(135, 485, 'R$ ' + valDESC + ',00')
-                        Can.drawString(172, 470, 'R$ ' + valTOTAL + ',00')
+                        Can.drawString(98, 515, 'R$' + valBRUTO + ',00')
+                        Can.drawString(122, 500, 'R$' + valMulta + ',00')
+                        Can.drawString(135, 485, 'R$' + valDESC + ',00')
+                        Can.drawString(172, 470, 'R$' + valTOTAL + ',00')
                         Can.drawString(148, 455, formaPAGA)
 
                         # Criar uma linha separadora
@@ -1589,6 +1589,7 @@ def ABA_Consu_Veic():
 
             def Valor_Final():
                 try:
+                    vValorTotaVendFIN.delete(0, END)
                     vBrutoD = vValBrutVenFIN.get()
                     vDescoD = vValDescVenFIN.get()
                     vFinal = int(vBrutoD) - int(vDescoD)
@@ -2052,7 +2053,7 @@ def Versao():
     AppVersao.focus_force()
     AppVersao.grab_set()
 
-    lblVersao = Label(AppVersao, text="Versão: 1.5.9 \n Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
+    lblVersao = Label(AppVersao, text="Versão: 1.6.2 \n Data de Criação: 28/09/2020", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
     lblVersao.place(x=102, y=20)
 
     lvlDesenv = Label(AppVersao, text="Desenvolvedores:\n Célio Santos Cardoso,\n Luiz de Paula Martins Filho e \n Talita Paes Landim do Nascimento", font="arial 12 italic", bg='#2b2b2b', fg="#fff")
